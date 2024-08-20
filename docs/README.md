@@ -9,7 +9,7 @@
 
 **Tiago de Almeida Santos, email do aluno 4**
 
-**Júlia Rocha Fiorini, email do aluno 5**
+**Júlia Rocha Fiorini,juliarochafiorini@gmail.com**
 
 ---
 
