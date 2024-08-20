@@ -1,21 +1,20 @@
-# Nome do projeto
+# Reisen
 
-Escreva um ou dois parágrafos resumindo o objetivo do seu projeto.
+A ideia do projeto de gestão e gerenciamento de viagens é desenvolver uma plataforma que centralize todo o processo de planejamento, organização e execução de viagens, tanto pessoais quanto corporativas. A plataforma permitiria que os usuários planejem suas viagens desde a escolha do destino, passando pela reserva de passagens, hospedagens e passeios, até o controle de gastos e geração de relatórios. Integrada com APIs de companhias aéreas, hotéis e serviços de transporte, a ferramenta ofereceria opções personalizadas com base em preferências e orçamento do usuário. Além disso, o sistema incluiria funcionalidades como acompanhamento em tempo real de voos, notificações automáticas sobre alterações ou cancelamentos, e sugestões de itinerários otimizados.
 
 ## Integrantes
 
-* Nome completo do aluno 1
-* Nome completo do aluno 2
-* Nome completo do aluno 3
-* Nome completo do aluno 4
-* Nome completo do aluno 5
-* Nome completo do aluno 6
+* Matheus Dias Mendes 
+* Felipe Araujo Monteiro 
+* Matheus Balsamão
+* Julia Rocha Fiorini
+* Tiago de Almeida Santos 
 
 ## Professor
 
-* Nome completo do professor 1
-* Nome completo do professor 2
-* Nome completo do professor 3
+* Alexandre 
+* Danilo
+* Michele
 
 ## Instruções de utilização
 
