@@ -1,27 +1,25 @@
-# TITULO DO PROJETO
+ # Raisen
 
 
-**Nome completo do Aluno 1, email do aluno 1**
+**Matheus Dias Mendes, matheusdiasmendespop@gmail.com**
 
-**Nome completo do Aluno 2, email do aluno 2**
+**Felipe Araujo Monteiro ,felipeamonteiro.fam@gmail.com**
 
-**Nome completo do Aluno 3, email do aluno 3**
+**Matheus Balsamão Ferreira, email do aluno 3**
 
-**Nome completo do Aluno 4, email do aluno 4**
+**Tiago de Almeida Santos, email do aluno 4**
 
-**Nome completo do Aluno 5, email do aluno 5**
-
-**Nome completo do Aluno 6, email do aluno 6**
+**Júlia Rocha Fiorini, email do aluno 5**
 
 ---
 
 Professores:
 
-** Prof. Nome do Prof 1 **
+** Prof. Alexandre **
 
-** Prof. Nome do Prof 2 **
+** Prof. Danilo **
 
-** Prof. Nome do Prof 3 **
+** Prof. Michele **
 
 ---
 
@@ -31,43 +29,35 @@ _Instituto de Informática e Ciências Exatas – Pontifícia Universidade Cató
 
 ---
 
-_**Resumo**. Escrever aqui o resumo. O resumo deve contextualizar rapidamente o trabalho, descrever seu objetivo e, ao final, 
-mostrar algum resultado relevante do trabalho (até 10 linhas)._
+_**Resumo**. A ideia do projeto de gestão e gerenciamento de viagens é desenvolver uma plataforma que centralize todo o processo de planejamento, organização e execução de viagens, tanto pessoais quanto corporativas. A plataforma permitiria que os usuários planejem suas viagens desde a escolha do destino, passando pela reserva de passagens, hospedagens e passeios, até o controle de gastos e geração de relatórios. Integrada com APIs de companhias aéreas, hotéis e serviços de transporte, a ferramenta ofereceria opções personalizadas com base em preferências e orçamento do usuário. Além disso, o sistema incluiria funcionalidades como acompanhamento em tempo real de voos, notificações automáticas sobre alterações ou cancelamentos, e sugestões de itinerários otimizados.
 
 ---
 
 
 ## 1. Introdução
 
-_Apresente uma frase introdutória definindo o que será apresentado._
+"Transforme desafios em oportunidades e sonhos em conquistas."
 
 ### 1.1 Contextualização
 
-_Na **contextualização**, o aluno deve dizer do que se trata o trabalho, em que área ou contexto se insere.
-A **contextualização** deve ser desenvolvida de algo mais genérico para algo mais específico. 
-A citação de pesquisas quantitativas é bem aceita aqui (corretamente referenciadas)._
-
+No contexto atual, a globalização e o avanço tecnológico têm intensificado a necessidade de soluções eficazes para a gestão de viagens, tanto no âmbito pessoal quanto corporativo. De acordo com a *Global Business Travel Association (GBTA)*, o mercado de viagens corporativas movimentou mais de 1,3 trilhões de dólares em 2023, o que reflete a importância desse setor para a economia global. Nesse cenário, o gerenciamento eficiente das viagens, considerando desde a organização logística até o controle de despesas, tornou-se um desafio crescente para empresas e indivíduos. Essa demanda crescente evidencia a relevância de ferramentas e plataformas que possam otimizar todo o processo de planejamento e execução de viagens. Este trabalho insere-se no campo da engenharia de software, mais especificamente no desenvolvimento de soluções voltadas para a automação e gestão de processos. O objetivo é propor uma plataforma que centralize a administração de viagens, oferecendo funcionalidades personalizadas e integradas para facilitar tanto o planejamento quanto a execução, considerando as diversas necessidades e desafios enfrentados pelos usuários no contexto atual.
+ 
 ### 1.2 Problema
 
-_Em seguida o aluno deve caminhar a contextualização para descrever o **problema** que o trabalho trata. 
-O **problema** pode ser algo vivido em uma empresa específica. Neste caso, o aluno deve rapidamente apresentar 
-o cenário de problema da empresa. A empresa só deve ser citada explicitamente se o aluno tiver autorização 
-para tal._
+Apesar da crescente importância do setor de viagens, muitas empresas ainda enfrentam dificuldades para gerenciar eficientemente todo o processo, desde o planejamento até o controle de custos e o acompanhamento das viagens. Um dos principais problemas observados em empresas de médio porte, por exemplo, é a descentralização das informações e a falta de integração entre as etapas do processo de viagens, resultando em retrabalho, perda de tempo e aumento de despesas. Em um cenário real, uma empresa do setor de tecnologia enfrenta desafios recorrentes ao tentar conciliar a gestão das viagens de seus colaboradores com as políticas de conformidade e controle financeiro. Neste caso, o problema surge da utilização de ferramentas desconexas, como planilhas manuais e sistemas independentes, que dificultam a visibilidade das informações em tempo real e a tomada de decisões estratégicas. Isso leva a falhas no controle de despesas, dificuldades em acompanhar mudanças nas agendas e limitações na análise de dados para otimizar processos futuros. Dessa forma, o trabalho se propõe a desenvolver uma solução integrada que centralize e automatize a gestão de viagens, abordando especificamente esses desafios enfrentados por empresas que necessitam de um gerenciamento mais eficiente e estratégico das suas operações.
 
 ### 1.3 Objetivo geral
 
-_O aluno deve escrever um pequeno parágrafo ou frase com o **objetivo geral** do trabalho. 
-O objetivo deve ser bem direto, específico e definido com verbos de ação (elaborar, propor, avaliar, comparar, desenvolver, etc.). No caso específico deste projeto, o objetivo deste trabalho é desenvolver um sistema para automação de processos para um problema específico._
+O objetivo geral deste trabalho é desenvolver um sistema para automação do processo de gestão de viagens, integrando planejamento, controle de despesas e acompanhamento de itinerários em uma única plataforma.
 
 #### 1.3.1 Objetivos específicos
 
-_Apresente também alguns (pelo menos 2) **objetivos específicos** dependendo de onde você vai querer 
-concentrar sua prática investigativa, ou como você irá aprofundar seu trabalho._
+Implementar funcionalidades que permitam a integração de reservas de voos, hotéis e transporte em tempo real, facilitando o planejamento das viagens. Desenvolver um módulo de controle de despesas que possibilite o acompanhamento detalhado dos custos e a geração de relatórios financeiros automatizados.
+
 
 ### 1.4 Justificativas
 
-_Mostre também as **justificativas** para o 
-desenvolvimento do seu trabalho e, caso deseje, destaque alguma contribuição do trabalho._
+A justificativa para o desenvolvimento deste trabalho baseia-se na crescente demanda por soluções tecnológicas que otimizem a gestão de viagens, especialmente em ambientes corporativos. A descentralização de informações e a ineficiência no controle de despesas geram custos elevados e impactam negativamente a produtividade das empresas. Ao centralizar todas as etapas do processo em uma única plataforma, o sistema proposto busca não apenas automatizar tarefas, mas também oferecer insights para decisões estratégicas, contribuindo para a redução de custos e o aumento da eficiência operacional. Além disso, a solução poderá ser adaptada a diferentes contextos e empresas, gerando um impacto positivo no gerenciamento de viagens em diversas áreas.
 
 ## 2. Participantes do processo
 
