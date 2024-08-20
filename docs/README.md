@@ -61,7 +61,15 @@ A justificativa para o desenvolvimento deste trabalho baseia-se na crescente dem
 
 ## 2. Participantes do processo
 
-_Apresente aqui os perfis dos usuários-chave do sistema. Diversas são as informações que podem ser relevantes para a definição dos perfis dos usuários, tais como idade, gênero, aspectos culturais, nível de educação, entre outros. A pesquisa de mercado pode ser uma ferramenta poderosa para se identificar e caracterizar os perfis de usuários. Apresente claramente o papel a ser desempenhado por cada usuário._
+Os usuários-chave do sistema de gestão de viagens podem ser divididos em três perfis principais:
+
+1. **Colaborador Viajante**: Profissionais de diversas áreas, geralmente com idades entre 25 e 50 anos, que realizam viagens corporativas. Esse perfil é composto por indivíduos com nível de escolaridade variando entre técnico e superior, com familiaridade moderada a avançada com tecnologia. Eles utilizam o sistema para acessar seus itinerários, gerenciar suas reservas e registrar despesas durante a viagem. Esses usuários valorizam a praticidade e a simplicidade na navegação.
+
+2. **Gestor de Viagens**: Profissionais responsáveis por coordenar e aprovar viagens dentro da empresa, geralmente com idades entre 30 e 55 anos, com formação superior em administração, logística ou áreas correlatas. Esse usuário possui o papel de supervisionar as políticas de viagem, aprovar itinerários e monitorar os custos, garantindo conformidade com as diretrizes corporativas. O gestor precisa de uma interface que ofereça visibilidade centralizada das informações e acesso rápido a relatórios financeiros.
+
+3. **Equipe Financeira**: Usuários responsáveis pelo controle financeiro da empresa, com idades entre 30 e 60 anos, formação superior em contabilidade ou áreas afins, e alto nível de conhecimento técnico. Eles utilizam o sistema para monitorar despesas, gerar relatórios detalhados e auditar os gastos relacionados às viagens. Esses usuários necessitam de recursos avançados de filtragem de dados e integração com outros sistemas de ERP para um controle financeiro eficiente.
+
+Cada um desses perfis desempenha um papel essencial no processo de gestão de viagens, com necessidades específicas que direcionam as funcionalidades e a interface do sistema.
 
 ## 3. Modelagem do processo de negócio
 
