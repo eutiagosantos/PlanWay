@@ -3,23 +3,23 @@
 
 **Matheus Dias Mendes, matheusdiasmendespop@gmail.com**
 
-**Felipe Araujo Monteiro ,felipeamonteiro.fam@gmail.com**
+**Felipe Araujo Monteiro, felipeamonteiro.fam@gmail.com**
 
-**Matheus Balsamão Ferreira, email do aluno 3**
+**Matheus Balsamão Ferreira, matheusbalsa1234@gmail.com**
 
-**Tiago de Almeida Santos, email do aluno 4**
+**Tiago de Almeida Santos, tiagoalmeidasantos1812@gmail.com**
 
-**Júlia Rocha Fiorini,juliarochafiorini@gmail.com**
+**Júlia Rocha Fiorini, juliarochafiorini@gmail.com**
 
 ---
 
 Professores:
 
-** Prof. Alexandre **
+** Prof. Alexandre Augusto Bittencourt Munaier **
 
 ** Prof. Danilo **
 
-** Prof. Michele **
+** Prof. Michelle Hanne Soares de Andrade **
 
 ---
 
@@ -29,7 +29,7 @@ _Instituto de Informática e Ciências Exatas – Pontifícia Universidade Cató
 
 ---
 
-_**Resumo**. A ideia do projeto de gestão e gerenciamento de viagens é desenvolver uma plataforma que centralize todo o processo de planejamento, organização e execução de viagens, tanto pessoais quanto corporativas. A plataforma permitiria que os usuários planejem suas viagens desde a escolha do destino, passando pela reserva de passagens, hospedagens e passeios, até o controle de gastos e geração de relatórios. Integrada com APIs de companhias aéreas, hotéis e serviços de transporte, a ferramenta ofereceria opções personalizadas com base em preferências e orçamento do usuário. Além disso, o sistema incluiria funcionalidades como acompanhamento em tempo real de voos, notificações automáticas sobre alterações ou cancelamentos, e sugestões de itinerários otimizados.
+Imagine uma plataforma que transforma o jeito como você planeja e gerencia suas viagens, seja para momentos de lazer ou compromissos profissionais. Desde a escolha do destino até o controle do orçamento, essa solução centraliza tudo o que você precisa em um só lugar. Quer encontrar o voo perfeito, a hospedagem ideal ou aquele passeio imperdível? Com hotéis e serviços de transporte, podendo tambem compartilhar seu plano de viagem com seus amigos e familiares para facilitar as suas aventuras!
 
 ---
 
@@ -40,36 +40,31 @@ _**Resumo**. A ideia do projeto de gestão e gerenciamento de viagens é desenvo
 
 ### 1.1 Contextualização
 
-No contexto atual, a globalização e o avanço tecnológico têm intensificado a necessidade de soluções eficazes para a gestão de viagens, tanto no âmbito pessoal quanto corporativo. De acordo com a *Global Business Travel Association (GBTA)*, o mercado de viagens corporativas movimentou mais de 1,3 trilhões de dólares em 2023, o que reflete a importância desse setor para a economia global. Nesse cenário, o gerenciamento eficiente das viagens, considerando desde a organização logística até o controle de despesas, tornou-se um desafio crescente para empresas e indivíduos. Essa demanda crescente evidencia a relevância de ferramentas e plataformas que possam otimizar todo o processo de planejamento e execução de viagens. Este trabalho insere-se no campo da engenharia de software, mais especificamente no desenvolvimento de soluções voltadas para a automação e gestão de processos. O objetivo é propor uma plataforma que centralize a administração de viagens, oferecendo funcionalidades personalizadas e integradas para facilitar tanto o planejamento quanto a execução, considerando as diversas necessidades e desafios enfrentados pelos usuários no contexto atual.
+No cenário atual, marcado pela globalização e pelo avanço tecnológico, a gestão de viagens se tornou uma necessidade crescente, tanto para pessoas quanto para empresas. Com o mercado de viagens corporativas movimentando mais de 1,3 trilhões de dólares em 2023, segundo a Global Business Travel Association (GBTA), a eficiência nesse processo é crucial. Organizar a logística, controlar despesas e lidar com imprevistos são desafios que demandam soluções ágeis e integradas. Diante disso, este projeto busca desenvolver uma plataforma que simplifica o planejamento e a gestão de viagens, centralizando desde a escolha do destino até o controle dos gastos. Com funcionalidades personalizadas e automação, atendendo às necessidades atuais tanto no âmbito pessoal quanto corporativo.
  
 ### 1.2 Problema
 
-Apesar da crescente importância do setor de viagens, muitas empresas ainda enfrentam dificuldades para gerenciar eficientemente todo o processo, desde o planejamento até o controle de custos e o acompanhamento das viagens. Um dos principais problemas observados em empresas de médio porte, por exemplo, é a descentralização das informações e a falta de integração entre as etapas do processo de viagens, resultando em retrabalho, perda de tempo e aumento de despesas. Em um cenário real, uma empresa do setor de tecnologia enfrenta desafios recorrentes ao tentar conciliar a gestão das viagens de seus colaboradores com as políticas de conformidade e controle financeiro. Neste caso, o problema surge da utilização de ferramentas desconexas, como planilhas manuais e sistemas independentes, que dificultam a visibilidade das informações em tempo real e a tomada de decisões estratégicas. Isso leva a falhas no controle de despesas, dificuldades em acompanhar mudanças nas agendas e limitações na análise de dados para otimizar processos futuros. Dessa forma, o trabalho se propõe a desenvolver uma solução integrada que centralize e automatize a gestão de viagens, abordando especificamente esses desafios enfrentados por empresas que necessitam de um gerenciamento mais eficiente e estratégico das suas operações.
+Muitas empresas ainda enfrentam dificuldades na gestão de viagens, com processos fragmentados e uso de ferramentas desconexas como planilhas manuais. Isso resulta em retrabalho, perda de tempo e aumento de custos, especialmente em empresas de médio porte. Um exemplo comum é o desafio de alinhar a gestão de viagens corporativas com o controle financeiro e as políticas internas, levando a falhas no controle de despesas e dificuldades na adaptação de agendas. Este projeto propõe uma solução integrada que centralize e automatize a gestão de viagens, facilitando o controle e a tomada de decisões estratégicas.
 
 ### 1.3 Objetivo geral
 
-O objetivo geral deste trabalho é desenvolver um sistema para automação do processo de gestão de viagens, integrando planejamento, controle de despesas e acompanhamento de itinerários em uma única plataforma.
+O objetivo geral deste trabalho é desenvolver um sistema para automação do processo de gestão de viagens, integrando planejamento, controle de despesas e acompanhamento em uma única plataforma.
 
 #### 1.3.1 Objetivos específicos
 
-Implementar funcionalidades que permitam a integração de reservas de voos, hotéis e transporte em tempo real, facilitando o planejamento das viagens. Desenvolver um módulo de controle de despesas que possibilite o acompanhamento detalhado dos custos e a geração de relatórios financeiros automatizados.
-
+Implementar funcionalidades que permitam a integração de reservas de hotéis e transporte em tempo real, facilitando o planejamento das viagens. Desenvolver um módulo de controle de despesas que possibilite o acompanhamento detalhado dos custos e o compartilhamento do planejamento com outras pessoas.
 
 ### 1.4 Justificativas
 
-A justificativa para o desenvolvimento deste trabalho baseia-se na crescente demanda por soluções tecnológicas que otimizem a gestão de viagens, especialmente em ambientes corporativos. A descentralização de informações e a ineficiência no controle de despesas geram custos elevados e impactam negativamente a produtividade das empresas. Ao centralizar todas as etapas do processo em uma única plataforma, o sistema proposto busca não apenas automatizar tarefas, mas também oferecer insights para decisões estratégicas, contribuindo para a redução de custos e o aumento da eficiência operacional. Além disso, a solução poderá ser adaptada a diferentes contextos e empresas, gerando um impacto positivo no gerenciamento de viagens em diversas áreas.
+A justificativa deste projeto está na crescente necessidade de soluções que melhorem a gestão de viagens, especialmente em empresas. A falta de integração e o controle ineficiente de despesas aumentam custos e afetam a produtividade. A proposta é criar uma plataforma única que centralize todo o processo de viagem, automatizando tarefas e gerando insights estratégicos para otimizar custos e operações. Além disso, a solução será adaptável a diferentes setores, trazendo melhorias no gerenciamento de viagens em diversos contextos.
 
 ## 2. Participantes do processo
 
-Os usuários-chave do sistema de gestão de viagens podem ser divididos em três perfis principais:
+Os usuários-chave do sistema de gestão de viagens podem ser divididos em dois perfis principais:
 
-1. **Colaborador Viajante**: Profissionais de diversas áreas, geralmente com idades entre 25 e 50 anos, que realizam viagens corporativas. Esse perfil é composto por indivíduos com nível de escolaridade variando entre técnico e superior, com familiaridade moderada a avançada com tecnologia. Eles utilizam o sistema para acessar seus itinerários, gerenciar suas reservas e registrar despesas durante a viagem. Esses usuários valorizam a praticidade e a simplicidade na navegação.
+Pessoas que planejam viagens: Usuários que buscam organizar suas viagens, seja para lazer ou trabalho. Eles querem facilidade para escolher destinos, reservar hospedagens, e montar itinerários personalizados, valorizando uma experiência prática e intuitiva.
 
-2. **Gestor de Viagens**: Profissionais responsáveis por coordenar e aprovar viagens dentro da empresa, geralmente com idades entre 30 e 55 anos, com formação superior em administração, logística ou áreas correlatas. Esse usuário possui o papel de supervisionar as políticas de viagem, aprovar itinerários e monitorar os custos, garantindo conformidade com as diretrizes corporativas. O gestor precisa de uma interface que ofereça visibilidade centralizada das informações e acesso rápido a relatórios financeiros.
-
-3. **Equipe Financeira**: Usuários responsáveis pelo controle financeiro da empresa, com idades entre 30 e 60 anos, formação superior em contabilidade ou áreas afins, e alto nível de conhecimento técnico. Eles utilizam o sistema para monitorar despesas, gerar relatórios detalhados e auditar os gastos relacionados às viagens. Esses usuários necessitam de recursos avançados de filtragem de dados e integração com outros sistemas de ERP para um controle financeiro eficiente.
-
-Cada um desses perfis desempenha um papel essencial no processo de gestão de viagens, com necessidades específicas que direcionam as funcionalidades e a interface do sistema.
+Proprietários de hospedagens e serviços turísticos: Donos de hotéis, pousadas ou outros estabelecimentos, interessados em cadastrar seus serviços na plataforma. Esses usuários buscam uma solução que permita gerenciar reservas, promover seus negócios e alcançar um público maior de forma acessível e eficiente.
 
 ## 3. Modelagem do processo de negócio
 
