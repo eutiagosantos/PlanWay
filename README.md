@@ -1,6 +1,6 @@
 # Reisen
 
-A ideia do projeto de gestão e gerenciamento de viagens é desenvolver uma plataforma que centralize todo o processo de planejamento, organização e execução de viagens, tanto pessoais quanto corporativas. A plataforma permitiria que os usuários planejem suas viagens desde a escolha do destino, passando pela reserva de passagens, hospedagens e passeios, até o controle de gastos e geração de relatórios. Integrada com APIs de companhias aéreas, hotéis e serviços de transporte, a ferramenta ofereceria opções personalizadas com base em preferências e orçamento do usuário. Além disso, o sistema incluiria funcionalidades como acompanhamento em tempo real de voos, notificações automáticas sobre alterações ou cancelamentos, e sugestões de itinerários otimizados.
+Imagine uma plataforma que transforma o jeito como você planeja e gerencia suas viagens, seja para momentos de lazer ou compromissos profissionais. Desde a escolha do destino até o controle do orçamento, essa solução centraliza tudo o que você precisa em um só lugar. Quer encontrar o voo perfeito, a hospedagem ideal ou aquele passeio imperdível? Com hotéis e serviços de transporte, podendo tambem compartilhar seu plano de viagem com seus amigos e familiares para facilitar as suas aventuras!.
 
 ## Integrantes
 
@@ -12,9 +12,9 @@ A ideia do projeto de gestão e gerenciamento de viagens é desenvolver uma plat
 
 ## Professor
 
-* Alexandre 
+* Alexandre Augusto Bittencourt Munaier
 * Danilo
-* Michele
+* Michelle Hanne Soares de Andrade
 
 ## Instruções de utilização
 
