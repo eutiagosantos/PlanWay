@@ -70,7 +70,7 @@ Proprietários de hospedagens e serviços turísticos: Donos de hotéis, pousada
 
 ### 3.1. Análise da situação atual
 
-_Apresente uma descrição textual de como os sistemas atuais resolvem o problema que se propõe a resolver.  Caso sua proposta seja inovadora e não existam processos claramente definidos, **apresente como as tarefas que o seu sistema pretende implementar são executadas atualmente**, mesmo que não se utilize tecnologia computacional._
+Hoje, planejar e gerenciar uma viagem, seja pessoal ou a trabalho, é uma tarefa que pode ser complicada e demorada. Muitas vezes, é preciso usar vários sites e aplicativos para reservar passagens, hotéis e passeios, e o controle do orçamento é feito manualmente ou com planilhas, o que é confuso e propenso a erros. As empresas, especialmente as de médio e pequeno porte, enfrentam ainda mais desafios, lidando com processos fragmentados e falta de integração entre as ferramentas de controle de despesas e de reserva. As soluções atuais disponíveis são geralmente caras, complexas e voltadas para grandes corporações, deixando muitos sem uma opção prática e acessível.
 
 ### 3.2. Descrição geral da proposta de solução
 
