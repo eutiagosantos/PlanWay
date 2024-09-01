@@ -1,6 +1,6 @@
-# Reisen
+# PLAN WAY
 
-Imagine uma plataforma que transforma o jeito como você planeja e gerencia suas viagens, seja para momentos de lazer ou compromissos profissionais. Desde a escolha do destino até o controle do orçamento, essa solução centraliza tudo o que você precisa em um só lugar. Quer encontrar o voo perfeito, a hospedagem ideal ou aquele passeio imperdível? Com hotéis e serviços de transporte, podendo tambem compartilhar seu plano de viagem com seus amigos e familiares para facilitar as suas aventuras!.
+Somos uma plataforma que transforma a maneira como você planeja e gerencia suas viagens, sejam elas de lazer ou a trabalho. Com o PlanWay, você terá todas as informações centralizadas em um único lugar, eliminando a necessidade de acessar várias plataformas ou vasculhar documentos para encontrar detalhes sobre passagens, acomodações e roteiros. Isso significa menos confusão, mais organização e um risco muito menor de perder informações essenciais. Descubra uma nova forma de viajar com o PlanWay.
 
 ## Integrantes
 
