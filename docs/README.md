@@ -17,7 +17,7 @@ Professores:
 
 ** Prof. Alexandre Augusto Bittencourt Munaier **
 
-** Prof. Danilo **
+** Prof. Danilo Boechat Seufitelli **
 
 ** Prof. Michelle Hanne Soares de Andrade **
 
