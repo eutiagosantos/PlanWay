@@ -13,7 +13,7 @@ Imagine uma plataforma que transforma o jeito como você planeja e gerencia suas
 ## Professor
 
 * Alexandre Augusto Bittencourt Munaier
-* Danilo
+* Danilo Boechat Seufitelli
 * Michelle Hanne Soares de Andrade
 
 ## Instruções de utilização
