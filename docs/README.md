@@ -74,7 +74,19 @@ _Apresente uma descrição textual de como os sistemas atuais resolvem o problem
 
 ### 3.2. Descrição geral da proposta de solução
 
-_Apresente aqui uma descrição da sua proposta abordando seus limites e suas ligações com as estratégias e objetivos do negócio. Apresente aqui as oportunidades de melhorias._
+O "PlanWay" é uma plataforma que simplifica tudo isso, reunindo todas as etapas de uma viagem em um só lugar. Desde a escolha do destino até o controle de gastos, o "PlanWay" permite que usuários planejem, reservem e gerenciem suas viagens de forma rápida e fácil. A ideia é criar uma ferramenta acessível para todos, que seja intuitiva de usar, facilitando o dia a dia de quem viaja, seja por lazer ou negócios.
+
+Limites:
+Ainda estamos no começo, e pode ser desafiador integrar alguns sistemas corporativos específicos.
+Nosso alcance pode ser limitado em regiões com pouca digitalização de serviços turísticos.
+Podemos ter dificuldades em implementar certas funcionalidades.
+
+Oportunidades de Melhoria:
+Tornar o processo de planejamento e reserva de viagens muito mais simples, eliminando o uso de várias ferramentas.
+Oferecer uma solução acessível e fácil de usar para empresas de todos os tamanhos e para viajantes individuais.
+Facilitar o controle de despesas em tempo real e permitir a personalização das viagens.
+Dar mais visibilidade e oportunidade de negócios para hotéis e serviços turísticos locais.
+Com o "PlanWay", a gestão de viagens se torna menos complicada e mais prazerosa, permitindo que as pessoas se concentrem no que realmente importa: aproveitar a viagem.
 
 ### 3.3. Modelagem dos processos
 
