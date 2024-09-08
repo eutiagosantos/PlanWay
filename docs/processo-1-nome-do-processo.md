@@ -45,7 +45,7 @@ _* **Tabela** - campo formado por uma matriz de valores_
  *Inserção de Dados Pessoais*
 
 | **Campo**       | **Tipo**         | **Restrições** | **Valor default** |
-| ---                  | ---                            | ---               |
+| ---               | ---            | ---            | ---               |
 | Nome Completo   | Caixa de Texto   |Campo obrigatório,apenas texto|Nenhum|
 |Endereço de E-mail|Caixa de Texto   |formato de e-mail  |Nenhum           |
 |Numero de telefone | Caixa de Texto   | formato numerico  |Nenhum           |
@@ -53,6 +53,7 @@ _* **Tabela** - campo formado por uma matriz de valores_
 |                      |                                |                   |
 
 | **Comandos**         |  **Destino**                   | **Tipo** |
+| ---                  | ---                            | ---      |
 |Criar conta            | Validar dados            | default           |
 |                      |                                |                   |
 
@@ -61,9 +62,9 @@ _* **Tabela** - campo formado por uma matriz de valores_
 *Confirmação de cadastro*
 
 | **Campo**       | **Tipo**         | **Restrições** | **Valor default** |
-| ---                  | ---                            | ---               |
-| Status do Cadastro| Seleção Única  |Deve ser "Aprovado" ou "Rejeitado".|Rejeitado|
-| Mensagem de Confirmação | Área de texto |Deve conter uma mensagem clara sobre o status do cadastro.|Cadastro Rejeitado|
+| ---               | ---            | ---            | ---               |
+| Status do Cadastro | Seleção Única  | Deve ser "Aprovado" ou "Rejeitado". | Rejeitado|
+| Mensagem de Confirmação | Área de texto | Deve conter uma mensagem clara sobre o status do cadastro. | Cadastro Rejeitado |
 
 | **Comandos**         |  **Destino**                   | **Tipo**          |
 | ---                  | ---                            | ---               |
