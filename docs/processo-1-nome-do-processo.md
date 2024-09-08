@@ -50,9 +50,11 @@ _* **Tabela** - campo formado por uma matriz de valores_
 |Endereço de E-mail|Caixa de Texto   |formato de e-mail  |Nenhum           |
 |Numero de telefone | Caixa de Texto   | formato numerico  |Nenhum           |
 |Senha | Caixa de Texto   | formato senha  |Nenhum           |
+|                      |                                |                   |
 
 | **Comandos**         |  **Destino**                   | **Tipo** |
 |Criar conta            | Validar dados            | default           |
+|                      |                                |                   |
 
 
 
