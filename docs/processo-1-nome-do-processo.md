@@ -42,31 +42,28 @@ _* **Link** - campo que armazena uma URL_
 _* **Tabela** - campo formado por uma matriz de valores_
 
 
- Inserção de Dados Pessoais
+ *Inserção de Dados Pessoais*
 
 | **Campo**       | **Tipo**         | **Restrições** | **Valor default** |
-| ---             | ---              | ---            | ---               |
-| Nome Completo | Caixa de Texto |    Campo obrigatório,apenas texto.          |                   |
-|   |                  |                |                   |
-|           | Caixa de Texto   | formato de e-mail |                |
-|         | Caixa de Texto   | mínimo de 8 caracteres |           |
+| ---                  | ---                            | ---               |
+| Nome Completo   | Caixa de Texto   |Campo obrigatório,apenas texto|Nenhum|
+|Endereço de E-mail|Caixa de Texto   |formato de e-mail  |Nenhum           |
+|Numero de telefone | Caixa de Texto   | formato numerico  |Nenhum           |
+|Senha | Caixa de Texto   | formato senha  |Nenhum           |
 
 | **Comandos**         |  **Destino**                   | **Tipo** |
-| ---                  | ---                            | ---               |
-| [Nome do botão/link] | Atividade/processo de destino  | (default/cancel  ) |
-| ***Exemplo:***       |                                |                   |
-| entrar               | Fim do Processo 1              | default           |
-| cadastrar            | Início do proceso de cadastro  |                   |
+|Criar conta            | Validar dados            | default           |
 
 
-**Nome da atividade 2**
+
+*Confirmação de cadastro*
 
 | **Campo**       | **Tipo**         | **Restrições** | **Valor default** |
-| ---             | ---              | ---            | ---               |
-| [Nome do campo] | [tipo de dados]  |                |                   |
-|                 |                  |                |                   |
+| ---                  | ---                            | ---               |
+| Status do Cadastro| Seleção Única  |Deve ser "Aprovado" ou "Rejeitado".|Rejeitado|
+| Mensagem de Confirmação | Área de texto |Deve conter uma mensagem clara sobre o status do cadastro.|Cadastro Rejeitado|
 
 | **Comandos**         |  **Destino**                   | **Tipo**          |
 | ---                  | ---                            | ---               |
-| [Nome do botão/link] | Atividade/processo de destino  | (default/cancel/  ) |
+| Finalizar Cadastro |Página Inicial ou Página de Erro  | default |
 |                      |                                |                   |
