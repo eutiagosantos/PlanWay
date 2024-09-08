@@ -1,7 +1,12 @@
-### 3.3.1 Processo 1 – NOME DO PROCESSO
+### 3.3.1 Processo 1 – Cadastro de usuário
 
-_Apresente aqui o nome e as oportunidades de melhoria para o processo 1. 
-Em seguida, apresente o modelo do processo 1, descrito no padrão BPMN._
+Automação de Validação: Implementar validação automática de dados (como formato de e-mail e força da senha) para reduzir erros.
+
+Melhoria na Experiência do Usuário: Adicionar feedback em tempo real durante a inserção de dados (por exemplo, informar ao usuário se o nome de usuário está disponível).
+
+Segurança: Implementar medidas de segurança adicionais, como criptografia de dados e autenticação multifator.
+
+Acessibilidade: Garantir que o processo de cadastro seja acessível a todos os usuários, incluindo aqueles com deficiências.
 
 ![Exemplo de um Modelo BPMN do PROCESSO 1](images/process.png "Modelo BPMN do Processo 1.")
 
@@ -37,14 +42,14 @@ _* **Link** - campo que armazena uma URL_
 _* **Tabela** - campo formado por uma matriz de valores_
 
 
-**Nome da atividade 1**
+ Inserção de Dados Pessoais
 
 | **Campo**       | **Tipo**         | **Restrições** | **Valor default** |
 | ---             | ---              | ---            | ---               |
-| [Nome do campo] | [tipo de dados]  |                |                   |
-| ***Exemplo:***  |                  |                |                   |
-| login           | Caixa de Texto   | formato de e-mail |                |
-| senha           | Caixa de Texto   | mínimo de 8 caracteres |           |
+| Nome Completo | Caixa de Texto |    Campo obrigatório,apenas texto.          |                   |
+|   |                  |                |                   |
+|           | Caixa de Texto   | formato de e-mail |                |
+|         | Caixa de Texto   | mínimo de 8 caracteres |           |
 
 | **Comandos**         |  **Destino**                   | **Tipo** |
 | ---                  | ---                            | ---               |
