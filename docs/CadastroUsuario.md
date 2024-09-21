@@ -8,7 +8,8 @@ Segurança: Implementar medidas de segurança adicionais, como criptografia de d
 
 Acessibilidade: Garantir que o processo de cadastro seja acessível a todos os usuários, incluindo aqueles com deficiências.
 
-![Exemplo de um Modelo BPMN do PROCESSO 1](images/ModelagemCadastro.PNG "Modelo BPMN do Processo 1.")
+![Exemplo de um Modelo BPMN do PROCESSO 1]![Cadastro Usuario](https://github.com/user-attachments/assets/20f7b323-7566-41c7-8c59-6dc4f8842ecc)
+
 
 #### Detalhamento das atividades
 
