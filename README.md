@@ -1,6 +1,6 @@
 # PLAN WAY
 
-Somos uma plataforma que transforma a maneira como você planeja e gerencia suas viagens, sejam elas de lazer ou a trabalho. Com o PlanWay, você terá todas as informações centralizadas em um único lugar, eliminando a necessidade de acessar várias plataformas ou vasculhar documentos para encontrar detalhes sobre passagens, acomodações e roteiros. Isso significa menos confusão, mais organização e um risco muito menor de perder informações essenciais. Descubra uma nova forma de viajar com o PlanWay.
+Com o PlanWay, oferecemos uma solução inovadora para agências e clientes, centralizando todas as informações em um único lugar. Seja você uma agência cadastrando e promovendo suas excursões, ou um cliente buscando a próxima aventura, nosso sistema otimiza o planejamento e o gerenciamento de viagens de forma fácil e intuitiva. Elimine a necessidade de navegar por vários sites e simplifique o processo de busca, reserva e acompanhamento de excursões.
 
 ## Integrantes
 
