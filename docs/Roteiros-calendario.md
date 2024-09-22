@@ -12,35 +12,37 @@ Sincronização Multiplataforma: Permitir a integração com calendários de ter
 #### Detalhamento das atividades
 
 
-**Inserção de Detalhes do Roteiro ou Evento**
+Inserção de Detalhes do Roteiro ou Evento
 
-| **Campo**       | **Tipo**         | **Restrições** | **Valor default** |
-| ---             | ---              | ---            | ---               |
-| Nome do Roteiro | Caixa de texto   | Campo obrigatório, apenas texto| Nenhum|
-| Descrição       | Área de Texto    |Máximo de 500 caracteres        |Nenhum |
-| Data de Iníco| Data  | Campo obrigatório, formato dd-mm-aaaa |  	Nenhum    |
-| Hora de Início        |Hora  | Campo obrigatório, formato hh:mm |  Nenhum         |
-| Data de Término       |Data  | 	Campo opcional, formato dd-mm-aaaa | 	Nenhum          |
-|Hora de Término       | Hora   | Campo opcional, formato hh:mm |Nenhum           |
-| Local         | Caixa de Texto   | Campo obrigatório, apenas texto| Nenhum          |
-| Imagem de Evento          | Imagem  | Campo opcional |  Nenhum         |
-|Lembretes      | Seleção Múltipla  | Opções: "1 hora antes", "1 dia antes", "sem lembrete |Sem lembrete |
+| **Campo**              | **Tipo**          | **Restrições**                                      | **Valor Default**      |
+|------------------------|-------------------|----------------------------------------------------|------------------------|
+| Nome do Roteiro         | Caixa de Texto    | Campo obrigatório, apenas texto                    | Nenhum                 |
+| Descrição               | Área de Texto     | Máximo de 500 caracteres                           | Nenhum                 |
+| Data de Início          | Data              | Campo obrigatório, formato dd-mm-aaaa              | Nenhum                 |
+| Hora de Início          | Hora              | Campo obrigatório, formato hh:mm                   | Nenhum                 |
+| Data de Término         | Data              | Campo opcional, formato dd-mm-aaaa                 | Nenhum                 |
+| Hora de Término         | Hora              | Campo opcional, formato hh:mm                      | Nenhum                 |
+| Local                  | Caixa de Texto    | Campo obrigatório, apenas texto                    | Nenhum                 |
+| Imagem de Evento        | Imagem            | Campo opcional                                     | Nenhum                 |
+| Lembretes               | Seleção Múltipla  | Opções: "1 hora antes", "1 dia antes", "sem lembrete" | Sem lembrete           |
 
-| **Comandos**         |  **Destino**                   | **Tipo** |
-| ---                  | ---                            | ---               |
-| Adicionar Evento ao Roteiro | Retorna para Tarefa de Inserção  | default |
-| Finalizar Criação do Roteiro| Salvar e Sincronizar Calendário|default|
+### Comandos
 
+| **Comando**                  | **Destino**                    | **Tipo**    |
+|------------------------------|---------------------------------|-------------|
+| Adicionar Evento ao Roteiro   | Retorna para Tarefa de Inserção | Default     |
+| Finalizar Criação do Roteiro  | Salvar e Sincronizar Calendário | Default     |
 
+### Confirmação de Roteiro Criado
 
-**Confirmação de Roteiro Criado**
+| **Campo**              | **Tipo**          | **Restrições**                                      | **Valor Default**      |
+|------------------------|-------------------|----------------------------------------------------|------------------------|
+| Status do Roteiro       | Seleção Única     | "Criado com sucesso" ou "Erro ao criar roteiro"     | Erro ao criar roteiro   |
+| Mensagem de Confirmação | Área de Texto     | Mensagem com detalhes do status do roteiro          | Roteiro criado com sucesso! |
 
-| **Campo**       | **Tipo**         | **Restrições** | **Valor default** |
-| ---             | ---              | ---            | ---               |
-| Status do Roteiro | Seleção Única  |"Criado com sucesso" ou "Erro ao criar roteiro".|Erro ao criar roteiro|
-|Mensagem de Confirmação|Área de Texto|Mensagem com detalhes do status do roteiro.|Roteiro criado com sucesso!|
+### Comandos
 
-| **Comandos**         |  **Destino**                   | **Tipo**          |
-| ---                  | ---                            | ---               |
-| Finalizar | Página Inicial  | default |
-|  Editar Roteiro   |  Retornar para edição do roteiro |  cancel  |
+| **Comando**            | **Destino**            | **Tipo**    |
+|------------------------|------------------------|-------------|
+| Finalizar              | Página Inicial          | Default     |
+| Editar Roteiro         | Retornar para edição    | Cancel      |
