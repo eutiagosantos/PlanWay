@@ -6,7 +6,7 @@ Melhoria da Usabilidade: Simplificação da interface para facilitar a criação
 Integração de Notificações: Envio de lembretes automáticos sobre eventos ou alterações no roteiro.
 Sincronização Multiplataforma: Permitir a integração com calendários de terceiros (Google Calendar, Outlook, etc.).
 
-![Exemplo de um Modelo BPMN do PROCESSO 2](images/ModelagemRelatorio.PNG "Modelo BPMN do Processo 2.")
+![Exemplo de um Modelo BPMN do PROCESSO 2](images/RoteiroCalendario.jpeg "Modelo BPMN do Processo 2.")
 
 
 #### Detalhamento das atividades

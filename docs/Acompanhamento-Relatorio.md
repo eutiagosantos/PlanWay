@@ -6,7 +6,7 @@ Melhoria na Visualização: Implementação de dashboards interativos para facil
 Notificações Automatizadas: Envio de notificações automáticas ao usuário sobre o status das tarefas e prazos importantes.
 Integração com Ferramentas Externas: Sincronização de dados de acompanhamento e relatórios com ferramentas de produtividade como Trello ou Asana.
 
-![Exemplo de um Modelo BPMN do PROCESSO 3](images/ModelagemTarefas.PNG "Modelo BPMN do Processo 3.")
+![Exemplo de um Modelo BPMN do PROCESSO 3](images/AcompanhamentoRelatorio.jpeg "Modelo BPMN do Processo 3.")
 
 
 #### Detalhamento das atividades
