@@ -29,34 +29,37 @@ _Instituto de Informática e Ciências Exatas – Pontifícia Universidade Cató
 
 ---
 
-Somos uma plataforma que transforma a maneira como você planeja e gerencia suas viagens, sejam elas de lazer ou a trabalho. Com o PlanWay, você terá todas as informações centralizadas em um único lugar, eliminando a necessidade de acessar várias plataformas ou vasculhar documentos para encontrar detalhes sobre passagens, acomodações e roteiros. Isso significa menos confusão, mais organização e um risco muito menor de perder informações essenciais. Descubra uma nova forma de viajar com o PlanWay.
+Com o PlanWay, oferecemos uma solução inovadora para agências e clientes, centralizando todas as informações em um único lugar. Seja você uma agência cadastrando e promovendo suas excursões, ou um cliente buscando a próxima aventura, nosso sistema otimiza o planejamento e o gerenciamento de viagens de forma fácil e intuitiva. Elimine a necessidade de navegar por vários sites e simplifique o processo de busca, reserva e acompanhamento de excursões.
 
 ---
 
 
 ## 1. Introdução
 
-"Transforme desafios em oportunidades e sonhos em conquistas."
+"Transforme desafios em oportunidades e experiências em memórias."
 
 ### 1.1 Contextualização
 
-No cenário atual, marcado pela globalização e pelo avanço tecnológico, a gestão de viagens se tornou uma necessidade crescente, tanto para pessoas quanto para empresas. Com o mercado de viagens corporativas movimentando mais de 1,3 trilhões de dólares em 2023, segundo a Global Business Travel Association (GBTA), a eficiência nesse processo é crucial. Organizar a logística, controlar despesas e lidar com imprevistos são desafios que demandam soluções ágeis e integradas. Diante disso, este projeto busca desenvolver uma plataforma que simplifica o planejamento e a gestão de viagens, centralizando desde a escolha do destino até o controle dos gastos. Com funcionalidades personalizadas e automação, atendendo às necessidades atuais tanto no âmbito pessoal quanto corporativo.
+No cenário atual, a gestão de excursões tornou-se um desafio crescente, tanto para agências quanto para os clientes. O mercado turístico, especialmente voltado para excursões, enfrenta a necessidade de integrar de forma eficiente a oferta de destinos com a demanda de consumidores que buscam experiências práticas e organizadas. Segundo dados de 2023, o turismo movimenta bilhões de dólares anualmente, e a necessidade de soluções ágeis que conectem agências e viajantes nunca foi tão urgente. Este projeto tem como objetivo desenvolver uma plataforma que simplifica o planejamento e a gestão de excursões, centralizando desde o cadastro de ofertas até o controle de reservas e compartilhamento de itinerários.
  
 ### 1.2 Problema
 
-Muitas empresas ainda enfrentam dificuldades na gestão de viagens, com processos fragmentados e uso de ferramentas desconexas como planilhas manuais. Isso resulta em retrabalho, perda de tempo e aumento de custos, especialmente em empresas de médio porte. Um exemplo comum é o desafio de alinhar a gestão de viagens corporativas com o controle financeiro e as políticas internas, levando a falhas no controle de despesas e dificuldades na adaptação de agendas. Este projeto propõe uma solução integrada que centralize e automatize a gestão de viagens, facilitando o controle e a tomada de decisões estratégicas.
+Atualmente, muitas agências de excursões e clientes enfrentam dificuldades com processos fragmentados, falta de integração e a necessidade de utilizar várias plataformas para promover, gerenciar e reservar excursões. Para as agências, a promoção de pacotes é um desafio devido à falta de visibilidade e ferramentas adequadas. Para os clientes, encontrar e comparar ofertas se torna uma tarefa demorada e confusa, o que pode resultar em uma experiência de planejamento frustrante e ineficiente.
 
 ### 1.3 Objetivo geral
 
-O objetivo geral deste trabalho é desenvolver um sistema para automação do processo de gestão de viagens, integrando planejamento, controle de despesas e acompanhamento em uma única plataforma.
+Desenvolver uma plataforma integrada para automação do processo de planejamento e gestão de excursões, centralizando o cadastro de ofertas, reservas, controle financeiro e compartilhamento de roteiros em um único ambiente.
 
 #### 1.3.1 Objetivos específicos
 
-Implementar funcionalidades que permitam a integração de reservas de hotéis e transporte em tempo real, facilitando o planejamento das viagens. Desenvolver um módulo de controle de despesas que possibilite o acompanhamento detalhado dos custos e o compartilhamento do planejamento com outras pessoas.
+* Permitir que agências de excursões cadastrem suas ofertas, informando destinos, preços e datas de forma centralizada.
+* Implementar um sistema de pesquisa e comparação de pacotes que simplifique a experiência dos clientes.
+* Desenvolver ferramentas de controle de reservas e geração de relatórios para as agências.
+* Facilitar o compartilhamento de roteiros entre os participantes da excursão, garantindo melhor organização e alinhamento.
 
 ### 1.4 Justificativas
 
-A justificativa deste projeto está na crescente necessidade de soluções que melhorem a gestão de viagens, especialmente em empresas. A falta de integração e o controle ineficiente de despesas aumentam custos e afetam a produtividade. A proposta é criar uma plataforma única que centralize todo o processo de viagem, automatizando tarefas e gerando insights estratégicos para otimizar custos e operações. Além disso, a solução será adaptável a diferentes setores, trazendo melhorias no gerenciamento de viagens em diversos contextos.
+O mercado de excursões carece de uma solução acessível que conecte pequenas e médias agências diretamente com seus clientes, eliminando a necessidade de ferramentas desconexas. Com o PlanWay, agências poderão gerenciar suas ofertas e reservas em um único sistema, enquanto os clientes terão uma experiência otimizada, com todas as informações e opções centralizadas. O impacto será uma maior eficiência no planejamento de excursões e oportunidades para os estabelecimentos turísticos locais aumentarem sua visibilidade.
 
 ## 2. Participantes do processo
 
