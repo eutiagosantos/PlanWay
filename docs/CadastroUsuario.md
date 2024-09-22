@@ -13,35 +13,34 @@ Acessibilidade: Garantir que o processo de cadastro seja acessível a todos os u
 
 #### Detalhamento das atividades
 
+Inserção de Dados Pessoais
 
- *Inserção de Dados Pessoais*
+| **Campo**             | **Tipo**         | **Restrições**                                   | **Valor Default** |
+|-----------------------|------------------|-------------------------------------------------|-------------------|
+| Nome Completo         | Caixa de Texto   | Campo obrigatório, apenas texto                 | Nenhum            |
+| Endereço de E-mail     | Caixa de Texto   | Formato de e-mail válido, campo obrigatório      | Nenhum            |
+| Número de Telefone     | Caixa de Texto   | Formato numérico, campo obrigatório              | Nenhum            |
+| Senha                 | Caixa de Texto   | Formato de senha com regras de complexidade      | Nenhum            |
+| Destino Preferido      | Caixa de Texto   | Formato texto, opcional                          | Nenhum            |
+| Passagens (se houver) | Upload de Foto   | Upload de imagem opcional                        | Nenhum            |
+| Hotel (se houver)     | Caixa de Texto   | Formato texto, opcional                          | Nenhum            |
 
-| **Campo**       | **Tipo**         | **Restrições** | **Valor default** |
-| ---               | ---            | ---            | ---               |
-| Nome Completo   | Caixa de Texto   |Campo obrigatório,apenas texto|Nenhum|
-|Endereço de E-mail|Caixa de Texto   |formato de e-mail  |Nenhum           |
-|Numero de telefone | Caixa de Texto   | formato numerico  |Nenhum           |
-|Senha | Caixa de Texto   | formato senha  |Nenhum           |
-|Destino| Caixa de Texto  | formato texto                   |Nenhum          |
-|Passagens| Foto  | upload                   |Nenhum          |
-|Hotel| Caixa de texto  | formato texto                   |Nenhum          |
-|                      |                                |                   |
+### Comandos
 
-| **Comandos**         |  **Destino**                   | **Tipo** |
-| ---                  | ---                            | ---      |
-|Criar conta            | Validar dados            | default           |
-|                      |                                |                   |
+| **Comando**           | **Destino**            | **Tipo**    |
+|-----------------------|------------------------|-------------|
+| Criar Conta           | Validar Dados           | Default     |
+| Confirmar Cadastro    | Redirecionar para página de confirmação | Default |
 
+### Confirmação de Cadastro
 
+| **Campo**             | **Tipo**         | **Restrições**                                   | **Valor Default** |
+|-----------------------|------------------|-------------------------------------------------|-------------------|
+| Status do Cadastro    | Seleção Única    | Deve ser "Aprovado" ou "Rejeitado"               | Rejeitado         |
+| Mensagem de Confirmação | Área de Texto  | Deve conter uma mensagem clara sobre o status    | Cadastro Rejeitado|
 
-*Confirmação de cadastro*
+### Comandos
 
-| **Campo**       | **Tipo**         | **Restrições** | **Valor default** |
-| ---               | ---            | ---            | ---               |
-| Status do Cadastro | Seleção Única  | Deve ser "Aprovado" ou "Rejeitado". | Rejeitado|
-| Mensagem de Confirmação | Área de texto | Deve conter uma mensagem clara sobre o status do cadastro. | Cadastro Rejeitado |
-
-| **Comandos**         |  **Destino**                   | **Tipo**          |
-| ---                  | ---                            | ---               |
-| Finalizar Cadastro |Página Inicial ou Página de Erro  | default |
-|                      |                                |                   |
+| **Comando**           | **Destino**            | **Tipo**    |
+|-----------------------|------------------------|-------------|
+| Finalizar Cadastro    | Página Inicial ou Página de Erro | Default     |
