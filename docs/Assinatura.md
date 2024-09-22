@@ -6,7 +6,7 @@ Implementar automação no processo de verificação de pagamento.
 Melhorar a experiência do usuário durante o fluxo de assinatura.
 Garantir a segurança dos dados financeiros dos usuários.
 
-![Exemplo de um Modelo BPMN do PROCESSO 4](images/Assinatura.jpeg "Modelo BPMN do Processo 4.")
+![Assinatura](images/Assinatura.jpeg "Modelo BPMN do Processo 4.")
 
 
 #### Detalhamento das atividades
