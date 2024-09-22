@@ -65,31 +65,23 @@ O mercado de excursões carece de uma solução acessível que conecte pequenas 
 
 Os usuários-chave do sistema de gestão de viagens podem ser divididos em dois perfis principais:
 
-Pessoas que planejam viagens: Usuários que buscam organizar suas viagens, seja para lazer ou trabalho. Eles querem facilidade para escolher destinos, reservar hospedagens, e montar itinerários personalizados, valorizando uma experiência prática e intuitiva.
+Agências de Excursões: As agências serão responsáveis por cadastrar suas excursões, gerenciar reservas e promover suas ofertas na plataforma. Elas também poderão gerar relatórios de desempenho para otimizar seus negócios.
 
-Proprietários de hospedagens e serviços turísticos: Donos de hotéis, pousadas ou outros estabelecimentos, interessados em cadastrar seus serviços na plataforma. Esses usuários buscam uma solução que permita gerenciar reservas, promover seus negócios e alcançar um público maior de forma acessível e eficiente.
+Clientes de Excursões: Usuários que buscam excursões para lazer ou viagens em grupo. Eles poderão pesquisar e comparar pacotes de excursões, reservar e compartilhar itinerários com outros participantes.
 
 ## 3. Modelagem do processo de negócio
 
 ### 3.1. Análise da situação atual
 
-Hoje, planejar e gerenciar uma viagem, seja pessoal ou a trabalho, é uma tarefa que pode ser complicada e demorada. Muitas vezes, é preciso usar vários sites e aplicativos para reservar passagens, hotéis e passeios, e o controle do orçamento é feito manualmente ou com planilhas, o que é confuso e propenso a erros. As empresas, especialmente as de médio e pequeno porte, enfrentam ainda mais desafios, lidando com processos fragmentados e falta de integração entre as ferramentas de controle de despesas e de reserva. As soluções atuais disponíveis são geralmente caras, complexas e voltadas para grandes corporações, deixando muitos sem uma opção prática e acessível.
+O planejamento de excursões ainda é um processo complicado e demorado para muitas agências e clientes. As agências enfrentam desafios na promoção de pacotes e no gerenciamento eficiente de reservas. Por outro lado, os clientes precisam acessar várias plataformas para comparar e reservar excursões, o que torna o processo fragmentado e propenso a erros. Soluções atuais costumam ser caras e inadequadas para agências menores, deixando-as sem uma alternativa acessível.
 
 ### 3.2. Descrição geral da proposta de solução
 
-O "PlanWay" é uma plataforma que centraliza todas as informações em um único local, eliminando a necessidade de acessar múltiplas plataformas ou documentos para encontrar detalhes sobre passagens, estadias e roteiros. Isso evitará a confusão causada pela dispersão de informações e minimizará o risco de perda de dados importantes. Além disso, ao permitir o compartilhamento dessas informações com todos os viajantes envolvidos, o sistema facilitará a comunicação e o alinhamento do grupo, garantindo que todos estejam cientes dos detalhes da viagem, como horários de voos, endereços de hospedagem e atividades planejadas. Isso não só melhora a organização, mas também reduz o estresse associado ao planejamento e à execução de uma viagem, tornando o processo mais fluido e eficiente. O cronograma detalhado dos roteiros diários, com todas as atividades e locais a serem visitados, também permitirá que os viajantes aproveitem ao máximo seu tempo, sem a preocupação de perder eventos ou compromissos importantes.
+O PlanWay centraliza a gestão de excursões, eliminando a necessidade de usar múltiplas ferramentas e plataformas. Agências podem cadastrar suas ofertas, gerenciar reservas e gerar relatórios em um único local, enquanto os clientes podem buscar, comparar e reservar excursões facilmente. A plataforma também permite o compartilhamento de roteiros diários e itinerários, garantindo uma melhor organização das viagens em grupo.
 
-Limites:
-Ainda estamos no começo, e pode ser desafiador integrar alguns sistemas corporativos específicos.
-Nosso alcance pode ser limitado em regiões com pouca digitalização de serviços turísticos.
-Podemos ter dificuldades em implementar certas funcionalidades.
+Limitações: Pode ser desafiador integrar alguns sistemas corporativos específicos, e a digitalização limitada em algumas regiões pode restringir o alcance de funcionalidades.
 
-Oportunidades de Melhoria:
-Tornar o processo de planejamento e reserva de viagens muito mais simples, eliminando o uso de várias ferramentas.
-Oferecer uma solução acessível e fácil de usar para empresas de todos os tamanhos e para viajantes individuais.
-Facilitar o controle de despesas em tempo real e permitir a personalização das viagens.
-Dar mais visibilidade e oportunidade de negócios para hotéis e serviços turísticos locais.
-Com o "PlanWay", a gestão de viagens se torna menos complicada e mais prazerosa, permitindo que as pessoas se concentrem no que realmente importa: aproveitar a viagem.
+Oportunidades de Melhoria: A plataforma pode simplificar a gestão de excursões e oferecer soluções personalizadas e acessíveis para agências e clientes. O PlanWay também pode gerar novas oportunidades de negócios, aumentando a visibilidade de hotéis e serviços turísticos locais, além de oferecer relatórios avançados para as agências melhorarem sua tomada de decisões.
 
 ### 3.3. Modelagem dos processos
 
