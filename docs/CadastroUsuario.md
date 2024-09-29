@@ -1,12 +1,10 @@
 ### 3.3.1 Processo 1 – Cadastro de usuário
 
-Automação de Validação: Implementar validação automática de dados (como formato de e-mail e força da senha) para reduzir erros.
-
-Melhoria na Experiência do Usuário: Adicionar feedback em tempo real durante a inserção de dados (por exemplo, informar ao usuário se o nome de usuário está disponível).
-
-Segurança: Implementar medidas de segurança adicionais, como criptografia de dados e autenticação multifator.
-
-Acessibilidade: Garantir que o processo de cadastro seja acessível a todos os usuários, incluindo aqueles com deficiências.
+Estaremos buscando maneiras de tornar o cadastro de usuários mais fácil e seguro. Aqui estão algumas melhorias que planejamos implementar:
+Validação Automática: Vamos checar automaticamente se o e-mail e a senha estão corretos, evitando que você cometa erros ao preencher o formulário.
+Acessibilidade: Queremos que todos consigam usar nosso sistema, então faremos adaptações para garantir que ele seja acessível para pessoas com deficiências.
+Interface Intuitiva: Estamos trabalhando em um design mais amigável e visual, para que o cadastro seja uma experiência agradável e descomplicada.
+Com essas melhorias, nosso objetivo é oferecer a você uma experiência de cadastro simples, segura e acolhedora. Estamos animados para colocar essas mudanças em prática!
 
 ![Cadastro Usuario](https://github.com/user-attachments/assets/936cc488-920c-416c-ba7c-49a50a9e0ce7)
 
@@ -15,22 +13,24 @@ Acessibilidade: Garantir que o processo de cadastro seja acessível a todos os u
 
 Inserção de Dados Pessoais
 
-| **Campo**             | **Tipo**         | **Restrições**                                   | **Valor Default** |
-|-----------------------|------------------|-------------------------------------------------|-------------------|
-| Nome Completo         | Caixa de Texto   | Campo obrigatório, apenas texto                 | Nenhum            |
-| Endereço de E-mail     | Caixa de Texto   | Formato de e-mail válido, campo obrigatório      | Nenhum            |
-| Número de Telefone     | Caixa de Texto   | Formato numérico, campo obrigatório              | Nenhum            |
-| Senha                 | Caixa de Texto   | Formato de senha com regras de complexidade      | Nenhum            |
-| Destino Preferido      | Caixa de Texto   | Formato texto, opcional                          | Nenhum            |
-| Passagens (se houver) | Upload de Foto   | Upload de imagem opcional                        | Nenhum            |
-| Hotel (se houver)     | Caixa de Texto   | Formato texto, opcional                          | Nenhum            |
+| Campo                     | Tipo            | Restrições                                            | Valor Default   |
+|---------------------------|-----------------|------------------------------------------------------|------------------|
+| Nome Completo             | Caixa de Texto  | Campo obrigatório, apenas texto                      | Nenhum           |
+| Endereço de E-mail        | Caixa de Texto  | Formato de e-mail válido, campo obrigatório          | Nenhum           |
+| Número de Telefone        | Caixa de Texto  | Formato numérico, campo obrigatório                   | Nenhum           |
+| Senha                     | Caixa de Texto  | Formato de senha com regras de complexidade           | Nenhum           |
+| Destino Preferido         | Caixa de Texto  | Formato texto, campo opcional                         | Nenhum           |
+| Aceito os Termos de Uso   | Checkbox        | Campo obrigatório para consentimento                   | Não marcado       |
+| Dicas de Preenchimento     | Tooltip         | Dicas para cada campo na inserção                    | N/A              |
 
-### Comandos
+#### Comandos
 
-| **Comando**           | **Destino**            | **Tipo**    |
-|-----------------------|------------------------|-------------|
-| Criar Conta           | Validar Dados           | Default     |
-| Confirmar Cadastro    | Redirecionar para página de confirmação | Default |
+| Comando                   | Destino                             | Tipo     |
+|---------------------------|-------------------------------------|----------|
+| Criar Conta               | Validar Dados                       | Default  |
+| Confirmar Cadastro        | Redirecionar para página de confirmação | Default  |
+| Recuperar Senha           | Redirecionar para formulário de recuperação | Default  |
+
 
 ### Confirmação de Cadastro
 
@@ -38,9 +38,3 @@ Inserção de Dados Pessoais
 |-----------------------|------------------|-------------------------------------------------|-------------------|
 | Status do Cadastro    | Seleção Única    | Deve ser "Aprovado" ou "Rejeitado"               | Rejeitado         |
 | Mensagem de Confirmação | Área de Texto  | Deve conter uma mensagem clara sobre o status    | Cadastro Rejeitado|
-
-### Comandos
-
-| **Comando**           | **Destino**            | **Tipo**    |
-|-----------------------|------------------------|-------------|
-| Finalizar Cadastro    | Página Inicial ou Página de Erro | Default     |
