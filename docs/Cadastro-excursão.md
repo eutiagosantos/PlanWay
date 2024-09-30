@@ -3,9 +3,13 @@
 Estamos focados em tornar o processo de cadastro de excursões intuitivo e completo para as agências. Aqui estão algumas melhorias que planejamos implementar:
 
 Facilidade no Preenchimento: Simplificamos o processo para que as agências possam cadastrar excursões de forma rápida e sem complicações.
+
 Validação Automática: Todos os dados serão validados em tempo real, como datas e valores, para garantir que não ocorram erros ao cadastrar uma excursão.
+
 Campos Opcionais e Personalizáveis: Para atender às diferentes necessidades das agências, o formulário incluirá campos opcionais que podem ser personalizados, como serviços adicionais.
+
 Compatibilidade com Calendário: As excursões cadastradas podem ser diretamente integradas ao calendário para um melhor controle de datas e itinerários.
+
 Com essas melhorias, o cadastro de excursões será otimizado, proporcionando uma experiência fluida e eficiente para as agências.
 
 ![Cadastro Usuario](https://github.com/user-attachments/assets/936cc488-920c-416c-ba7c-49a50a9e0ce7)
