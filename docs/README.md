@@ -93,6 +93,8 @@ Oportunidades de Melhoria: A plataforma pode simplificar a gestão de excursões
 
 [PROCESSO 4 - Assinatura](Assinatura.md "Detalhamento do Processo 4.")
 
+[PROCESSO 5 - Cadastrar-excursão](Cadastrar-excursão.md "Detalhamento do Processo 5.")
+
 ## 4. Projeto da solução
 
 _O documento a seguir apresenta o detalhamento do projeto da solução. São apresentadas duas seções que descrevem, respectivamente: modelo relacional e tecnologias._
