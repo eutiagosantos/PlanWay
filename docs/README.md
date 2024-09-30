@@ -93,7 +93,7 @@ Oportunidades de Melhoria: A plataforma pode simplificar a gestão de excursões
 
 [PROCESSO 4 - Assinatura](Assinatura.md "Detalhamento do Processo 4.")
 
-[PROCESSO 5 - Cadastrar-excursão](Cadastrar-excursão.md "Detalhamento do Processo 5.")
+[PROCESSO 5 - Cadastrar-excursão]
 
 ## 4. Projeto da solução
 
