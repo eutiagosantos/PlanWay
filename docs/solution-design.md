@@ -4,7 +4,7 @@
 
 _Apresente o modelo de dados por meio de um modelo relacional que contemple todos os conceitos e atributos apresentados na modelagem dos processos._ 
 
-![Exemplo de um modelo relacional](images/modeloRelacional.jpg "Exemplo de Modelo Relacional.")
+![PlanWay drawio](https://github.com/user-attachments/assets/09df505f-0b12-4813-a8e5-b8a78aaaf1ef)
 ---
 
 ### 4.2. Tecnologias
