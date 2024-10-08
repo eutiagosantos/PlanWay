@@ -44,5 +44,5 @@ Inserção de Dados da Excursão
 
 | **Campo**             | **Tipo**         | **Restrições**                                    | **Valor Default** |
 |-----------------------|------------------|--------------------------------------------------|-------------------|
-| Status da Excursão    | Seleção Única    | Deve ser "Aprovada" ou "Rejeitada"                | Rejeitada         |
+| Status da Excursão    | Seleção Única    | Deve ser "Cancelada" ou "Realizada"                | Rejeitada         |
 | Mensagem de Confirmação | Área de Texto  | Deve conter uma mensagem clara sobre o status     | Excursão Rejeitada|
