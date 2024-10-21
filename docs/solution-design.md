@@ -15,7 +15,7 @@ _As tecnologias que ultilizaremos em nosso projeto são as descritas a baixo_
 | **Dimensão**   | **Tecnologia**  |
 | ---            | ---             |
 | SGBD           | MySQL           |
-| Front end      | HTML+CSS+JS     |
+| Front end      | React JS        |
 | Back end       | Java SpringBoot |
 | Deploy         | Github Pages    |
 
