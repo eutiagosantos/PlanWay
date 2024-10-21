@@ -1,12 +1,19 @@
 ### 3.3.1 Processo 1 – Cadastro de usuário
 
-Estaremos buscando maneiras de tornar o cadastro de usuários mais fácil e seguro. Aqui estão algumas melhorias que planejamos implementar:
-Validação Automática: Vamos checar automaticamente se o e-mail e a senha estão corretos, evitando que você cometa erros ao preencher o formulário.
-Acessibilidade: Queremos que todos consigam usar nosso sistema, então faremos adaptações para garantir que ele seja acessível para pessoas com deficiências.
-Interface Intuitiva: Estamos trabalhando em um design mais amigável e visual, para que o cadastro seja uma experiência agradável e descomplicada.
-Com essas melhorias, nosso objetivo é oferecer a você uma experiência de cadastro simples, segura e acolhedora. Estamos animados para colocar essas mudanças em prática!
 
-![Cadastro Usuario](https://github.com/user-attachments/assets/936cc488-920c-416c-ba7c-49a50a9e0ce7)
+Estamos aprimorando o processo de cadastro de usuários, e aqui estão as melhorias que implementamos com base no novo modelo BPMN:
+
+Cadastro Simplificado: Agora, o sistema diferencia automaticamente entre usuários comuns e agências de viagem, verificando se é necessário cadastrar CPF ou CNPJ, de forma clara e objetiva.
+
+Validação Automática: O sistema verifica em tempo real se o usuário já possui cadastro, e caso sim, redireciona diretamente para a página de login, tornando o processo mais eficiente.
+
+Processos Automatizados: O fluxo do BPMN otimiza a verificação de dados e o envio de mensagens, garantindo que o sistema responda rapidamente ao usuário, exibindo mensagens de erro ou sucesso conforme necessário.
+
+Experiência de Usuário Fluida: Implementamos um fluxo lógico que permite aos usuários realizar o cadastro de forma intuitiva e sem complicações, garantindo que todos os passos do processo estejam claros e acessíveis.
+
+Essas mudanças visam melhorar a eficiência, segurança e simplicidade no cadastro de usuários, tanto para pessoas físicas quanto para agências de viagem.
+
+![Cadastro Usuario](images/cadastroUsuario.jpg)
 
 
 #### Detalhamento das atividades
@@ -19,7 +26,7 @@ Inserção de Dados Pessoais
 | Endereço de E-mail        | Caixa de Texto  | Formato de e-mail válido, campo obrigatório          | Nenhum           |
 | Número de Telefone        | Caixa de Texto  | Formato numérico, campo obrigatório                   | Nenhum           |
 | Senha                     | Caixa de Texto  | Formato de senha com regras de complexidade           | Nenhum           |
-| Destino Preferido         | Caixa de Texto  | Formato texto, campo opcional                         | Nenhum           |
+| CPF/CNPJ        | Caixa de Texto  | Formato texto,campo obrigatorio                         | Nenhum           |
 | Aceito os Termos de Uso   | Checkbox        | Campo obrigatório para consentimento                   | Não marcado       |
 | Dicas de Preenchimento     | Tooltip         | Dicas para cada campo na inserção                    | N/A              |
 
