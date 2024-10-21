@@ -24,7 +24,6 @@ Inserção de Dados Pessoais
 |---------------------------|-----------------|------------------------------------------------------|------------------|
 | Nome Completo             | Caixa de Texto  | Campo obrigatório, apenas texto                      | Nenhum           |
 | Endereço de E-mail        | Caixa de Texto  | Formato de e-mail válido, campo obrigatório          | Nenhum           |
-| Número de Telefone        | Caixa de Texto  | Formato numérico, campo obrigatório                   | Nenhum           |
 | Senha                     | Caixa de Texto  | Formato de senha com regras de complexidade           | Nenhum           |
 | CPF/CNPJ        | Caixa de Texto  | Formato texto,campo obrigatorio                         | Nenhum           |
 | Aceito os Termos de Uso   | Checkbox        | Campo obrigatório para consentimento                   | Não marcado       |
