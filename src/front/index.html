@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,6 +9,7 @@
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="./assets/css/style.css">
 </head>
+
 <body>
     <!-- Vídeo de fundo -->
     <video autoplay loop muted class="background-video">
@@ -18,7 +20,7 @@
     <div class="form-container">
         <main class="form-box">
             <h1 id="form-title" class="mb-4">Login</h1>
-            <form id="auth-form">
+            <form id="auth-form" method="post">
                 <div class="form-group">
                     <input type="email" class="form-control" id="email" placeholder="Email" required>
                 </div>
@@ -30,7 +32,7 @@
                     <span class="icon" id="toggle-password">👁️</span>
                 </div>
                 <div class="form-group" id="confirm-password-group" style="display: none;">
-                  <input type="password" class="form-control" id="confirm-password" placeholder="Confirmar Senha">
+                    <input type="password" class="form-control" id="confirm-password" placeholder="Confirmar Senha">
                 </div>
                 <div class="row mb-3">
                     <div class="col">
@@ -57,4 +59,5 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <script src="./assets/js/script.js"></script>
 </body>
+
 </html>
