@@ -1,31 +1,32 @@
 package com.planway.trabalhoInterdiciplinar.Entity;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.validation.constraints.Size;
+import jakarta.persistence.*;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotBlank;
 import lombok.Getter;
+
 import lombok.Setter;
 
 @Entity
+@Table(name = "user")
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 @Getter
 @Setter
 public class User {
 
-    @Column(name = "user_email", unique = true, nullable = false)
-    @Size(min = 8, max = 254)
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    @Email
+    @NotBlank
     private String email;
 
-    @Column(name = "user_senha", nullable = false)
-    @Size(min = 3, max = 20)
+    @NotBlank
     private String password;
-
-    public User() {
-
-    }
 
     public User(String email, String password) {
         this.email = email;
         this.password = password;
     }
-
 }
