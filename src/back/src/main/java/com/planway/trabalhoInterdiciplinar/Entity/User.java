@@ -20,6 +20,8 @@ public class User {
 
     @Email
     @NotBlank
+    @Column(name = "email", unique = true
+    )
     private String email;
 
     @NotBlank
@@ -29,4 +31,8 @@ public class User {
         this.email = email;
         this.password = password;
     }
+
+    public User() {
+    }
+
 }

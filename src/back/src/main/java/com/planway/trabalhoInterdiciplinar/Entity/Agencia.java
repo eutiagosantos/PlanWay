@@ -5,7 +5,6 @@ import jakarta.persistence.DiscriminatorValue;
 import jakarta.persistence.Entity;
 import jakarta.validation.constraints.Size;
 import lombok.Getter;
-
 import lombok.Setter;
 
 @Entity
@@ -21,6 +20,9 @@ public class Agencia extends User {
     public Agencia(String email, String password, String cnpj) {
         super(email, password);
         this.cnpj = cnpj;
+    }
+
+    public Agencia() {
     }
 
 }

@@ -22,7 +22,11 @@ public class UsuarioComum extends User {
         this.cpf = cpf;
     }
 
+    public UsuarioComum() {
+    }
+
     public String getCpf() {
         return this.cpf;
     }
+
 }

@@ -82,16 +82,14 @@ public class UserService {
     }
 
     public List<User> listUsers() {
-        // Obtemos todos os usuários comuns
+    
         List<UsuarioComum> usuariosComuns = userRepository.findAll();
 
-        // Obtemos todas as agências
         List<Agencia> agencias = agenciaRepository.findAll();
 
-        // Juntamos as listas em uma lista de User
         List<User> allUsers = new ArrayList<>();
-        allUsers.addAll(usuariosComuns); // Adiciona usuários comuns
-        allUsers.addAll(agencias); // Adiciona agências
+        allUsers.addAll(usuariosComuns);
+        allUsers.addAll(agencias);
 
         return allUsers.stream()
                 .distinct()
@@ -140,7 +138,7 @@ public class UserService {
         agenciaRepository.deleteByCnpj(cnpj);
     }
 
-    public boolean authenticate(String email, String cpfCnpj, String password) {
+    public boolean authenticate(String email, String password) {
         Optional<UsuarioComum> optionalUserComum = userRepository.findByEmail(email);
         Optional<Agencia> optionalAgencia = agenciaRepository.findByEmail(email);
 
