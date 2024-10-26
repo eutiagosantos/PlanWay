@@ -55,7 +55,7 @@ function handleSubmit() {
         }
         cadastro();
     } else {
-        alert('Login bem-sucedido!');
+        login();
     }
 }
 
@@ -79,17 +79,47 @@ async function cadastro() {
 
         if (response.ok) {
             alert('Cadastro realizado com sucesso!');
-            toggleLayout(); 
+            toggleLayout();
         } else {
             const errorMessage = await response.text();
             alert(`Erro ao cadastrar: ${errorMessage}`);
         }
     } catch (error) {
-        console.error('Erro detalhado:', error); 
+        console.error('Erro detalhado:', error);
         alert(`Erro ao conectar ao servidor: ${error.message}`);
     }
 }
 
+
+async function login() {
+    let email = document.getElementById('email').value;
+    let password = document.getElementById('password').value;
+
+    try {
+        const response = await fetch("http://localhost:8081/api/usuarios/login", {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                email: email,
+                password: password,
+            })
+        });
+
+        if (response.ok) {
+            alert('Login realizado com sucesso!');
+            window.location.href = 'index.html';
+        } else {
+            const errorMessage = await response.text();
+            alert(`Erro ao logar: ${errorMessage}`);
+        }
+    } catch (error) {
+        console.error('Erro detalhado:', error);
+        alert(`Erro ao conectar ao servidor: ${error.message}`);
+    }
+
+}
 
 
 
