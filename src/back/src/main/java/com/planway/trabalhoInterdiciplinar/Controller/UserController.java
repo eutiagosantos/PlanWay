@@ -1,14 +1,22 @@
 package com.planway.trabalhoInterdiciplinar.Controller;
 
+import java.util.List;
+
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RestController;
 import com.planway.trabalhoInterdiciplinar.Dto.UserDto;
+import com.planway.trabalhoInterdiciplinar.Dto.UpdateUserDto;
 import com.planway.trabalhoInterdiciplinar.Dto.LoginRequest;
 import com.planway.trabalhoInterdiciplinar.Service.UserService;
+import com.planway.trabalhoInterdiciplinar.Entity.User;
 
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 
 @RestController
@@ -40,6 +48,24 @@ public class UserController {
         } else {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Credenciais inválidas");
         }
+    }
+
+    @PutMapping("/updateUser")
+    public void updateUserByDocument(@PathVariable String documento, @RequestBody UpdateUserDto userDto) {
+        userService.updateUser(documento, userDto);
+        ResponseEntity.noContent().build();
+    }
+
+    @GetMapping("/listUsers")
+    public ResponseEntity<List<User>> listUsers() {
+        var users = userService.listUsers();
+        return ResponseEntity.ok(users);
+    }
+
+    @DeleteMapping("/deleteUser")
+    public ResponseEntity<Void> deleteUserByDocument(@PathVariable("documento") String documento) {
+        userService.deleteUserByDocument(documento);
+        return ResponseEntity.noContent().build();
     }
 
 }

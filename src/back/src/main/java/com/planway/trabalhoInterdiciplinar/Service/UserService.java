@@ -82,7 +82,7 @@ public class UserService {
     }
 
     public List<User> listUsers() {
-    
+
         List<UsuarioComum> usuariosComuns = userRepository.findAll();
 
         List<Agencia> agencias = agenciaRepository.findAll();
@@ -96,46 +96,49 @@ public class UserService {
                 .collect(Collectors.toList());
     }
 
-    public void updateUser(String cpf, UpdateUserDto userDto) {
-        var userExists = userRepository.findByCpf(cpf);
+    public void updateUser(String documento, UpdateUserDto userDto) {
+        String tipoDocumento = identificarDocumento(documento);
 
-        if (userExists.isPresent()) {
-            var user = userExists.get();
+        if ("CPF".equals(tipoDocumento)) {
+            var userExists = userRepository.findByCpf(tipoDocumento);
 
-            if (userDto.email() != null) {
-                user.setEmail(userDto.email());
+            if (userExists.isPresent()) {
+                var user = userExists.get();
+
+                if (userDto.email() != null) {
+                    user.setEmail(userDto.email());
+                }
+
+                if (userDto.password() != null) {
+                    user.setPassword(userDto.password());
+                }
+                userRepository.save(user);
             }
+        } else if ("CNPJ".equals(tipoDocumento) && documento.length() == 14) {
+            var agenciaExists = agenciaRepository.findByCnpj(tipoDocumento);
+            if (agenciaExists.isPresent()) {
+                var agencia = agenciaExists.get();
 
-            if (userDto.password() != null) {
-                user.setPassword(userDto.password());
+                if (userDto.email() != null) {
+                    agencia.setEmail(userDto.email());
+                }
+
+                if (userDto.password() != null) {
+                    agencia.setPassword(userDto.password());
+                }
+                agenciaRepository.save(agencia);
             }
-            userRepository.save(user);
         }
     }
 
-    public void updateAgencia(String cnpj, UpdateUserDto userDto) {
-        var agenciaExists = agenciaRepository.findByCnpj(cnpj);
+    public void deleteUserByDocument(String documento) {
+        String tipoDocumento = identificarDocumento(documento);
 
-        if (agenciaExists.isPresent()) {
-            var agencia = agenciaExists.get();
-
-            if (userDto.email() != null) {
-                agencia.setEmail(userDto.email());
-            }
-
-            if (userDto.password() != null) {
-                agencia.setPassword(userDto.password());
-            }
-            agenciaRepository.save(agencia);
+        if ("CPF".equals(tipoDocumento)) {
+            userRepository.deleteByCpf(tipoDocumento);
+        } else if ("CNPJ".equals(tipoDocumento) && documento.length() == 14) {
+            agenciaRepository.deleteByCnpj(tipoDocumento);
         }
-    }
-
-    public void deleteUser(String cpf) {
-        userRepository.deleteByCpf(cpf);
-    }
-
-    public void deleteAgencia(String cnpj) {
-        agenciaRepository.deleteByCnpj(cnpj);
     }
 
     public boolean authenticate(String email, String password) {

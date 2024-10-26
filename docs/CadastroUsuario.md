@@ -13,7 +13,7 @@ Experiência de Usuário Fluida: Implementamos um fluxo lógico que permite aos 
 
 Essas mudanças visam melhorar a eficiência, segurança e simplicidade no cadastro de usuários, tanto para pessoas físicas quanto para agências de viagem.
 
-![Cadastro Usuario](images/cadastroUsuario.jpg)
+![Cadastro Usuario](images/CadastroUsuario.jpg)
 
 
 #### Detalhamento das atividades
