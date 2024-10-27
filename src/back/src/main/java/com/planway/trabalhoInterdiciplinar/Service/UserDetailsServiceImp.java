@@ -16,7 +16,7 @@ import com.planway.trabalhoInterdiciplinar.Repository.UserComumRepository;
 import com.planway.trabalhoInterdiciplinar.Security.UserSpringSecurity;
 
 @Service
-public class UserDetailsImp implements UserDetailsService {
+public class UserDetailsServiceImp implements UserDetailsService {
 
     @Autowired
     private UserComumRepository userRepository;

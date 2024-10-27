@@ -144,18 +144,18 @@ public class UserService {
         }
     }
 
-    public boolean authenticate(String email, String password) {
+    public boolean authenticate(String email, String password, String documento) {
         Optional<UsuarioComum> optionalUserComum = userRepository.findByEmail(email);
         Optional<Agencia> optionalAgencia = agenciaRepository.findByEmail(email);
 
         if (optionalUserComum.isPresent()) {
             UsuarioComum user = optionalUserComum.get();
-            return user.getPassword().equals(password);
+            return bCryptPasswordEncoder.matches(password, user.getPassword());
         }
 
         if (optionalAgencia.isPresent()) {
             Agencia agencia = optionalAgencia.get();
-            return agencia.getPassword().equals(password);
+            return bCryptPasswordEncoder.matches(password, agencia.getPassword());
         }
 
         return false;

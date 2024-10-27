@@ -2,38 +2,41 @@ package com.planway.trabalhoInterdiciplinar.Config;
 
 import java.util.Arrays;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
-import org.springframework.web.cors.CorsConfiguration;
-import org.springframework.web.cors.CorsConfigurationSource;
-import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
+import com.planway.trabalhoInterdiciplinar.Security.JWTAuthenticationFilter;
+import com.planway.trabalhoInterdiciplinar.Security.JWTUtil;
+import com.planway.trabalhoInterdiciplinar.Service.UserDetailsServiceImp;
 
 @Configuration
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 public class SecurityConfig {
 
-    private static final String[] PUBLIC_MATCHERS = {
-        "/"
-    };
+    @Autowired
+    private UserDetailsServiceImp userDetailService;
 
-    private static final String[] PUBLIC_MATCHERS_POST = {
-        "/api/usuarios/cadastrar",
-        "/api/usuarios/login"
-    };
+    private AuthenticationManager authenticationManager;
+
+    @Autowired
+    private JWTUtil jwtUtil;
+
+    private static final String[] PUBLIC_MATCHERS = {"/"};
+    private static final String[] PUBLIC_MATCHERS_POST = {"/api/usuarios/cadastrar", "/api/usuarios/login"};
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-        http.cors()
-                .and()
-                .csrf(csrf -> csrf.disable())
+        http.cors().and().csrf().disable()
                 .authorizeHttpRequests(authz -> authz
                 .requestMatchers(HttpMethod.POST, PUBLIC_MATCHERS_POST).permitAll()
                 .requestMatchers(PUBLIC_MATCHERS).permitAll()
@@ -42,21 +45,20 @@ public class SecurityConfig {
                 .sessionManagement(session -> session
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 );
+        http.addFilter(new JWTAuthenticationFilter(this.authenticationManager, this.jwtUtil));
 
+        http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
         return http.build();
     }
 
     @Bean
-    public CorsConfigurationSource corsConfigurationSource() {
-        CorsConfiguration configuration = new CorsConfiguration();
-        configuration.setAllowedOrigins(Arrays.asList("http://127.0.0.1:5500"));
-        configuration.setAllowedMethods(Arrays.asList("POST", "GET", "PUT", "DELETE"));
-        configuration.setAllowCredentials(true);
-        configuration.setAllowedHeaders(Arrays.asList("Authorization", "Content-Type"));
-
-        final UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
-        source.registerCorsConfiguration("/**", configuration);
-        return source;
+    public AuthenticationManager authManager(HttpSecurity http) throws Exception {
+        AuthenticationManagerBuilder authenticationManagerBuilder
+                = http.getSharedObject(AuthenticationManagerBuilder.class);
+        authenticationManagerBuilder
+                .userDetailsService(userDetailService)
+                .passwordEncoder(bCryptPasswordEncoder());
+        return authenticationManagerBuilder.build();
     }
 
     @Bean
