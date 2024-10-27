@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="./assets/img/turismo-removebg.png">
+    <title>PlanWay - Dashboard</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="./assets/css/calendario.css">
+    <link rel="stylesheet" href="./assets/css/style.css">
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg fixed-top">
+        <a class="navbar-brand" href="#">PlanWay</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="#dashboard">Dashboard</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#my-excursions">Minhas Excursões</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#reports">Relatórios</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#settings">Configurações</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="index.html">Sair</a>
+                </li>
+            </ul>
+        </div>
+    </nav><br><br><br>
+
+    <main>
+        <div class="conteudo">
+            <div class ="calendario">
+                <header>
+                <h2 id="mes">Abril</h2>
+                <a class="btn-ant" id="btn-ant"> < </a>
+                <a class="btn-pro" id="btn-prev"> > </a>
+                </header>
+                <table>
+                    <thead>
+                        <tr>
+                            <td>Dom</td>
+                            <td>Seg</td>
+                            <td>Ter</td>
+                            <td>Quar</td>
+                            <td>Qui</td>
+                            <td>Sex</td>
+                            <td>Sab</td>
+                        </tr>
+                    </thead>
+                    <tbody id="dias">
+                        <tr>
+                            <td>1</td>
+                            <td>2</td>
+                            <td>3</td>
+                            <td>4</td>
+                            <td>5</td>
+                            <td>6</td>
+                            <td>7</td>
+                        </tr>
+                        <tr>
+                            <td>1</td>
+                            <td>2</td>
+                            <td>3</td>
+                            <td>4</td>
+                            <td>5</td>
+                            <td>6</td>
+                            <td>7</td>
+                        </tr>
+                        <tr>
+                            <td>1</td>
+                            <td>2</td>
+                            <td>3</td>
+                            <td>4</td>
+                            <td>5</td>
+                            <td>6</td>
+                            <td>7</td>
+                        </tr>
+                        <tr>
+                            <td>1</td>
+                            <td>2</td>
+                            <td>3</td>
+                            <td>4</td>
+                            <td>5</td>
+                            <td>6</td>
+                            <td>7</td>
+                        </tr>
+                        <tr>
+                            <td>1</td>
+                            <td>2</td>
+                            <td>3</td>
+                            <td>4</td>
+                            <td>5</td>
+                            <td>6</td>
+                            <td>7</td>
+                        </tr>
+                        <tr>
+                            <td>1</td>
+                            <td>2</td>
+                            <td>3</td>
+                            <td>4</td>
+                            <td>5</td>
+                            <td>6</td>
+                            <td>7</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <h2 id="ano" style="text-align: center;">2024</h2>
+
+            <section id="event-list" class="event-list">
+                <h2 style="text-align: center;"> Eventos Salvos</h2>
+                <ul id="event-items"style="text-align: center;"></ul><br>
+            </section>
+
+            
+        <div id="modal" class="modal">
+            <div class="modal-content">
+                <span class="close">&times;</span>
+                <h3>Adicione um sintoma ou um evento</h2>
+                <form id="eventForm">
+                    <label for="eventDate">Data:</label>
+                    <input type="text" id="eventDate" name="eventDate"  class="form-control" readonly>
+                    <label for="eventTitle">Título:</label>
+                    <input type="text" id="eventTitle" name="eventTitle"  class="form-control" placeholder="Dor de cabeça" required>
+                    <button type="submit" class="btn btn-outline-primary">Salvar</button>
+                </form>
+            </div>
+        </div>
+
+        </div>
+    </main>
+
+    <script src="./assets/js/Calendario.js"></script>
+</body>
+</html>

@@ -1,0 +1,163 @@
+.conteudo {
+    left: 50%;
+    margin: 0 0 0 -250px;
+    position: absolute;
+    width: 500px;
+}
+
+h2 {
+    margin-top: 20px;
+    font-size: 32px;
+    text-transform: uppercase;
+}
+
+.calendario {
+    text-align: center;
+}
+
+.conteudo .calendario header {
+    position: relative;
+}
+
+.btn-ant, .btn-pro {
+    position: absolute;
+    top: 50%;
+    height: 32px;
+    width: 32px;
+    line-height: 32px;
+    margin-top: -16px;
+    border: 2px solid #3685F5;
+    border-radius: 50%;
+    color: blue;
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.btn-ant {
+    left: 80px;
+}
+
+.btn-pro {
+    right: 80px;
+}
+
+.btn-ant:hover, .btn-pro:hover {
+    background: #3685F5;
+    color: white;
+}
+
+table {
+    margin-top: 20px;
+    border-collapse: collapse;
+}
+
+.calendario thead {
+    background: white;
+    font-weight: 600;
+    text-transform: uppercase;
+    border-top: 2px solid #3685F5;
+    border-bottom: 2px solid #3685F5;
+}
+
+.calendario thead td {
+    height: 67.4px;
+}
+
+.calendario thead td:first-child {
+    border-left: 2px solid #3685F5;
+}
+
+.calendario thead td:last-child {
+    border-right: 2px solid #3685F5;
+}
+
+.calendario td {
+    border: 1px solid black;
+    height: 71.4px;
+    text-align: center;
+    width: 71.4px;
+}
+
+.calendario tbody td {
+    cursor: pointer;
+}
+
+.calendario tbody td:hover {
+    background: #3685F5;
+    color: white;
+}
+
+.calendario table .dia-atual {
+    background: #3649F5;
+    color: white;
+}
+
+.calendario .mes-anterior, .calendario .proximo-mes {
+    color: rgb(138, 138, 138);
+}
+
+.calendario .mes-anterior:hover, .calendario .proximo-mes:hover {
+    background-color: rgb(105, 104, 104);
+}
+
+.event {
+    position: relative;
+}
+
+.event:after {
+    content: '';
+    width: 7px;
+    height: 7px;
+    left: 50%;
+    bottom: 7px;
+    margin: -3.5px 0 0 -3.5px;
+    background: blue;
+    display: block;
+    position: absolute;
+    border-radius: 50%;
+}
+
+.event:hover:after {
+    background: white;
+}
+
+.event.dia-atual::after {
+    background: white;
+}
+
+.modal {
+    display: none;
+    position: fixed;
+    text-align: center;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgb(0, 0, 0);
+    background-color: rgba(0, 0, 0, 0.4);
+}
+
+.modal-content {
+    background-color: #fefefe;
+    margin: 15% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+    max-width: 500px;
+}
+
+.close {
+    text-align: left;
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close:hover, .close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
