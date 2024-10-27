@@ -8,7 +8,7 @@ import org.springframework.stereotype.Repository;
 import com.planway.trabalhoInterdiciplinar.Entity.UsuarioComum;
 
 @Repository
-public interface UserComumRepository extends JpaRepository<UsuarioComum, String> {
+public interface UserComumRepository extends JpaRepository<UsuarioComum, Long> {
 
     Optional<UsuarioComum> findByCpf(String cpf);
 
