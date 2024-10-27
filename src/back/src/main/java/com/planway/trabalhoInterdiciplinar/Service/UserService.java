@@ -1,10 +1,12 @@
 package com.planway.trabalhoInterdiciplinar.Service;
 
-import java.util.Optional;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.planway.trabalhoInterdiciplinar.Dto.UpdateUserDto;
@@ -19,13 +21,12 @@ import com.planway.trabalhoInterdiciplinar.util.CpfValidator;
 @Service
 public class UserService {
 
+    @Autowired
+    private BCryptPasswordEncoder bCryptPasswordEncoder;
+    @Autowired
     private UserComumRepository userRepository;
+    @Autowired
     private AgenciaRepository agenciaRepository;
-
-    public UserService(AgenciaRepository agenciaRepository, UserComumRepository userRepository) {
-        this.agenciaRepository = agenciaRepository;
-        this.userRepository = userRepository;
-    }
 
     public boolean validarCpf(UsuarioComum usuarioComum) {
 
@@ -55,9 +56,9 @@ public class UserService {
         String tipoDocumento = identificarDocumento(documento);
 
         if ("CPF".equals(tipoDocumento)) {
-            return cadastrarUsuarioComum(email, senha, documento);
+            return cadastrarUsuarioComum(email, this.bCryptPasswordEncoder.encode(senha), documento);
         } else if ("CNPJ".equals(tipoDocumento) && documento.length() == 14) {
-            return cadastrarAgencia(email, senha, documento);
+            return cadastrarAgencia(email, this.bCryptPasswordEncoder.encode(senha), documento);
         }
 
         throw new IllegalArgumentException("Documento inválido.");
@@ -111,6 +112,7 @@ public class UserService {
 
                 if (userDto.password() != null) {
                     user.setPassword(userDto.password());
+                    user.setPassword(this.bCryptPasswordEncoder.encode(userDto.password()));
                 }
                 userRepository.save(user);
             }
@@ -125,6 +127,7 @@ public class UserService {
 
                 if (userDto.password() != null) {
                     agencia.setPassword(userDto.password());
+                    agencia.setPassword(this.bCryptPasswordEncoder.encode(userDto.password()));
                 }
                 agenciaRepository.save(agencia);
             }

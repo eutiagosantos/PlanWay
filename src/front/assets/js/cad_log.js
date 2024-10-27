@@ -80,9 +80,6 @@ async function cadastro() {
         if (response.ok) {
             alert('Cadastro realizado com sucesso!');
             toggleLayout();
-        } else {
-            const errorMessage = await response.text();
-            alert(`Erro ao cadastrar: ${errorMessage}`);
         }
     } catch (error) {
         console.error('Erro detalhado:', error);
