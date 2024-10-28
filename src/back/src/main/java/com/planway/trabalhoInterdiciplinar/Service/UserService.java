@@ -64,12 +64,12 @@ public class UserService {
         throw new IllegalArgumentException("Documento inválido.");
     }
 
-    private UsuarioComum cadastrarUsuarioComum(String email, String senha, String cpf) {
+    public UsuarioComum cadastrarUsuarioComum(String email, String senha, String cpf) {
         UsuarioComum usuarioComum = new UsuarioComum(email, senha, cpf);
         return userRepository.save(usuarioComum);
     }
 
-    private Agencia cadastrarAgencia(String email, String senha, String cnpj) {
+    public Agencia cadastrarAgencia(String email, String senha, String cnpj) {
         Agencia agencia = new Agencia(email, senha, cnpj);
         return agenciaRepository.save(agencia);
     }
