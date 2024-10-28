@@ -7,7 +7,8 @@ Integração: Permitir a conexão com calendários como Google Calendar e Outloo
 
 Essas melhorias visam tornar a experiência do usuário mais fluida e agradável!
 
-![Roteiro-Calendario](https://github.com/user-attachments/assets/077e5e50-ea14-4aa9-9737-9b2ac0e15368)
+![image](https://github.com/user-attachments/assets/e9cf43b6-e607-44f5-8f22-e57537c9c62c)
+
 
 
 #### Detalhamento das atividades
