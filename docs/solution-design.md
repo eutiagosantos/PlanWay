@@ -4,7 +4,7 @@
 
 _Apresente o modelo de dados por meio de um modelo relacional que contemple todos os conceitos e atributos apresentados na modelagem dos processos._ 
 
-![PlanWay_2.0](images/modelo_de_dados.jpg)
+![PlanWay_2.0](images/modelo_de_dados.png)
 
 ---
 
