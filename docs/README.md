@@ -87,7 +87,7 @@ Oportunidades de Melhoria: A plataforma pode simplificar a gestão de excursões
 
 [PROCESSO 1 - Cadastro Usuário](CadastroUsuario.md "Detalhamento do Processo 1.")
 
-[PROCESSO 2 - Roteiros-calendário](RoteiroAtualizado.png "Detalhamento do Processo 2.")
+[PROCESSO 2 - Roteiros-calendário](Roteiros-calendario.md "Detalhamento do Processo 2.")
 
 [PROCESSO 3 - Acompanhamento-Relatorio](Acompanhamento-Relatorio.md "Detalhamento do Processo 3.")
 
