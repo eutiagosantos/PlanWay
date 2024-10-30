@@ -106,7 +106,7 @@ async function login() {
 
         if (response.ok) {
             alert('Login realizado com sucesso!');
-            window.location.href = 'index.html';
+            window.location.href = 'home.html';
         } else {
             const errorMessage = await response.text();
             alert(`Erro ao logar: ${errorMessage}`);

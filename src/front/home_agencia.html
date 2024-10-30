@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="./assets/img/turismo-removebg.png">
+    <title>PlanWay - Dashboard</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="./assets/css/style.css">
+</head>
+
+<body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg fixed-top">
+        <a class="navbar-brand" href="#">PlanWay</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="#dashboard">Dashboard</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#my-excursions">Minhas Excursões</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#reports">Relatórios</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#settings">Configurações</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="index.html">Sair</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Welcome Section -->
+    <div class="container mt-5 pt-5">
+        <div class="row">
+            <div class="col text-center">
+                <h1>Bem-vindo(a) ao PlanWay!</h1>
+                <p>Gerencie suas excursões e explore novas oportunidades de viagem.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Dashboard Section -->
+    <section id="dashboard" class="mt-5">
+        <div class="container">
+            <h2 class="text-center">Dashboard</h2>
+            <div class="row text-center">
+                <div class="col-md-3">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title">Cadastrar Excursão</h5>
+                            <p class="card-text">Adicione novas excursões para sua agência.</p>
+                            <a href="cadastrar_excursoes.html" class="btn btn-primary">Cadastrar</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title">Minhas Reservas</h5>
+                            <p class="card-text">Verifique suas reservas atuais e futuras.</p>
+                            <a href="minhas_reservas.html" class="btn btn-primary">Ver Reservas</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title">Relatórios</h5>
+                            <p class="card-text">Acesse relatórios de desempenho e estatísticas.</p>
+                            <a href="relatorios.html" class="btn btn-primary">Ver Relatórios</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title">Calendario</h5>
+                            <p class="card-text">Adicione novos eventos no calendario.</p>
+                            <a href="calendario.html" class="btn btn-primary">Cadastrar</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer text-white text-center mt-5">
+        <p>&copy; 2024 PlanWay. Todos os direitos reservados.</p>
+    </footer>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+
+</html>
