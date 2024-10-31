@@ -2,6 +2,7 @@ package com.planway.trabalhoInterdiciplinar.Controller;
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -13,8 +14,11 @@ import org.springframework.web.bind.annotation.RestController;
 import com.planway.trabalhoInterdiciplinar.Dto.UserDto;
 import com.planway.trabalhoInterdiciplinar.Dto.UpdateUserDto;
 import com.planway.trabalhoInterdiciplinar.Dto.LoginRequest;
+import com.planway.trabalhoInterdiciplinar.Dto.RoteiroDto;
+import com.planway.trabalhoInterdiciplinar.Service.RoteiroService;
 import com.planway.trabalhoInterdiciplinar.Service.UserService;
 import com.planway.trabalhoInterdiciplinar.Entity.User;
+import com.planway.trabalhoInterdiciplinar.Entity.Roteiro;
 
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -23,11 +27,11 @@ import org.springframework.web.bind.annotation.RequestBody;
 @RequestMapping("/api/usuarios")
 public class UserController {
 
+    @Autowired
     private UserService userService;
 
-    public UserController(UserService userService) {
-        this.userService = userService;
-    }
+    @Autowired
+    private RoteiroService roteiroService;
 
     @PostMapping("/cadastrar")
     public ResponseEntity<Object> criarUsuario(@RequestBody UserDto userDto) {
@@ -37,6 +41,13 @@ public class UserController {
         } catch (IllegalArgumentException e) {
             return ResponseEntity.badRequest().body(e.getMessage());
         }
+    }
+
+    @PostMapping("/criarRoteiro")
+    public ResponseEntity<Roteiro> criarRoteiro(@RequestBody RoteiroDto roteiroDto) {
+        Roteiro roteiro = roteiroService.createRoteiro(roteiroDto);
+
+        return ResponseEntity.ok(roteiro);
     }
 
     @PostMapping("/login")

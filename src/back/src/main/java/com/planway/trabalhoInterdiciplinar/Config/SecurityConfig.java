@@ -32,7 +32,11 @@ public class SecurityConfig {
     private JWTUtil jwtUtil;
 
     private static final String[] PUBLIC_MATCHERS = {"/"};
-    private static final String[] PUBLIC_MATCHERS_POST = {"/api/usuarios/cadastrar", "/api/usuarios/login"};
+    private static final String[] PUBLIC_MATCHERS_POST = {
+        "/api/usuarios/cadastrar",
+        "/api/usuarios/login",
+        "/api/usuarios/criarRoteiro"
+    };
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
@@ -40,14 +44,12 @@ public class SecurityConfig {
                 .authorizeHttpRequests(authz -> authz
                 .requestMatchers(HttpMethod.POST, PUBLIC_MATCHERS_POST).permitAll()
                 .requestMatchers(PUBLIC_MATCHERS).permitAll()
-                .anyRequest().authenticated()
+                .anyRequest().permitAll()
                 )
                 .sessionManagement(session -> session
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 );
         http.addFilter(new JWTAuthenticationFilter(this.authenticationManager, this.jwtUtil));
-
-        http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
         return http.build();
     }
 
