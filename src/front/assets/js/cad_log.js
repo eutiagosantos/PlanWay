@@ -25,13 +25,7 @@ function toggleLayout() {
     document.getElementById('toggle-text').innerHTML = isLogin
         ? 'Ainda não possui uma conta? <a href="#" id="toggle-layout" class="link-cadastro">Cadastrar</a>'
         : 'Já possui uma conta? <a href="#" id="toggle-layout" class="link-cadastro">Login</a>';
-
-    // Atualizar o ouvinte para o novo "toggle-layout"
-    document.getElementById('toggle-layout').addEventListener('click', function (e) {
-        e.preventDefault();
-        toggleLayout();
-    });
-}
+    };
 
 function togglePasswordVisibility() {
     const passwordInput = document.getElementById('password');
@@ -48,6 +42,11 @@ function handleSubmit() {
     const password = document.getElementById('password').value;
     const confirmPassword = document.getElementById('confirm-password').value;
 
+    if (!email || !password || (isLogin && !cpfCnpj)) {
+        alert('Por favor, preencha todos os campos.');
+        return;
+    }
+    
     if (!isLogin) {
         if (password !== confirmPassword) {
             alert('As senhas não coincidem.');
@@ -80,6 +79,8 @@ async function cadastro() {
         if (response.ok) {
             alert('Cadastro realizado com sucesso!');
             toggleLayout();
+        } else {
+            alert(`Esse usuaario já existe`);
         }
     } catch (error) {
         console.error('Erro detalhado:', error);
@@ -87,10 +88,10 @@ async function cadastro() {
     }
 }
 
-
 async function login() {
     let email = document.getElementById('email').value;
     let password = document.getElementById('password').value;
+    let documento = document.getElementById('cpf-cnpj').value;
 
     try {
         const response = await fetch("http://localhost:8081/api/usuarios/login", {
@@ -105,17 +106,32 @@ async function login() {
         });
 
         if (response.ok) {
+            // Aqui você define o tipo de usuário
+            let userType;
+            if (documento.length === 11) {
+                userType = 'cliente';
+            } else if (documento.length === 14) {
+                userType = 'agencia';
+            } else {
+                alert('Login, CPF/CNPJ ou senha estão incorretos');
+                return;
+            }
+
+            // Armazenar informações de login
+            sessionStorage.setItem('isLoggedIn', 'true');
+            sessionStorage.setItem('userType', userType);
+
             alert('Login realizado com sucesso!');
-            window.location.href = 'home.html';
+            window.location.href = userType === 'cliente' ? 'home.html' : 'home_agencia.html';
         } else {
             const errorMessage = await response.text();
             alert(`Erro ao logar: ${errorMessage}`);
         }
+        
     } catch (error) {
         console.error('Erro detalhado:', error);
         alert(`Erro ao conectar ao servidor: ${error.message}`);
     }
-
 }
 
 
