@@ -3,7 +3,7 @@
 Automatização: Facilitar a criação de roteiros com automações que sincronizem automaticamente com o calendário do usuário.
 Usabilidade: Simplificar a interface para tornar a criação de eventos mais intuitiva e rápida.
 Notificações: Enviar lembretes automáticos sobre eventos e mudanças nos roteiros, ajudando os usuários a se manterem organizados.
-Integração: Permitir a conexão com calendários como Google Calendar e Outlook, oferecendo mais flexibilidade na gestão dos roteiros.
+Integração: Oferecendo mais flexibilidade na gestão dos roteiros.
 
 Essas melhorias visam tornar a experiência do usuário mais fluida e agradável!
 
