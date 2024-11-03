@@ -37,7 +37,7 @@
                 </li>
             </ul>
         </div>
-    </nav><br><br><br>
+    </nav>
 
     <main>
         <div class="conteudo">
@@ -126,23 +126,49 @@
             </section>
 
             
-        <div id="modal" class="modal">
-            <div class="modal-content">
-                <span class="close">&times;</span>
-                <h3>Adicione um sintoma ou um evento</h2>
-                <form id="eventForm">
-                    <label for="eventDate">Data:</label>
-                    <input type="text" id="eventDate" name="eventDate"  class="form-control" readonly>
-                    <label for="eventTitle">Título:</label>
-                    <input type="text" id="eventTitle" name="eventTitle"  class="form-control" placeholder="Dor de cabeça" required>
-                    <button type="submit" class="btn btn-outline-primary">Salvar</button>
-                </form>
+            <div id="modal" class="modal"> <!-- Modal para roteiros -->
+                <div class="modal-content">
+                    <span class="close">&times;</span>
+                    <h3>Cadastrar Evento</h3>
+                    <form id="eventForm">
+                        <label for="eventTitle">Título:</label>
+                        <input type="text" id="eventTitle" class="form-control" required>
+                        <label for="eventStartDate">Data de Início:</label>
+                        <input type="date" id="eventStartDate" class="form-control" required>
+                        <label for="eventEndDate">Data de Fim:</label>
+                        <input type="date" id="eventEndDate" class="form-control" required>
+                        <label for="eventLocation">Local:</label>
+                        <input type="text" id="eventLocation" class="form-control" required>
+                        <button type="submit" class="btn btn-outline-primary">Salvar Evento</button>
+                    </form>
+                </div>
             </div>
-        </div>
+            <div id="activityModal" class="modal"> <!-- Modal para atividades -->
+                <div class="modal-content">
+                    <span class="close">&times;</span>
+                    <h3>Adicionar Atividade</h3>
+                    <form id="activityForm">
+                        <label for="activityDescription">Descrição:</label>
+                        <input type="text" id="activityDescription" required>
+                        <label for="activityStart">Início:</label>
+                        <input type="time" id="activityStart" required>
+                        <label for="activityEnd">Fim:</label>
+                        <input type="time" id="activityEnd" required>
+                        <label for="activityAddress">Endereço:</label>
+                        <input type="text" id="activityAddress" required>
+                        <button type="submit" class="btn btn-outline-primary">Salvar Atividade</button>
+                    </form>
+                </div>
+            </div>            
 
         </div>
     </main>
 
-    <script src="./assets/js/Calendario.js"></script>
+        <!-- Footer -->
+        <footer class="footer text-white text-center mt-5">
+            <p>&copy; 2024 PlanWay. Todos os direitos reservados.</p>
+        </footer>
+        
+    <script src="./assets/js/calendario.js"></script>
 </body>
 </html>
