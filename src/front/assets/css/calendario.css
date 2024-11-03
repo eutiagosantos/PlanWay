@@ -95,7 +95,6 @@ header {
     transition: background-color 0.3s;
 }
 
-
 .calendario .mes-anterior, .calendario .proximo-mes {
     color: rgb(138, 138, 138);
 }

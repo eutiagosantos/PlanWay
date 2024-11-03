@@ -6,12 +6,10 @@ document.addEventListener('DOMContentLoaded', function() {
     const tableDays = document.getElementById('dias');
     const eventList = document.getElementById('event-items');
     let events = JSON.parse(localStorage.getItem('events')) || [];
-
-    
-
     let startDate = new Date();
     let endDate = new Date(startDate);
 
+    //Essa função mexe com tudo sobre o calendario(somente na parte de js)
     function GetDaysCalendar(mes, ano) {
         document.getElementById('mes').innerHTML = monthBR[mes];
         document.getElementById('ano').innerHTML = ano;
