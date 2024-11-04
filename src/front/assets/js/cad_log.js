@@ -1,3 +1,4 @@
+import { setUsuarioDocumento } from './script.js';
 let isLogin = true;
 
 // Inicializar ouvintes
@@ -25,7 +26,7 @@ function toggleLayout() {
     document.getElementById('toggle-text').innerHTML = isLogin
         ? 'Ainda não possui uma conta? <a href="#" id="toggle-layout" class="link-cadastro">Cadastrar</a>'
         : 'Já possui uma conta? <a href="#" id="toggle-layout" class="link-cadastro">Login</a>';
-    };
+};
 
 function togglePasswordVisibility() {
     const passwordInput = document.getElementById('password');
@@ -46,7 +47,7 @@ function handleSubmit() {
         alert('Por favor, preencha todos os campos.');
         return;
     }
-    
+
     if (!isLogin) {
         if (password !== confirmPassword) {
             alert('As senhas não coincidem.');
@@ -57,6 +58,7 @@ function handleSubmit() {
         login();
     }
 }
+
 
 async function cadastro() {
     let email = document.getElementById('email').value;
@@ -77,16 +79,19 @@ async function cadastro() {
         });
 
         if (response.ok) {
+            const data = await response.json();
             alert('Cadastro realizado com sucesso!');
+            setUsuarioDocumento(data.documento); // Aqui você chama a função para armazenar o documento
             toggleLayout();
         } else {
-            alert(`Esse usuaario já existe`);
+            alert(`Esse usuario já existe`);
         }
     } catch (error) {
         console.error('Erro detalhado:', error);
         alert(`Erro ao conectar ao servidor: ${error.message}`);
     }
 }
+
 
 async function login() {
     let email = document.getElementById('email').value;
@@ -101,6 +106,7 @@ async function login() {
             },
             body: JSON.stringify({
                 email: email,
+                documento: documento,
                 password: password,
             })
         });
@@ -111,7 +117,7 @@ async function login() {
             if (documento.length === 11) {
                 userType = 'cliente';
             } else if (documento.length === 14) {
-                userType = 'agencia';
+                userType = 'agencia'
             } else {
                 alert('Login, CPF/CNPJ ou senha estão incorretos');
                 return;
@@ -127,7 +133,7 @@ async function login() {
             const errorMessage = await response.text();
             alert(`Erro ao logar: ${errorMessage}`);
         }
-        
+
     } catch (error) {
         console.error('Erro detalhado:', error);
         alert(`Erro ao conectar ao servidor: ${error.message}`);

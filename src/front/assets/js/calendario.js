@@ -1,5 +1,7 @@
+import { getUsuarioDocumento } from './script.js';
+
 //Funcionalidade do calendario
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
 
     const monthBR = [
         'Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho',
@@ -12,34 +14,34 @@ document.addEventListener('DOMContentLoaded', function() {
     function GetDaysCalendar(mes, ano) {
         document.getElementById('mes').innerHTML = monthBR[mes];
         document.getElementById('ano').innerHTML = ano;
-    
+
         let firstDayOfWeek = new Date(ano, mes, 1).getDay(); // Correção: Começar a partir do dia 1 do mês
         let getLastDayThisMonth = new Date(ano, mes + 1, 0).getDate();
-    
+
         for (let i = 1 - firstDayOfWeek, index = 0; i <= (42 - firstDayOfWeek); i++, index++) {
             let dt = new Date(ano, mes, i);
             let dtNow = new Date();
             let dayTable = tableDays.getElementsByTagName('td')[index];
             dayTable.classList.remove('mes-anterior', 'proximo-mes', 'dia-atual', 'event');
             dayTable.innerHTML = dt.getDate();
-    
+
             if (dt.getFullYear() === dtNow.getFullYear() &&
                 dt.getMonth() === dtNow.getMonth() &&
                 dt.getDate() === dtNow.getDate()) {
                 dayTable.classList.add('dia-atual');
             }
-    
+
             if (dt.getMonth() < mes) {
                 dayTable.classList.add('mes-anterior');
             }
             if (dt.getMonth() > mes) {
                 dayTable.classList.add('proximo-mes');
             }
-    
-            dayTable.onclick = function() {
+
+            dayTable.onclick = function () {
                 openModal(dt);
             };
-    
+
             events.forEach(event => {
                 if (new Date(event.date).toDateString() === dt.toDateString()) {
                     dayTable.classList.add('event');
@@ -47,9 +49,9 @@ document.addEventListener('DOMContentLoaded', function() {
                 }
             });
         }
-    }    
+    }
 
-// Funcionalidade de abrir um span na tela para cadastrar o sintoma
+    // Funcionalidade de abrir um span na tela para cadastrar o sintoma
     function openModal(date) {
         const modal = document.getElementById('modal');
         const span = document.getElementsByClassName('close')[0];
@@ -61,25 +63,26 @@ document.addEventListener('DOMContentLoaded', function() {
 
         modal.style.display = 'block';
 
-        span.onclick = function() {
+        span.onclick = function () {
             modal.style.display = 'none';
         };
 
-        window.onclick = function(event) {
+        window.onclick = function (event) {
             if (event.target == modal) {
                 modal.style.display = 'none';
             }
         };
 
-        eventForm.onsubmit = function(e) {
+        eventForm.onsubmit = function (e) {
             e.preventDefault();
             const eventTitle = eventTitleInput.value;
             saveEvent(date, eventTitle);
+            cadastrarRoteiro();
             modal.style.display = 'none';
         };
     }
 
-// Funcionalidade de salvar o evento no local storage
+    // Funcionalidade de salvar o evento no local storage
     function saveEvent(date, title) {
         events.push({ date: date.toISOString().split('T')[0], title: title });
         localStorage.setItem('events', JSON.stringify(events));
@@ -87,8 +90,8 @@ document.addEventListener('DOMContentLoaded', function() {
         displayEvents();
     }
 
-// Funcionalidade de editar o evento no local storage
-    window.editEvent = function(index) {
+    // Funcionalidade de editar o evento no local storage
+    window.editEvent = function (index) {
         const event = events[index];
         const modal = document.getElementById('modal');
         const eventDateInput = document.getElementById('eventDate');
@@ -100,7 +103,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
         modal.style.display = 'block';
 
-        eventForm.onsubmit = function(e) {
+        eventForm.onsubmit = function (e) {
             e.preventDefault();
             events[index].title = eventTitleInput.value;
             localStorage.setItem('events', JSON.stringify(events));
@@ -110,16 +113,17 @@ document.addEventListener('DOMContentLoaded', function() {
         };
     }
 
-// Funcionalidade de deletar o evento do local storage
-    window.deleteEvent = function(index) {
+    // Funcionalidade de deletar o evento do local storage
+    window.deleteEvent = function (index) {
         events.splice(index, 1);
         localStorage.setItem('events', JSON.stringify(events));
         displayEvents();
         const now = new Date();
         GetDaysCalendar(now.getMonth(), now.getFullYear());
+        deleteRoteiro(index);
     }
 
-// Funcionalidade de colocar uma lista com os eventos salvos na tela com HTML
+    // Funcionalidade de colocar uma lista com os eventos salvos na tela com HTML
     function displayEvents() {
         eventList.innerHTML = '';
         events.forEach((event, index) => {
@@ -141,7 +145,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const botao_proximo = document.getElementById('btn-prev');
     const botao_anterior = document.getElementById('btn-ant');
 
-    botao_proximo.onclick = function() {
+    botao_proximo.onclick = function () {
         mes++;
         if (mes > 11) {
             mes = 0;
@@ -150,7 +154,7 @@ document.addEventListener('DOMContentLoaded', function() {
         GetDaysCalendar(mes, ano);
     };
 
-    botao_anterior.onclick = function() {
+    botao_anterior.onclick = function () {
         mes--;
         if (mes < 0) {
             mes = 11;
@@ -159,3 +163,4 @@ document.addEventListener('DOMContentLoaded', function() {
         GetDaysCalendar(mes, ano);
     };
 });
+

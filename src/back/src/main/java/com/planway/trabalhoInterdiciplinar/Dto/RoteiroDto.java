@@ -1,7 +1,5 @@
 package com.planway.trabalhoInterdiciplinar.Dto;
 
-import java.time.LocalDateTime;
-
-public record RoteiroDto(String titulo, String local, String descricao, LocalDateTime dataFim) {
+public record RoteiroDto(String titulo, String local, String descricao, String dataFim, String dataInicio) {
 
 }

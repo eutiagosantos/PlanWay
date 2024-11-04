@@ -7,3 +7,12 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         });
     });
 });
+
+let usuarioDocumento;
+export function setUsuarioDocumento(usuarioDocumento) {
+    usuarioDocumento = usuarioDocumento;
+}
+
+export function getUsuarioDocumento() {
+    return usuarioDocumento;;
+}

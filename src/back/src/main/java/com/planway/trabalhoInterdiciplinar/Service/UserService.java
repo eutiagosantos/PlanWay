@@ -15,6 +15,7 @@ import com.planway.trabalhoInterdiciplinar.Entity.User;
 import com.planway.trabalhoInterdiciplinar.Entity.UsuarioComum;
 import com.planway.trabalhoInterdiciplinar.Repository.AgenciaRepository;
 import com.planway.trabalhoInterdiciplinar.Repository.UserComumRepository;
+import com.planway.trabalhoInterdiciplinar.Repository.UserRepository;
 import com.planway.trabalhoInterdiciplinar.util.CnpjValidator;
 import com.planway.trabalhoInterdiciplinar.util.CpfValidator;
 
@@ -27,6 +28,9 @@ public class UserService {
     private UserComumRepository userRepository;
     @Autowired
     private AgenciaRepository agenciaRepository;
+
+    @Autowired
+    private UserRepository userReposi;
 
     public boolean validarCpf(UsuarioComum usuarioComum) {
 
@@ -159,5 +163,9 @@ public class UserService {
         }
 
         return false;
+    }
+
+    public Optional<User> getUserById(Long id) {
+        return userReposi.findById(id);
     }
 }

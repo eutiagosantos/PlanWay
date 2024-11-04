@@ -1,27 +1,25 @@
 package com.planway.trabalhoInterdiciplinar.Controller;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RestController;
-import com.planway.trabalhoInterdiciplinar.Dto.UserDto;
-import com.planway.trabalhoInterdiciplinar.Dto.UpdateUserDto;
-import com.planway.trabalhoInterdiciplinar.Dto.LoginRequest;
-import com.planway.trabalhoInterdiciplinar.Dto.RoteiroDto;
-import com.planway.trabalhoInterdiciplinar.Service.RoteiroService;
-import com.planway.trabalhoInterdiciplinar.Service.UserService;
-import com.planway.trabalhoInterdiciplinar.Entity.User;
-import com.planway.trabalhoInterdiciplinar.Entity.Roteiro;
-
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.planway.trabalhoInterdiciplinar.Dto.LoginRequest;
+import com.planway.trabalhoInterdiciplinar.Dto.UpdateUserDto;
+import com.planway.trabalhoInterdiciplinar.Dto.UserDto;
+import com.planway.trabalhoInterdiciplinar.Entity.User;
+import com.planway.trabalhoInterdiciplinar.Service.UserService;
 
 @RestController
 @RequestMapping("/api/usuarios")
@@ -29,9 +27,6 @@ public class UserController {
 
     @Autowired
     private UserService userService;
-
-    @Autowired
-    private RoteiroService roteiroService;
 
     @PostMapping("/cadastrar")
     public ResponseEntity<Object> criarUsuario(@RequestBody UserDto userDto) {
@@ -41,13 +36,6 @@ public class UserController {
         } catch (IllegalArgumentException e) {
             return ResponseEntity.badRequest().body(e.getMessage());
         }
-    }
-
-    @PostMapping("/criarRoteiro")
-    public ResponseEntity<Roteiro> criarRoteiro(@RequestBody RoteiroDto roteiroDto) {
-        Roteiro roteiro = roteiroService.createRoteiro(roteiroDto);
-
-        return ResponseEntity.ok(roteiro);
     }
 
     @PostMapping("/login")
@@ -73,7 +61,16 @@ public class UserController {
         return ResponseEntity.ok(users);
     }
 
-    @DeleteMapping("/deleteUser")
+    @GetMapping("/{id}")
+    public ResponseEntity<Optional<User>> getUserById(@PathVariable Long id) {
+        var usuario = userService.getUserById(id);
+        if (usuario == null) {
+            return ResponseEntity.notFound().build();
+        }
+        return ResponseEntity.ok(usuario);
+    }
+
+    @DeleteMapping("/deleteUser/{documento}")
     public ResponseEntity<Void> deleteUserByDocument(@PathVariable("documento") String documento) {
         userService.deleteUserByDocument(documento);
         return ResponseEntity.noContent().build();

@@ -1,8 +1,7 @@
 package com.planway.trabalhoInterdiciplinar.Service;
 
-import java.time.LocalDateTime;
 import java.util.List;
-import java.util.UUID;
+import java.util.Optional;
 import java.util.concurrent.ThreadLocalRandom;
 import java.util.stream.Collectors;
 
@@ -10,33 +9,47 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.planway.trabalhoInterdiciplinar.Dto.RoteiroDto;
+import com.planway.trabalhoInterdiciplinar.Entity.Agencia;
 import com.planway.trabalhoInterdiciplinar.Entity.Roteiro;
+import com.planway.trabalhoInterdiciplinar.Repository.AgenciaRepository;
 import com.planway.trabalhoInterdiciplinar.Repository.RoteiroRepository;
+import org.springframework.transaction.annotation.Transactional;
+import jakarta.persistence.EntityManager;
 
 @Service
 public class RoteiroService {
 
     @Autowired
     private RoteiroRepository roteiroRepository;
+    @Autowired
+    private AgenciaRepository agenciaRepository;
+    // @Autowired
+    // private UserRepository userRepository;
+    @Autowired
+    private EntityManager entityManager;
 
-    public Roteiro createRoteiro(RoteiroDto roteiroDto) {
+    @Transactional
+    public Roteiro createRoteiro(RoteiroDto roteiroDto, String usuarioCnpj) {
+
+        Agencia usuario = agenciaRepository.findByCnpj(usuarioCnpj)
+                .orElseThrow(() -> new RuntimeException("Usuário não encontrado"));
+
         var roteiro = new Roteiro(
-                generateRandomId(),
-                roteiroDto.local(),
+                null,
                 roteiroDto.titulo(),
-                roteiroDto.descricao(),
                 roteiroDto.dataFim(),
-                LocalDateTime.now()
+                usuario.getEmail(),
+                usuario
         );
 
-        if (roteiroRepository.findById(roteiro.getId()).isPresent()) {
-            throw new RuntimeException("O roteiro ja existe");
-        }
+        usuario.getRoteiros().add(roteiro);
+        roteiro = entityManager.merge(roteiro);
 
-        return roteiroRepository.save(roteiro);
+        return roteiro;
     }
 
     public List<Roteiro> listRoteiros() {
+
         List<Roteiro> roteiros = roteiroRepository.findAll();
 
         return roteiros.stream().distinct().collect(Collectors.toList());
@@ -53,11 +66,11 @@ public class RoteiroService {
             }
 
             if (roteiroDto.local() != null) {
-                roteiro.setLocal(roteiroDto.local());
+                // roteiro.setLocal(roteiroDto.local());
             }
 
             if (roteiroDto.descricao() != null) {
-                roteiro.setDescricao(roteiroDto.descricao());
+                // roteiro.setDescricao(roteiroDto.descricao());
             }
 
             if (roteiroDto.dataFim() != null) {
@@ -71,6 +84,11 @@ public class RoteiroService {
 
     public void deleteRoteiro(Long roteiroId) {
         roteiroRepository.deleteById(roteiroId);
+    }
+
+    public Optional<Roteiro> findRoteiroById(Long roteiroId) {
+        Optional<Roteiro> roteiro = roteiroRepository.findById(roteiroId);
+        return roteiro;
     }
 
     private long generateRandomId() {
