@@ -10,7 +10,10 @@ document.addEventListener('DOMContentLoaded', function () {
     const tableDays = document.getElementById('dias');
     const eventList = document.getElementById('event-items');
     let events = JSON.parse(localStorage.getItem('events')) || [];
-
+    let startDate = new Date();
+    let endDate = new Date(startDate);
+}
+    //Essa função mexe com tudo sobre o calendario(somente na parte de js)
     function GetDaysCalendar(mes, ano) {
         document.getElementById('mes').innerHTML = monthBR[mes];
         document.getElementById('ano').innerHTML = ano;
@@ -43,7 +46,7 @@ document.addEventListener('DOMContentLoaded', function () {
             };
 
             events.forEach(event => {
-                if (new Date(event.date).toDateString() === dt.toDateString()) {
+                if (new Date(event.startDate).toDateString() === dt.toDateString()) {
                     dayTable.classList.add('event');
                     dayTable.setAttribute('title', event.title);
                 }
@@ -55,11 +58,14 @@ document.addEventListener('DOMContentLoaded', function () {
     function openModal(date) {
         const modal = document.getElementById('modal');
         const span = document.getElementsByClassName('close')[0];
-        const eventDateInput = document.getElementById('eventDate');
         const eventForm = document.getElementById('eventForm');
         const eventTitleInput = document.getElementById('eventTitle');
+        const eventStartDateInput = document.getElementById('eventStartDate');
+        const eventEndDateInput = document.getElementById('eventEndDate');
+        const eventLocationInput = document.getElementById('eventLocation');
 
-        eventDateInput.value = date.toDateString();
+        eventStartDateInput.value = date.toISOString().split('T')[0];
+        eventEndDateInput.value = date.toISOString().split('T')[0];
 
         modal.style.display = 'block';
 
@@ -82,85 +88,104 @@ document.addEventListener('DOMContentLoaded', function () {
         };
     }
 
-    // Funcionalidade de salvar o evento no local storage
-    function saveEvent(date, title) {
-        events.push({ date: date.toISOString().split('T')[0], title: title });
-        localStorage.setItem('events', JSON.stringify(events));
-        GetDaysCalendar(date.getMonth(), date.getFullYear());
-        displayEvents();
-    }
-
-    // Funcionalidade de editar o evento no local storage
-    window.editEvent = function (index) {
-        const event = events[index];
-        const modal = document.getElementById('modal');
-        const eventDateInput = document.getElementById('eventDate');
-        const eventTitleInput = document.getElementById('eventTitle');
-        const eventForm = document.getElementById('eventForm');
-
-        eventDateInput.value = new Date(event.date).toDateString();
-        eventTitleInput.value = event.title;
-
-        modal.style.display = 'block';
-
-        eventForm.onsubmit = function (e) {
-            e.preventDefault();
-            events[index].title = eventTitleInput.value;
-            localStorage.setItem('events', JSON.stringify(events));
-            modal.style.display = 'none';
-            displayEvents();
-            GetDaysCalendar(new Date(event.date).getMonth(), new Date(event.date).getFullYear());
+    //função de salvar os roteiros
+    function saveEvent(startDate, endDate, location, title) {
+        const newEvent = {
+            startDate: startDate.toISOString().split('T')[0],
+            endDate: endDate.toISOString().split('T')[0],
+            location: location,
+            title: title,
+            activities: []
         };
-    }
 
-    // Funcionalidade de deletar o evento do local storage
-    window.deleteEvent = function (index) {
-        events.splice(index, 1);
-        localStorage.setItem('events', JSON.stringify(events));
-        displayEvents();
-        const now = new Date();
-        GetDaysCalendar(now.getMonth(), now.getFullYear());
-        deleteRoteiro(index);
-    }
+        // Funcionalidade de salvar o evento no local storage
+        function saveEvent(date, title) {
+            events.push({ date: date.toISOString().split('T')[0], title: title });
+            localStorage.setItem('events', JSON.stringify(events));
+            GetDaysCalendar(startDate.getMonth(), startDate.getFullYear());
+            displayEvents();
+            sendNotification(newEvent);
+        }
 
-    // Funcionalidade de colocar uma lista com os eventos salvos na tela com HTML
-    function displayEvents() {
-        eventList.innerHTML = '';
-        events.forEach((event, index) => {
-            let li = document.createElement('li');
-            li.innerHTML = `Data: ${event.date}, Título: ${event.title} 
+        // Funcionalidade de editar o evento no local storage
+        window.editEvent = function (index) {
+            const event = events[index];
+            const modal = document.getElementById('modal');
+            const eventForm = document.getElementById('eventForm');
+            const eventTitleInput = document.getElementById('eventTitle');
+            const eventStartDateInput = document.getElementById('eventStartDate');
+            const eventEndDateInput = document.getElementById('eventEndDate');
+            const eventLocationInput = document.getElementById('eventLocation');
+
+            eventTitleInput.value = event.title;
+            eventStartDateInput.value = event.startDate;
+            eventEndDateInput.value = event.endDate;
+            eventLocationInput.value = event.location;
+
+            modal.style.display = 'block';
+
+            eventForm.onsubmit = function (e) {
+                e.preventDefault();
+                events[index].title = eventTitleInput.value;
+                events[index].startDate = eventStartDateInput.value;
+                events[index].endDate = eventEndDateInput.value;
+                events[index].location = eventLocationInput.value;
+
+                localStorage.setItem('events', JSON.stringify(events));
+                modal.style.display = 'none';
+                displayEvents();
+                GetDaysCalendar(new Date(event.startDate).getMonth(), new Date(event.startDate).getFullYear());
+            };
+        }
+
+        // Funcionalidade de deletar o evento do local storage
+        window.deleteEvent = function (index) {
+            events.splice(index, 1);
+            localStorage.setItem('events', JSON.stringify(events));
+            displayEvents();
+            const now = new Date();
+            GetDaysCalendar(now.getMonth(), now.getFullYear());
+            deleteRoteiro(index);
+        }
+
+        // Funcionalidade de colocar uma lista com os eventos salvos na tela com HTML
+        function displayEvents() {
+            eventList.innerHTML = '';
+            events.forEach((event, index) => {
+                let li = document.createElement('li');
+                li.innerHTML = `Data: ${event.date}, Título: ${event.title} 
                             <button onclick="editEvent(${index})" class="btn btn-outline-primary">Editar</button>
                             <button onclick="deleteEvent(${index})" class="btn btn-outline-danger">Excluir</button>`;
-            eventList.appendChild(li);
-        });
-    }
-
-
-    let now = new Date();
-    let mes = now.getMonth();
-    let ano = now.getFullYear();
-    GetDaysCalendar(mes, ano);
-    displayEvents();
-
-    const botao_proximo = document.getElementById('btn-prev');
-    const botao_anterior = document.getElementById('btn-ant');
-
-    botao_proximo.onclick = function () {
-        mes++;
-        if (mes > 11) {
-            mes = 0;
-            ano++;
+                eventList.appendChild(li);
+            });
         }
-        GetDaysCalendar(mes, ano);
-    };
 
-    botao_anterior.onclick = function () {
-        mes--;
-        if (mes < 0) {
-            mes = 11;
-            ano--;
-        }
+
+        let now = new Date();
+        let mes = now.getMonth();
+        let ano = now.getFullYear();
         GetDaysCalendar(mes, ano);
-    };
-});
+        displayEvents();
+
+        const botao_proximo = document.getElementById('btn-prev');
+        const botao_anterior = document.getElementById('btn-ant');
+
+        botao_proximo.onclick = function () {
+            mes++;
+            if (mes > 11) {
+                mes = 0;
+                ano++;
+            }
+            GetDaysCalendar(mes, ano);
+        };
+
+        botao_anterior.onclick = function () {
+            mes--;
+            if (mes < 0) {
+                mes = 11;
+                ano--;
+            }
+            GetDaysCalendar(mes, ano);
+        };
+    });
 

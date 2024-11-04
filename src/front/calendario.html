@@ -12,6 +12,19 @@
 </head>
 
 <body>
+    <script>
+        // Verifica se o usuário está logado e se é uma agência
+        if (!sessionStorage.getItem('isLoggedIn') || sessionStorage.getItem('userType') !== 'agencia') {
+            window.location.href = 'index.html'; // Redireciona para o login
+        }
+
+        function logout() {
+            sessionStorage.removeItem('isLoggedIn');
+            sessionStorage.removeItem('userType'); // Limpa o tipo de usuário
+            window.location.href = 'index.html'; // Redireciona para o login
+        }
+    </script>
+
     <!-- Navbar -->
     <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
         <a class="navbar-brand" href="#">PlanWay</a>
@@ -22,7 +35,7 @@
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav ml-auto">
                 <li class="nav-item">
-                    <a class="nav-link" href="#dashboard">Dashboard</a>
+                    <a class="nav-link" href="home_agencia.html">Dashboard</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="#my-excursions">Minhas Excursões</a>
@@ -34,11 +47,11 @@
                     <a class="nav-link" href="#settings">Configurações</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="index.html">Sair</a>
+                    <a class="nav-link" href="index.html" onclick="logout()">Sair</a>
                 </li>
             </ul>
         </div>
-    </nav><br><br><br>
+    </nav>
 
     <main>
         <div class="conteudo">
@@ -140,6 +153,41 @@
                                 placeholder="Dor de cabeça" required>
                             <button type="submit" class="btn btn-outline-primary">Salvar</button>
                         </form>
+                </div>
+            </div>
+
+            <div id="modal" class="modal"> <!-- Modal para roteiros -->
+                <div class="modal-content">
+                    <span class="close">&times;</span>
+                    <h3>Cadastrar Evento</h3>
+                    <form id="eventForm">
+                        <label for="eventTitle">Título:</label>
+                        <input type="text" id="eventTitle" class="form-control" required>
+                        <label for="eventStartDate">Data de Início:</label>
+                        <input type="date" id="eventStartDate" class="form-control" required>
+                        <label for="eventEndDate">Data de Fim:</label>
+                        <input type="date" id="eventEndDate" class="form-control" required>
+                        <label for="eventLocation">Local:</label>
+                        <input type="text" id="eventLocation" class="form-control" required>
+                        <button type="submit" class="btn btn-outline-primary">Salvar Evento</button>
+                    </form>
+                </div>
+            </div>
+            <div id="activityModal" class="modal"> <!-- Modal para atividades -->
+                <div class="modal-content">
+                    <span class="close">&times;</span>
+                    <h3>Adicionar Atividade</h3>
+                    <form id="activityForm">
+                        <label for="activityDescription">Descrição:</label>
+                        <input type="text" id="activityDescription" required>
+                        <label for="activityStart">Início:</label>
+                        <input type="time" id="activityStart" required>
+                        <label for="activityEnd">Fim:</label>
+                        <input type="time" id="activityEnd" required>
+                        <label for="activityAddress">Endereço:</label>
+                        <input type="text" id="activityAddress" required>
+                        <button type="submit" class="btn btn-outline-primary">Salvar Atividade</button>
+                    </form>
                 </div>
             </div>
 
