@@ -1,13 +1,8 @@
 package com.planway.trabalhoInterdiciplinar.Entity;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.DiscriminatorValue;
 import jakarta.persistence.Entity;
-import jakarta.persistence.OneToMany;
 import jakarta.validation.constraints.Size;
 import lombok.Getter;
 import lombok.Setter;
@@ -22,9 +17,8 @@ public class Agencia extends User {
     @Size(min = 14, max = 14)
     private String cnpj;
 
-    @OneToMany(mappedBy = "agencia", cascade = CascadeType.ALL)
-    private List<Roteiro> roteiros = new ArrayList<>();
-
+    // @OneToMany(mappedBy = "agencia", cascade = CascadeType.ALL)
+    // private List<Roteiro> roteiros = new ArrayList<>();
     public Agencia(String email, String password, String cnpj) {
         super(email, password);
         this.cnpj = cnpj;

@@ -1,12 +1,9 @@
 package com.planway.trabalhoInterdiciplinar.Entity;
 
 import jakarta.persistence.Entity;
-import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import lombok.Getter;
 import lombok.Setter;
@@ -21,23 +18,19 @@ public class Roteiro {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    // private String local;
     private String titulo;
 
-    // private String descricao;
     private String dataFim;
 
     private String agenciaEmail;
 
-    @ManyToOne
-    @JoinColumn(name = "agencia_cnpj")
-    private Agencia agencia;
-
-    // private String dataInicio;
+    // @ManyToOne
+    // @JoinColumn(name = "agencia_cnpj")
+    // private Agencia agencia;
     public Roteiro() {
     }
 
-    public Roteiro(Long id, String titulo, String dataFim, String agenciaEmail, Agencia agencia) {
+    public Roteiro(Long id, String titulo, String dataFim, String agenciaEmail) {
         this.id = id;
         // this.local = local;
         this.titulo = titulo;
@@ -45,7 +38,6 @@ public class Roteiro {
         this.dataFim = dataFim;
         // this.dataInicio = dataInicio;
         this.agenciaEmail = agenciaEmail;
-        this.agencia = agencia;
     }
 
 }

@@ -126,6 +126,7 @@ async function login() {
             // Armazenar informações de login
             sessionStorage.setItem('isLoggedIn', 'true');
             sessionStorage.setItem('userType', userType);
+            localStorage.setItem('userEmail', email);
 
             alert('Login realizado com sucesso!');
             window.location.href = userType === 'cliente' ? 'home.html' : 'home_agencia.html';

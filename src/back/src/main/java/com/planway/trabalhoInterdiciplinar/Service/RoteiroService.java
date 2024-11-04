@@ -2,19 +2,18 @@ package com.planway.trabalhoInterdiciplinar.Service;
 
 import java.util.List;
 import java.util.Optional;
-import java.util.concurrent.ThreadLocalRandom;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.planway.trabalhoInterdiciplinar.Dto.RoteiroDto;
-import com.planway.trabalhoInterdiciplinar.Entity.Agencia;
 import com.planway.trabalhoInterdiciplinar.Entity.Roteiro;
 import com.planway.trabalhoInterdiciplinar.Repository.AgenciaRepository;
 import com.planway.trabalhoInterdiciplinar.Repository.RoteiroRepository;
-import org.springframework.transaction.annotation.Transactional;
+
 import jakarta.persistence.EntityManager;
+import jakarta.transaction.Transactional;
 
 @Service
 public class RoteiroService {
@@ -29,21 +28,15 @@ public class RoteiroService {
     private EntityManager entityManager;
 
     @Transactional
-    public Roteiro createRoteiro(RoteiroDto roteiroDto, String usuarioCnpj) {
-
-        Agencia usuario = agenciaRepository.findByCnpj(usuarioCnpj)
-                .orElseThrow(() -> new RuntimeException("Usuário não encontrado"));
-
+    public Roteiro createRoteiro(RoteiroDto roteiroDto) {
         var roteiro = new Roteiro(
                 null,
                 roteiroDto.titulo(),
                 roteiroDto.dataFim(),
-                usuario.getEmail(),
-                usuario
+                roteiroDto.email()
         );
 
-        usuario.getRoteiros().add(roteiro);
-        roteiro = entityManager.merge(roteiro);
+        roteiro = entityManager.merge(roteiro);  // Ou use save se preferir
 
         return roteiro;
     }
@@ -65,14 +58,6 @@ public class RoteiroService {
                 roteiro.setTitulo(roteiroDto.titulo());
             }
 
-            if (roteiroDto.local() != null) {
-                // roteiro.setLocal(roteiroDto.local());
-            }
-
-            if (roteiroDto.descricao() != null) {
-                // roteiro.setDescricao(roteiroDto.descricao());
-            }
-
             if (roteiroDto.dataFim() != null) {
                 roteiro.setDataFim(roteiroDto.dataFim());
             }
@@ -89,11 +74,6 @@ public class RoteiroService {
     public Optional<Roteiro> findRoteiroById(Long roteiroId) {
         Optional<Roteiro> roteiro = roteiroRepository.findById(roteiroId);
         return roteiro;
-    }
-
-    private long generateRandomId() {
-        // Gera um número aleatório entre 1 e Long.MAX_VALUE
-        return ThreadLocalRandom.current().nextLong(1, Long.MAX_VALUE);
     }
 
     public void deleteAllRoteiros() {

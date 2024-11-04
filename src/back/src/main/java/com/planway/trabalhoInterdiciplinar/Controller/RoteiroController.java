@@ -1,7 +1,6 @@
 package com.planway.trabalhoInterdiciplinar.Controller;
 
 import java.util.List;
-import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -12,7 +11,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.planway.trabalhoInterdiciplinar.Dto.RoteiroDto;
@@ -26,11 +24,11 @@ public class RoteiroController {
     @Autowired
     private RoteiroService roteiroService;
 
-    @PostMapping("/criarRoteiro/{cnpj}")
-    public ResponseEntity<Object> criarRoteiro(@RequestBody RoteiroDto roteiroDto, @PathVariable String cnpj) {
+    @PostMapping("/criarRoteiro")
+    public ResponseEntity<Object> criarRoteiro(@RequestBody RoteiroDto roteiroDto) {
 
         try {
-            Roteiro roteiro = roteiroService.createRoteiro(roteiroDto, cnpj);
+            Roteiro roteiro = roteiroService.createRoteiro(roteiroDto);
             return ResponseEntity.ok(roteiro);
         } catch (IllegalArgumentException e) {
             return ResponseEntity.badRequest().body(e.getMessage());
@@ -44,7 +42,7 @@ public class RoteiroController {
         return ResponseEntity.ok(roteiros);
     }
 
-    @PutMapping("/updateRoteiro")
+    @PutMapping("/updateRoteiro/{id}")
     public void updateRoteiro(@PathVariable Long id, @RequestBody RoteiroDto roteirodto) {
         roteiroService.updateRoteiro(id, roteirodto);
         ResponseEntity.noContent().build();

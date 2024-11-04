@@ -1,24 +1,27 @@
 import { getUsuarioDocumento } from './script.js';
 
-//Funcionalidade do calendario
-document.addEventListener('DOMContentLoaded', function () {
+// Array de meses em português
+const monthBR = [
+    'Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho',
+    'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'
+];
 
-    const monthBR = [
-        'Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho',
-        'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'
-    ];
+document.addEventListener('DOMContentLoaded', function () {
     const tableDays = document.getElementById('dias');
     const eventList = document.getElementById('event-items');
     let events = JSON.parse(localStorage.getItem('events')) || [];
-    let startDate = new Date();
-    let endDate = new Date(startDate);
-}
-    //Essa função mexe com tudo sobre o calendario(somente na parte de js)
+    let mes = new Date().getMonth();
+    let ano = new Date().getFullYear();
+
+    GetDaysCalendar(mes, ano);
+    displayEvents();
+
+    // Função para carregar os dias do calendário
     function GetDaysCalendar(mes, ano) {
         document.getElementById('mes').innerHTML = monthBR[mes];
         document.getElementById('ano').innerHTML = ano;
 
-        let firstDayOfWeek = new Date(ano, mes, 1).getDay(); // Correção: Começar a partir do dia 1 do mês
+        let firstDayOfWeek = new Date(ano, mes, 1).getDay();
         let getLastDayThisMonth = new Date(ano, mes + 1, 0).getDate();
 
         for (let i = 1 - firstDayOfWeek, index = 0; i <= (42 - firstDayOfWeek); i++, index++) {
@@ -54,8 +57,8 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     }
 
-    // Funcionalidade de abrir um span na tela para cadastrar o sintoma
-    function openModal(date) {
+    // Função para abrir o modal e cadastrar o evento
+    function openModal(date, index = null) {
         const modal = document.getElementById('modal');
         const span = document.getElementsByClassName('close')[0];
         const eventForm = document.getElementById('eventForm');
@@ -64,8 +67,16 @@ document.addEventListener('DOMContentLoaded', function () {
         const eventEndDateInput = document.getElementById('eventEndDate');
         const eventLocationInput = document.getElementById('eventLocation');
 
-        eventStartDateInput.value = date.toISOString().split('T')[0];
-        eventEndDateInput.value = date.toISOString().split('T')[0];
+        if (index !== null) { // Edição
+            const event = events[index];
+            eventTitleInput.value = event.title;
+            eventStartDateInput.value = event.startDate;
+            eventEndDateInput.value = event.endDate;
+            eventLocationInput.value = event.location;
+        } else { // Criação
+            eventStartDateInput.value = date.toISOString().split('T')[0];
+            eventEndDateInput.value = date.toISOString().split('T')[0];
+        }
 
         modal.style.display = 'block';
 
@@ -74,7 +85,7 @@ document.addEventListener('DOMContentLoaded', function () {
         };
 
         window.onclick = function (event) {
-            if (event.target == modal) {
+            if (event.target === modal) {
                 modal.style.display = 'none';
             }
         };
@@ -82,15 +93,25 @@ document.addEventListener('DOMContentLoaded', function () {
         eventForm.onsubmit = function (e) {
             e.preventDefault();
             const eventTitle = eventTitleInput.value;
-            saveEvent(date, eventTitle);
-            cadastrarRoteiro();
+            const eventStartDate = new Date(eventStartDateInput.value);
+            const eventEndDate = new Date(eventEndDateInput.value);
+            const eventLocation = eventLocationInput.value;
+
+            if (index !== null) {
+                atualizarRoteiro(events[index].id, { titulo: eventTitle, dataFim: eventEndDate.toISOString().split('T')[0] });
+                events[index] = { ...events[index], title: eventTitle, startDate: eventStartDate.toISOString().split('T')[0], endDate: eventEndDate.toISOString().split('T')[0], location: eventLocation };
+            } else {
+                saveEvent(eventStartDate, eventEndDate, eventLocation, eventTitle);
+            }
+
             modal.style.display = 'none';
         };
     }
 
-    //função de salvar os roteiros
+    // Função para salvar o evento
     function saveEvent(startDate, endDate, location, title) {
         const newEvent = {
+            id: events.length + 1, // Simulando um ID, você pode ajustar isso conforme necessário
             startDate: startDate.toISOString().split('T')[0],
             endDate: endDate.toISOString().split('T')[0],
             location: location,
@@ -98,94 +119,128 @@ document.addEventListener('DOMContentLoaded', function () {
             activities: []
         };
 
-        // Funcionalidade de salvar o evento no local storage
-        function saveEvent(date, title) {
-            events.push({ date: date.toISOString().split('T')[0], title: title });
-            localStorage.setItem('events', JSON.stringify(events));
-            GetDaysCalendar(startDate.getMonth(), startDate.getFullYear());
-            displayEvents();
-            sendNotification(newEvent);
-        }
+        events.push(newEvent);
+        localStorage.setItem('events', JSON.stringify(events));
+        GetDaysCalendar(startDate.getMonth(), startDate.getFullYear());
+        displayEvents();
+        cadastrarRoteiro(newEvent); // Passa o novo evento
+    }
 
-        // Funcionalidade de editar o evento no local storage
-        window.editEvent = function (index) {
-            const event = events[index];
-            const modal = document.getElementById('modal');
-            const eventForm = document.getElementById('eventForm');
-            const eventTitleInput = document.getElementById('eventTitle');
-            const eventStartDateInput = document.getElementById('eventStartDate');
-            const eventEndDateInput = document.getElementById('eventEndDate');
-            const eventLocationInput = document.getElementById('eventLocation');
+    // Função para editar o evento
+    window.editEvent = function (index) {
+        openModal(new Date(), index); // Passa a data atual apenas para abrir o modal
+    };
 
-            eventTitleInput.value = event.title;
-            eventStartDateInput.value = event.startDate;
-            eventEndDateInput.value = event.endDate;
-            eventLocationInput.value = event.location;
+    // Função para deletar o evento
+    window.deleteEvent = function (index) {
+        const roteiroId = events[index].id; // ID correto
+        deleteRoteiro(roteiroId);
+        events.splice(index, 1); // Remove do array local
+        localStorage.setItem('events', JSON.stringify(events)); // Atualiza localStorage
+        displayEvents();
+        GetDaysCalendar(new Date().getMonth(), new Date().getFullYear());
+    };
 
-            modal.style.display = 'block';
-
-            eventForm.onsubmit = function (e) {
-                e.preventDefault();
-                events[index].title = eventTitleInput.value;
-                events[index].startDate = eventStartDateInput.value;
-                events[index].endDate = eventEndDateInput.value;
-                events[index].location = eventLocationInput.value;
-
-                localStorage.setItem('events', JSON.stringify(events));
-                modal.style.display = 'none';
-                displayEvents();
-                GetDaysCalendar(new Date(event.startDate).getMonth(), new Date(event.startDate).getFullYear());
-            };
-        }
-
-        // Funcionalidade de deletar o evento do local storage
-        window.deleteEvent = function (index) {
-            events.splice(index, 1);
-            localStorage.setItem('events', JSON.stringify(events));
-            displayEvents();
-            const now = new Date();
-            GetDaysCalendar(now.getMonth(), now.getFullYear());
-            deleteRoteiro(index);
-        }
-
-        // Funcionalidade de colocar uma lista com os eventos salvos na tela com HTML
-        function displayEvents() {
-            eventList.innerHTML = '';
-            events.forEach((event, index) => {
-                let li = document.createElement('li');
-                li.innerHTML = `Data: ${event.date}, Título: ${event.title} 
+    // Função para exibir os eventos
+    function displayEvents() {
+        eventList.innerHTML = '';
+        events.forEach((event, index) => {
+            let li = document.createElement('li');
+            li.innerHTML = `Data: ${event.startDate}, Título: ${event.title} 
                             <button onclick="editEvent(${index})" class="btn btn-outline-primary">Editar</button>
                             <button onclick="deleteEvent(${index})" class="btn btn-outline-danger">Excluir</button>`;
-                eventList.appendChild(li);
-            });
+            eventList.appendChild(li);
+        });
+    }
+
+    // Inicializa o calendário com o mês e ano atuais
+    GetDaysCalendar(mes, ano);
+    displayEvents();
+
+    const botao_proximo = document.getElementById('btn-prev');
+    const botao_anterior = document.getElementById('btn-ant');
+
+    botao_proximo.onclick = function () {
+        mes++;
+        if (mes > 11) {
+            mes = 0;
+            ano++;
         }
-
-
-        let now = new Date();
-        let mes = now.getMonth();
-        let ano = now.getFullYear();
         GetDaysCalendar(mes, ano);
-        displayEvents();
+    };
 
-        const botao_proximo = document.getElementById('btn-prev');
-        const botao_anterior = document.getElementById('btn-ant');
+    botao_anterior.onclick = function () {
+        mes--;
+        if (mes < 0) {
+            mes = 11;
+            ano--;
+        }
+        GetDaysCalendar(mes, ano);
+    };
+});
 
-        botao_proximo.onclick = function () {
-            mes++;
-            if (mes > 11) {
-                mes = 0;
-                ano++;
+// Função para cadastrar roteiro
+function cadastrarRoteiro(event) {
+    const email = localStorage.getItem('userEmail');
+    const data = {
+        titulo: event.title,
+        dataFim: event.endDate,
+        email: email
+    };
+
+    fetch('http://localhost:8081/api/roteiro/criarRoteiro', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(data)
+    })
+        .then(response => response.json())
+        .then(data => {
+            console.log('Roteiro criado com sucesso:', data);
+        })
+        .catch((error) => {
+            console.error('Erro ao criar roteiro:', error);
+        });
+}
+
+// Função para deletar roteiro
+function deleteRoteiro(roteiroId) {
+    fetch(`http://localhost:8081/api/roteiro/deleteRoteiro/${roteiroId}`, {
+        method: 'DELETE',
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    })
+        .then(response => {
+            if (response.ok) {
+                console.log('Roteiro deletado com sucesso');
+            } else {
+                console.error('Erro ao deletar roteiro');
             }
-            GetDaysCalendar(mes, ano);
-        };
+        })
+        .catch((error) => {
+            console.error('Erro ao deletar roteiro:', error);
+        });
+}
 
-        botao_anterior.onclick = function () {
-            mes--;
-            if (mes < 0) {
-                mes = 11;
-                ano--;
+// Função para atualizar roteiro
+function atualizarRoteiro(roteiroId, updatedData) {
+    fetch(`http://localhost:8081/api/roteiro/updateRoteiro/${roteiroId}`, {
+        method: 'PUT',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(updatedData)
+    })
+        .then(response => {
+            if (response.ok) {
+                console.log('Roteiro atualizado com sucesso');
+            } else {
+                console.error('Erro ao atualizar roteiro');
             }
-            GetDaysCalendar(mes, ano);
-        };
-    });
-
+        })
+        .catch((error) => {
+            console.error('Erro ao atualizar roteiro:', error);
+        });
+}
