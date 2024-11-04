@@ -10,7 +10,6 @@
     <link rel="stylesheet" href="./assets/css/calendario.css">
     <link rel="stylesheet" href="./assets/css/style.css">
 </head>
-
 <body>
     <script>
         // Verifica se o usuário está logado e se é uma agência
@@ -55,12 +54,11 @@
 
     <main>
         <div class="conteudo">
-            <div class="calendario">
+            <div class ="calendario">
                 <header>
-                    <h2 id="mes" style="color:white">Abril</h2>
-                    <a class="btn-ant" id="btn-ant">
-                        < </a>
-                            <a class="btn-pro" id="btn-prev"> > </a>
+                <h2 id="mes"style="color:white">Abril</h2>
+                <a class="btn-ant" id="btn-ant"> < </a>
+                <a class="btn-pro" id="btn-prev"> > </a>
                 </header>
                 <table>
                     <thead>
@@ -132,7 +130,7 @@
                     </tbody>
                 </table>
             </div>
-
+            
 
             <section id="event-list" class="event-list">
                 <h2 id="ano" style="text-align: center;">2024</h2>
@@ -140,22 +138,7 @@
                 <ul id="event-items"></ul>
             </section>
 
-
-            <div id="modal" class="modal">
-                <div class="modal-content">
-                    <span class="close">&times;</span>
-                    <h3>Adicione um sintoma ou um evento</h2>
-                        <form id="eventForm" onsubmit="cadastrarRoteiro()">
-                            <label for="eventDate">Data:</label>
-                            <input type="text" id="eventDate" name="eventDate" class="form-control" readonly>
-                            <label for="eventTitle">Título:</label>
-                            <input type="text" id="eventTitle" name="eventTitle" class="form-control"
-                                placeholder="Dor de cabeça" required>
-                            <button type="submit" id="criar-roteiro-btn" class="btn btn-outline-primary">Salvar</button>
-                        </form>
-                </div>
-            </div>
-
+            
             <div id="modal" class="modal"> <!-- Modal para roteiros -->
                 <div class="modal-content">
                     <span class="close">&times;</span>
@@ -189,12 +172,18 @@
                         <button type="submit" class="btn btn-outline-primary">Salvar Atividade</button>
                     </form>
                 </div>
-            </div>
+            </div>            
 
         </div>
     </main>
 
-    <script type="module" src="./assets/js/Calendario.js"></script>
+        <!-- Footer -->
+        <footer class="footer text-white text-center mt-5">
+            <p>&copy; 2024 PlanWay. Todos os direitos reservados.</p>
+        </footer>
+    
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="./assets/js/calendario.js"></script>
 </body>
-
 </html>
