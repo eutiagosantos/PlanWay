@@ -1,0 +1,14 @@
+        /* Customização adicional para os cards */
+        .card {
+            transition: transform 0.3s ease-in-out;
+        }
+
+        .card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Estilo para garantir que as excursões fiquem em linhas separadas */
+        .excursion-card {
+            margin-bottom: 1rem;
+        }
