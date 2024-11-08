@@ -9,7 +9,7 @@ document.addEventListener('DOMContentLoaded', function() {
     let startDate = new Date();
     let endDate = new Date(startDate);
 
-    //Essa função mexe com tudo sobre o calendario(somente na parte de js)
+    //Essa função mexe com tudo sobre o calendario
     function GetDaysCalendar(mes, ano) {
         document.getElementById('mes').innerHTML = monthBR[mes];
         document.getElementById('ano').innerHTML = ano;
@@ -83,7 +83,6 @@ document.addEventListener('DOMContentLoaded', function() {
             const eventEndDate = new Date(eventEndDateInput.value + 'T00:00:00');
             const eventLocation = eventLocationInput.value.trim();
         
-            // Validação
             if (!eventTitle) {
                 alert("Por favor, insira um título para o evento.");
                 return;
@@ -102,7 +101,7 @@ document.addEventListener('DOMContentLoaded', function() {
         };
     }
     
-    //função de salvar os roteiros
+    //Função de salvar os roteiros
     function saveEvent(startDate, endDate, location, title) {
         const newEvent = {
             startDate: startDate.toISOString().split('T')[0],
@@ -123,7 +122,7 @@ document.addEventListener('DOMContentLoaded', function() {
         alert(`Notificação: Evento criado de ${event.startDate} a ${event.endDate} no local ${event.location}.`);
     }
 
-    //função que cria a lista ao lado do calendario
+    //Função que cria a lista ao lado do calendario
     function displayEvents() {
         eventList.innerHTML = '';
         events.forEach((event, index) => {
@@ -218,7 +217,7 @@ document.addEventListener('DOMContentLoaded', function() {
         GetDaysCalendar(mes, ano);
     };
 
-    //essa função abre a janela de criação de Atividades
+    //Essa função abre a janela de criação de Atividades
     window.openActivityModal = function openActivityModal(eventIndex) {
         const modal = document.getElementById('activityModal');
         const span = document.getElementsByClassName('close')[1];
@@ -228,16 +227,18 @@ document.addEventListener('DOMContentLoaded', function() {
         const activityDescriptionInput = document.getElementById('activityDescription');
         const activityAddressInput = document.getElementById('activityAddress');
     
-        modal.style.display = 'block'; // Exibir o modal
+        // Exibi o modal
+        modal.style.display = 'block'; 
     
-
+        // Fecha modal ao clicar no X
         span.onclick = function() {
-            modal.style.display = 'none'; // Fechar modal ao clicar no "X"
+            modal.style.display = 'none'; 
         };
     
+        // Fecha ao clicar fora do modal
         window.onclick = function(event) {
             if (event.target == modal) {
-                modal.style.display = 'none'; // Fechar ao clicar fora do modal
+                modal.style.display = 'none'; 
             }
         };
     
@@ -255,13 +256,15 @@ document.addEventListener('DOMContentLoaded', function() {
     
     const eventTitle = document.getElementById('eventTitle');
 
+    // Faz uma nova lista de atividades
     const newEvent = {
         startDate: startDate.toISOString().split('T')[0],
         endDate: endDate.toISOString().split('T')[0],
         title: eventTitle,
-        activities: []  // Nova lista de atividades
+        activities: []
     };
 
+    //Cria as atividades
     function addActivity(eventIndex, start, end, address, description) {
         console.log('Adicionando atividade:', { start, end, address, description });
         const newActivity = {
@@ -272,10 +275,10 @@ document.addEventListener('DOMContentLoaded', function() {
         };
         events[eventIndex].activities.push(newActivity);
         localStorage.setItem('events', JSON.stringify(events));
-        displayEvents(); // Para atualizar a lista de eventos
+        displayEvents(); 
     }
     
-    // Funções de edição e exclusão de atividades
+    // Funções de edição
     window.editActivity = function editActivity(eventIndex, activityIndex) {
         const activity = events[eventIndex].activities[activityIndex];
         const modal = document.getElementById('activityModal');
@@ -306,6 +309,7 @@ document.addEventListener('DOMContentLoaded', function() {
         };
     };
 
+    //Exclusão de atividades
     window.deleteActivity = function deleteActivity(eventIndex, activityIndex) {
         events[eventIndex].activities.splice(activityIndex, 1);
         localStorage.setItem('events', JSON.stringify(events));

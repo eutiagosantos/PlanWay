@@ -5,6 +5,7 @@ html {
   overflow: hidden;
 }
 
+  /* Coloca o vídeo no fundo */
 .background-video {
   position: fixed;
   top: 0;
@@ -13,17 +14,14 @@ html {
   height: 100vh;
   object-fit: cover;
   z-index: -1;
-  /* Coloca o vídeo no fundo */
 }
 
 .form-container {
   position: absolute;
   top: 50%;
   left: 30px;
-  /* Ajusta a posição para a esquerda */
   transform: translateY(-50%);
   z-index: 1;
-  /* Garante que o formulário fique sobre o vídeo */
   display: flex;
   justify-content: center;
   align-items: center;

@@ -1,7 +1,6 @@
 import { setUsuarioDocumento } from './script.js';
 let isLogin = true;
 
-// Inicializar ouvintes
 function initEventListeners() {
     document.getElementById('toggle-layout').addEventListener('click', function (e) {
         e.preventDefault();
@@ -18,6 +17,7 @@ function initEventListeners() {
     });
 }
 
+// Muda os layouts
 function toggleLayout() {
     isLogin = !isLogin;
     document.getElementById('form-title').textContent = isLogin ? 'Login' : 'Cadastro';
@@ -28,6 +28,7 @@ function toggleLayout() {
         : 'Já possui uma conta? <a href="#" id="toggle-layout" class="link-cadastro">Login</a>';
 };
 
+// Muda visibilidade das senhas
 function togglePasswordVisibility() {
     const passwordInput = document.getElementById('password');
     const confirmPasswordInput = document.getElementById('confirm-password');
@@ -37,6 +38,7 @@ function togglePasswordVisibility() {
     confirmPasswordInput.type = isPasswordVisible ? 'text' : 'password';
 }
 
+// Faz a verificação se a senha e confirmação são iguais
 function handleSubmit() {
     const email = document.getElementById('email').value;
     const cpfCnpj = document.getElementById('cpf-cnpj').value;
@@ -59,7 +61,7 @@ function handleSubmit() {
     }
 }
 
-
+// Função de cadastro
 async function cadastro() {
     let email = document.getElementById('email').value;
     let password = document.getElementById('password').value;
@@ -81,7 +83,7 @@ async function cadastro() {
         if (response.ok) {
             const data = await response.json();
             alert('Cadastro realizado com sucesso!');
-            setUsuarioDocumento(data.documento); // Aqui você chama a função para armazenar o documento
+            setUsuarioDocumento(data.documento); 
             toggleLayout();
         } else {
             alert(`Esse usuario já existe`);
@@ -92,7 +94,7 @@ async function cadastro() {
     }
 }
 
-
+// Função de login
 async function login() {
     let email = document.getElementById('email').value;
     let password = document.getElementById('password').value;
@@ -111,8 +113,8 @@ async function login() {
             })
         });
 
+        // Diferenciação de usuarios
         if (response.ok) {
-            // Aqui você define o tipo de usuário
             let userType;
             if (documento.length === 11) {
                 userType = 'cliente';
@@ -123,7 +125,7 @@ async function login() {
                 return;
             }
 
-            // Armazenar informações de login
+            // Armazenar informações do login
             sessionStorage.setItem('isLoggedIn', 'true');
             sessionStorage.setItem('userType', userType);
             localStorage.setItem('userEmail', email);
@@ -140,7 +142,5 @@ async function login() {
         alert(`Erro ao conectar ao servidor: ${error.message}`);
     }
 }
-
-
 
 initEventListeners();

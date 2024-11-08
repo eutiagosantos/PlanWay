@@ -4,12 +4,26 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cadastro de Excursão - PlanWay</title>
+    <link rel="icon" href="./assets/img/turismo-removebg.png">
+    <title>PlanWay - Cadastro de Excursão</title>
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="./assets/css/style.css">
 </head>
 
 <body>
+    <!--<script>
+        // Verifica se o usuário está logado e se é uma agência
+        if (!sessionStorage.getItem('isLoggedIn') || sessionStorage.getItem('userType') !== 'agencia') {
+            window.location.href = 'index.html'; // Redireciona para o login
+        }
+
+        function logout() {
+            sessionStorage.removeItem('isLoggedIn');
+            sessionStorage.removeItem('userType'); // Limpa o tipo de usuário
+            window.location.href = 'index.html'; // Redireciona para o login
+        }
+    </script>-->
+    
     <!-- Navbar -->
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
         <a class="navbar-brand" href="#">PlanWay</a>
@@ -20,13 +34,11 @@
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav ml-auto">
                 <li class="nav-item"><a class="nav-link" href="home_agencia.html">Dashboard</a></li>
-                <li class="nav-item"><a class="nav-link" href="#my-excursions">Minhas Excursões</a></li>
                 <li class="nav-item"><a class="nav-link" href="#reports">Relatórios</a></li>
-                <li class="nav-item"><a class="nav-link" href="#settings">Configurações</a></li>
                 <li class="nav-item"><a class="nav-link" href="index.html" onclick="logout()">Sair</a></li>
             </ul>
         </div>
-    </nav>
+    </nav><br>
 
     <div class="container mt-5">
         <h1 class="text-center">Cadastro de Excursão</h1>

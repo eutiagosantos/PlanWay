@@ -11,7 +11,7 @@
 </head>
 
 <body>
-    <script>
+<!--<script>
         // Verifica se o usuário está logado e se é uma agência
         if (!sessionStorage.getItem('isLoggedIn') || sessionStorage.getItem('userType') !== 'agencia') {
             window.location.href = 'index.html'; // Redireciona para o login
@@ -22,32 +22,20 @@
             sessionStorage.removeItem('userType'); // Limpa o tipo de usuário
             window.location.href = 'index.html'; // Redireciona para o login
         }
-    </script>
+    </script>-->
 
     <!-- Navbar -->
-    <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
-        <a class="navbar-brand" href="#">PlanWay</a>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+            <a class="navbar-brand" href="#">PlanWay</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
-            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav ml-auto">
-                <li class="nav-item">
-                    <a class="nav-link" href="#dashboard">Dashboard</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#my-excursions">Minhas Excursões</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#reports">Relatórios</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#settings">Configurações</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="index.html" onclick="logout()">Sair</a>
-                </li>
+                <li class="nav-item"><a class="nav-link" href="home_agencia.html">Dashboard</a></li>
+                <li class="nav-item"><a class="nav-link" href="#reports">Relatórios</a></li>
+                <li class="nav-item"><a class="nav-link" href="index.html" onclick="logout()">Sair</a></li>
             </ul>
         </div>
     </nav>
@@ -72,8 +60,8 @@
                     <div class="card">
                         <div class="card-body">
                             <h5 class="card-title">Cadastrar Excursão</h5>
-                            <p class="card-text">Adicione novas excursões para sua agência.</p>
-                            <a href="relatorio.html" class="btn btn-primary">Cadastrar</a>
+                            <p class="card-text">Adicione novas excursões para sua agência!</p>
+                            <a href="cad_excursao.html" class="btn btn-primary">Cadastrar</a>
                         </div>
                     </div>
                 </div>
@@ -81,8 +69,17 @@
                     <div class="card">
                         <div class="card-body">
                             <h5 class="card-title">Calendarios</h5>
-                            <p class="card-text">Verifique as datas das suas atividades.</p>
+                            <p class="card-text">Verifique as datas das suas atividades!</p>
                             <a href="calendario.html" class="btn btn-primary">Ver calendario</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title">Pesquisar</h5>
+                            <p class="card-text">Pesquise as excursões mais facil!</p>
+                            <a href="pesquisa.html" class="btn btn-primary">Pesquisra</a>
                         </div>
                     </div>
                 </div>
