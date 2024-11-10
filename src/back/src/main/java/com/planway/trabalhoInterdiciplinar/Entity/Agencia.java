@@ -22,9 +22,8 @@ public class Agencia extends User {
     @Size(min = 14, max = 14)
     private String cnpj;
 
-    @OneToMany(mappedBy = "agencia", cascade = CascadeType.ALL)
-    private List<Roteiro> roteiros = new ArrayList<>();
-
+    // @OneToMany(mappedBy = "agencia", cascade = CascadeType.ALL)
+    // private List<Roteiro> roteiros = new ArrayList<>();
     public Agencia(String email, String password, String cnpj) {
         super(email, password);
         this.cnpj = cnpj;
