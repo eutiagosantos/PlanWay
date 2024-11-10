@@ -41,7 +41,7 @@ function togglePasswordVisibility() {
 // Faz a verificação se a senha e confirmação são iguais
 function handleSubmit() {
     const email = document.getElementById('email').value;
-    const cpfCnpj = document.getElementById('cpf-cnpj').value;
+    const cpfCnpj = document.getElementById('cpfCnpj').value;
     const password = document.getElementById('password').value;
     const confirmPassword = document.getElementById('confirm-password').value;
 
@@ -65,7 +65,7 @@ function handleSubmit() {
 async function cadastro() {
     let email = document.getElementById('email').value;
     let password = document.getElementById('password').value;
-    let documento = document.getElementById('cpf-cnpj').value;
+    let documento = document.getElementById('cpfCnpj').value;
 
     try {
         const response = await fetch("http://localhost:8081/api/usuarios/cadastrar", {
@@ -86,7 +86,7 @@ async function cadastro() {
             setUsuarioDocumento(data.documento);
             toggleLayout();
         } else {
-            alert(`Esse usuario já existe`);
+            alert('Esse usuario já existe');
         }
     } catch (error) {
         console.error('Erro detalhado:', error);
@@ -98,7 +98,7 @@ async function cadastro() {
 async function login() {
     let email = document.getElementById('email').value;
     let password = document.getElementById('password').value;
-    let documento = document.getElementById('cpf-cnpj').value;
+    let documento = document.getElementById('cpfCnpj').value;
 
     try {
         const response = await fetch("http://localhost:8081/api/usuarios/login", {
@@ -113,13 +113,12 @@ async function login() {
             })
         });
 
-        // Diferenciação de usuarios
         if (response.ok) {
             let userType;
             if (documento.length === 11) {
                 userType = 'cliente';
             } else if (documento.length === 14) {
-                userType = 'agencia'
+                userType = 'agencia';
             } else {
                 alert('Login, CPF/CNPJ ou senha estão incorretos');
                 return;

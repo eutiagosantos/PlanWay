@@ -102,17 +102,6 @@ body, html {
     color: #6c757d;
 }
 
-/* Footer */
-.footer {
-    padding: 20px 0;
-    background: linear-gradient(120deg, #00b8ff, #1574c4);
-    text-align: center;
-    color: white;
-    position: relative;
-    bottom: 0;
-    width: 100%;
-}
-
 /* Responsividade */
 @media (max-width: 768px) {
     .hero-content h1 {
@@ -159,5 +148,5 @@ body, html {
 
     .features-section .col-md-4 {
         margin-bottom: 15px;
-    }
+    }    
 }
