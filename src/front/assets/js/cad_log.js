@@ -83,10 +83,14 @@ async function cadastro() {
         if (response.ok) {
             const data = await response.json();
             alert('Cadastro realizado com sucesso!');
-            setUsuarioDocumento(data.documento); 
+            
+            // Salvar CPF/CNPJ localmente
+            localStorage.setItem('userDocumento', data.documento);
+
+            setUsuarioDocumento(data.documento);
             toggleLayout();
         } else {
-            alert(`Esse usuario já existe`);
+            alert('Esse usuario já existe');
         }
     } catch (error) {
         console.error('Erro detalhado:', error);
@@ -113,13 +117,12 @@ async function login() {
             })
         });
 
-        // Diferenciação de usuarios
         if (response.ok) {
             let userType;
             if (documento.length === 11) {
                 userType = 'cliente';
             } else if (documento.length === 14) {
-                userType = 'agencia'
+                userType = 'agencia';
             } else {
                 alert('Login, CPF/CNPJ ou senha estão incorretos');
                 return;
@@ -129,6 +132,7 @@ async function login() {
             sessionStorage.setItem('isLoggedIn', 'true');
             sessionStorage.setItem('userType', userType);
             localStorage.setItem('userEmail', email);
+            localStorage.setItem('userDocumento', documento); // Armazenar CPF/CNPJ localmente
 
             alert('Login realizado com sucesso!');
             window.location.href = userType === 'cliente' ? 'home.html' : 'home_agencia.html';
@@ -142,5 +146,6 @@ async function login() {
         alert(`Erro ao conectar ao servidor: ${error.message}`);
     }
 }
+
 
 initEventListeners();

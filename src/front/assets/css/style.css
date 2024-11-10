@@ -108,7 +108,7 @@ body, html {
     background: linear-gradient(120deg, #00b8ff, #1574c4);
     text-align: center;
     color: white;
-    position: relative;
+    position: fixed;
     bottom: 0;
     width: 100%;
 }
