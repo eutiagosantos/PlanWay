@@ -117,6 +117,7 @@ document.addEventListener('DOMContentLoaded', function() {
         GetDaysCalendar(startDate.getMonth(), startDate.getFullYear());
         displayEvents();
         sendNotification(newEvent);
+        
     }
 
     function sendNotification(event) {
@@ -228,16 +229,16 @@ document.addEventListener('DOMContentLoaded', function() {
         const activityDescriptionInput = document.getElementById('activityDescription');
         const activityAddressInput = document.getElementById('activityAddress');
     
-        modal.style.display = 'block'; // Exibir o modal
+        modal.style.display = 'block';
     
 
         span.onclick = function() {
-            modal.style.display = 'none'; // Fechar modal ao clicar no "X"
+            modal.style.display = 'none';
         };
     
         window.onclick = function(event) {
             if (event.target == modal) {
-                modal.style.display = 'none'; // Fechar ao clicar fora do modal
+                modal.style.display = 'none';
             }
         };
     
@@ -249,7 +250,7 @@ document.addEventListener('DOMContentLoaded', function() {
             const activityAddress = activityAddressInput.value;
     
             addActivity(eventIndex, activityStart, activityEnd, activityAddress, activityDescription);
-            modal.style.display = 'none'; // Fechar o modal após adicionar a atividade
+            modal.style.display = 'none';
         };
     }
     
@@ -259,7 +260,7 @@ document.addEventListener('DOMContentLoaded', function() {
         startDate: startDate.toISOString().split('T')[0],
         endDate: endDate.toISOString().split('T')[0],
         title: eventTitle,
-        activities: []  // Nova lista de atividades
+        activities: []
     };
 
     function addActivity(eventIndex, start, end, address, description) {
@@ -272,7 +273,7 @@ document.addEventListener('DOMContentLoaded', function() {
         };
         events[eventIndex].activities.push(newActivity);
         localStorage.setItem('events', JSON.stringify(events));
-        displayEvents(); // Para atualizar a lista de eventos
+        displayEvents();
     }
     
     // Funções de edição e exclusão de atividades

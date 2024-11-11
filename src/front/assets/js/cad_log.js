@@ -59,7 +59,7 @@ function handleSubmit() {
         sessionStorage.setItem('userId', userId);
     } else {
         login();
-
+        sessionStorage.setItem('documento', cpfCnpj);
         sessionStorage.setItem('userId', userId);
     }
 }

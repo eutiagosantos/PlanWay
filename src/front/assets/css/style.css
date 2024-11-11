@@ -129,6 +129,9 @@ body, html {
         text-align: center;
         margin-bottom: 20px;
     }
+    .carousel-item img {
+        width: 100%;
+    }
 }
 
 /* Para telas pequenas */
@@ -149,4 +152,37 @@ body, html {
     .features-section .col-md-4 {
         margin-bottom: 15px;
     }    
+}
+
+/* Estilo para a caixa de informações */
+.excursion-info-box {
+    background-color: #1574c4; 
+    color: #fff;
+    padding: 20px; 
+    margin-top: 10px;
+    text-align: center;
+    margin: auto;
+}
+
+.excursion-info-box h5 {
+    margin-bottom: 10px;
+    font-size: 1.2em;
+}
+
+.excursion-info-box p {
+    margin: 5px 0;
+    font-size: 1em;
+}
+
+.carousel-item {
+    text-align: center;
+}
+
+footer {
+    text-align: center;
+    padding: 20px;
+    background: linear-gradient(120deg, #00b8ff, #1574c4);  
+    color: #ffffff;
+    position:relative;
+    margin-top: auto; 
 }

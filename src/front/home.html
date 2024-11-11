@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" href="./assets/img/turismo-removebg.png">
-    <title>PlanWay - Dashboard Cliente</title>
+    <title>PlanWay - Dashboard</title>
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="./assets/css/style.css">
 </head>
@@ -45,42 +45,71 @@
         <div class="row">
             <div class="col text-center">
                 <h1>Bem-vindo(a) ao PlanWay!</h1>
-                <p>Gerencie suas excursões e explore novas oportunidades de viagem.</p>
+                <p>Veja as excursões mais pesquisadas</p>
             </div>
         </div>
     </div>
 
-    <!-- Dashboard Section -->
-    <section id="dashboard" class="mt-5">
-        <div class="container">
-            <h2 class="text-center">Dashboard</h2>
-            <div class="row text-center">
+    <!-- Carrossel de Excursões -->
+    <div id="carouselExampleIndicators" class="carousel slide mt-5" data-ride="carousel">
+        <ol class="carousel-indicators" id="carouselIndicators">
+            <!-- Os indicadores ficaram aq -->
+        </ol>
+        <div class="carousel-inner" id="carouselItems">
+            <!-- os itens que vão aparecer aqui -->
+        </div>
+        <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="sr-only">Anterior</span>
+        </a>
+        <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="sr-only">Próximo</span>
+        </a>
+    </div>
 
-                <div class="col-md-3">
-                    <div class="card">
-                        <div class="card-body">
-                            <h5 class="card-title">Calendarios</h5>
-                            <p class="card-text">Verifique as datas das suas atividades.</p>
-                            <a href="calendario.html" class="btn btn-primary">Ver calendario</a>
-                        </div>
+<!-- Dashboard Section -->
+<section id="dashboard" class="mt-5">
+    <div class="container" style="height: 100vh;">
+        <div class="row justify-content-center align-items-center" >
+            <!-- Card 1 -->
+            <div class="col-md-3 mb-4">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Calendarios</h5>
+                        <p class="card-text">Verifique as datas das suas atividades.</p>
+                        <a href="calendario.html" class="btn btn-primary">Ver calendario</a>
                     </div>
                 </div>
-                <div class="col-md-3">
-                    <div class="card">
-                        <div class="card-body">
-                            <h5 class="card-title">Pesquisar</h5>
-                            <p class="card-text">Pesquise as excursões mais facil!</p>
-                            <a href="pesquisa.html" class="btn btn-primary">Pesquisar</a>
-                        </div>
+            </div>
+            <!-- Card 2 -->
+            <div class="col-md-3 mb-4">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Pesquisar</h5>
+                        <p class="card-text">Pesquise as excursões mais fácil!</p>
+                        <a href="pesquisa.html" class="btn btn-primary">Pesquisar</a>
                     </div>
                 </div>
             </div>
         </div>
-    </section>
+    </div>
+</section>
+
+
+    <form id="excursionForm" class="mt-4">
+        <!-- Campos do formulário -->
+    </form>
+
+    <footer>
+        <p>&copy; 2024 Sua Empresa. Todos os direitos reservados.</p>
+    </footer>
 
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="./assets/js/home.js"></script>
+    <script src="./assets/js/cad_excursao.js"></script>
 </body>
 
 </html>

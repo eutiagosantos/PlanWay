@@ -73,10 +73,10 @@
                 <input type="text" id="additionalServices" class="form-control" readonly>
             </div>
 
-            <!-- Botão de entrar na excursão -->
+            <!-- Botões de ação -->
             <button class="btn btn-success btn-block" id="joinExcursionBtn">Entrar na Excursão</button>
-
-            <!-- Botão de voltar -->
+            <button class="btn btn-warning btn-block" id="updateExcursionBtn">Alterar Excursão</button>
+            <button class="btn btn-danger btn-block" id="deleteExcursionBtn">Deletar Excursão</button>
             <button class="btn btn-primary btn-block mt-2" onclick="window.history.back()">Voltar</button>
         </div>
     </div><br>
@@ -89,27 +89,7 @@
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-    <script>
-        function viewExcursionDetails(id) {
-            fetch(`http://localhost:8081/api/excursoes/listExcursao/${id}`)
-                .then(response => response.json())
-                .then(excursao => {
-                    console.log(excursao); // Verifique a estrutura dos dados retornados
-                    document.getElementById("title").value = excursao.nome;
-                    document.getElementById("description").value = excursao.descricao;
-                    document.getElementById("startDate").value = excursao.dataInicio;
-                    document.getElementById("endDate").value = excursao.dataFim;
-                    document.getElementById("location").value = excursao.local;
-                    document.getElementById("price").value = excursao.valor;
-                    document.getElementById("additionalServices").value = excursao.servicosAdicionais;
-                })
-                .catch(error => console.error("Erro ao carregar detalhes da excursão:", error));
-        }
-
-        // Exemplo de chamada da função com um ID de excursão
-        // Você pode substituir este valor pelo ID da excursão que deseja visualizar
-        viewExcursionDetails(1);
-    </script>
+    <script src="assets/js/detalhes_excursao.js"></script>
 </body>
 
 </html>
