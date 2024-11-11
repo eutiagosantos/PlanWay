@@ -12,26 +12,17 @@
 
 <body>
     <!-- Navbar -->
-    <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
-        <a class="navbar-brand" href="index.html"><b>PlanWay</b></a>
-        <button class="navbar-toggler" style="color: blue;"type="button" data-toggle="collapse" data-target="#navbarNav"
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+        <a class="navbar-brand" href="index.html">PlanWay</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
             aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav ml-auto">
-                <li class="nav-item">
-                    <a class="nav-link" href="#about"><b>Sobre Nós</b></a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#features"><b>Funcionalidades</b></a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#contact"><b>Contato</b></a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="cad_log.html"><b>Entrar</b></a>
-                </li>
+                <li class="nav-item"><a class="nav-link" href="home.html">Dashboard</a></li>
+                <li class="nav-item"><a class="nav-link" href="#reports">Relatórios</a></li>
+                <li class="nav-item"><a class="nav-link" href="index.html" onclick="logout()">Sair</a></li>
             </ul>
         </div>
     </nav>
@@ -101,10 +92,6 @@
                 <a href="mailto:contato@planway.com" class="btn btn-primary">Enviar E-mail</a>
             </div>
         </section>
-
-        <footer class="footer bg-dark text-white text-center">
-            <p>&copy; 2024 PlanWay. Todos os direitos reservados.</p>
-        </footer>  
 
         <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>

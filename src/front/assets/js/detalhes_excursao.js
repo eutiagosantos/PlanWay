@@ -1,5 +1,4 @@
 document.addEventListener("DOMContentLoaded", () => {
-    // Verifica se há dados da excursão no localStorage
     const excursions = JSON.parse(localStorage.getItem("excursions"));
 
     // Exibe os detalhes da excursão

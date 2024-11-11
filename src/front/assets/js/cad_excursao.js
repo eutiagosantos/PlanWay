@@ -8,7 +8,7 @@ document.getElementById("excursionForm").addEventListener("submit", function (ev
     const location = document.getElementById("location").value.trim();
     const price = document.getElementById("price").value.trim();
 
-    console.log({ title, description, startDate, endDate, location, price }); // Verificação
+    console.log({ title, description, startDate, endDate, location, price });
 
     if (!title || !description || !location || !price) {
         alert("Por favor, preencha todos os campos obrigatórios!");
@@ -25,13 +25,11 @@ document.getElementById("excursionForm").addEventListener("submit", function (ev
         valor: parseFloat(price)
     };
 
-
-    // Salva a excursão no Local Storage
+    // Salva a excursão
     const storedExcursions = JSON.parse(localStorage.getItem("excursions")) || [];
     storedExcursions.push(newExcursion);
     localStorage.setItem("excursions", JSON.stringify(storedExcursions));
 
-    // Chama a função para cadastrar a excursão
     cadastrarExcursao(newExcursion);
 });
 

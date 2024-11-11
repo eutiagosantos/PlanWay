@@ -29,7 +29,7 @@ function enableEdit() {
 // Salva as alterações feitas no perfil
 function saveProfile() {
     const email = document.getElementById('email').value;
-    const documento = document.getElementById('cpf-cnpj').value;
+    const documento = document.getElementById('cpfCnpj').value;
 
     localStorage.setItem('userEmail', email);
     localStorage.setItem('userDocumento', documento);
@@ -41,7 +41,7 @@ function saveProfile() {
 // Cancela a edição do perfil
 function disableEdit() {
     document.getElementById('email').setAttribute('readonly', true);
-    document.getElementById('cpf-cnpj').setAttribute('readonly', true);
+    document.getElementById('cpfCnpj').setAttribute('readonly', true);
     document.getElementById('editProfileBtn').style.display = 'inline-block';
     document.getElementById('deleteProfileBtn').style.display = 'inline-block';
     document.getElementById('saveProfileBtn').style.display = 'none';

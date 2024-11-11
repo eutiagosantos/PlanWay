@@ -41,7 +41,7 @@ function togglePasswordVisibility() {
 // Faz a verificação se a senha e confirmação são iguais
 function handleSubmit() {
     const email = document.getElementById('email').value;
-    const cpfCnpj = document.getElementById('cpf-cnpj').value;
+    const cpfCnpj = document.getElementById('cpfCnpj').value;
     const password = document.getElementById('password').value;
     const confirmPassword = document.getElementById('confirm-password').value;
 
@@ -65,7 +65,7 @@ function handleSubmit() {
 async function cadastro() {
     let email = document.getElementById('email').value;
     let password = document.getElementById('password').value;
-    let documento = document.getElementById('cpf-cnpj').value;
+    let documento = document.getElementById('cpfCnpj').value;
 
     try {
         const response = await fetch("http://localhost:8081/api/usuarios/cadastrar", {
@@ -83,8 +83,7 @@ async function cadastro() {
         if (response.ok) {
             const data = await response.json();
             alert('Cadastro realizado com sucesso!');
-            
-            // Salvar CPF/CNPJ localmente
+
             localStorage.setItem('userDocumento', data.documento);
 
             setUsuarioDocumento(data.documento);
@@ -102,7 +101,7 @@ async function cadastro() {
 async function login() {
     let email = document.getElementById('email').value;
     let password = document.getElementById('password').value;
-    let documento = document.getElementById('cpf-cnpj').value;
+    let documento = document.getElementById('cpfCnpj').value;
 
     try {
         const response = await fetch("http://localhost:8081/api/usuarios/login", {
@@ -132,7 +131,7 @@ async function login() {
             sessionStorage.setItem('isLoggedIn', 'true');
             sessionStorage.setItem('userType', userType);
             localStorage.setItem('userEmail', email);
-            localStorage.setItem('userDocumento', documento); // Armazenar CPF/CNPJ localmente
+            localStorage.setItem('userDocumento', documento);
 
             alert('Login realizado com sucesso!');
             window.location.href = userType === 'cliente' ? 'home.html' : 'home_agencia.html';
@@ -146,6 +145,5 @@ async function login() {
         alert(`Erro ao conectar ao servidor: ${error.message}`);
     }
 }
-
 
 initEventListeners();
