@@ -83,7 +83,7 @@ async function cadastro() {
         if (response.ok) {
             const data = await response.json();
             alert('Cadastro realizado com sucesso!');
-            setUsuarioDocumento(data.documento); 
+            setUsuarioDocumento(data.documento);
             toggleLayout();
         } else {
             alert(`Esse usuario já existe`);

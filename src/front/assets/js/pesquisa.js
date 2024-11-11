@@ -76,7 +76,7 @@ const displayExcursions = (filteredExcursions) => {
                     <p class="card-text"><strong>Preço:</strong> R$ ${validPrice}</p>
                     <p class="card-text"><strong>Local:</strong> ${local || 'Local não informado'}</p>
                     <p class="card-text"><strong>Período:</strong> ${formattedDataInicio} a ${formattedDataFim}</p>
-                    <a href="detalhes_excursao.html?id=${id}" class="btn btn-outline-primary btn-block">Ver mais</a>
+                    <a href="detalhes_excursao.html?id=${id}" class="btn btn-outline-primary btn-block" onclick="viewExcursionDetails(${id})">Ver mais</a>
                 </div>
             </div>
         `;

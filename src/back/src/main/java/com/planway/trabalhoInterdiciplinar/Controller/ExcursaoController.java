@@ -41,6 +41,13 @@ public class ExcursaoController {
         return ResponseEntity.ok(excursoes);
     }
 
+    @GetMapping("/listExcursao/{id}")
+    public ResponseEntity<Excursao> listExcursao(@PathVariable Long id) {
+        Excursao excursao = excursaoService.listExcursaoPeloId(id);
+
+        return ResponseEntity.ok(excursao);
+    }
+
     @PutMapping("/{id}")
     public void updateExcursao(@PathVariable Long id, @RequestBody ExcursaoDto dto) {
         excursaoService.updateExcursao(id, dto);

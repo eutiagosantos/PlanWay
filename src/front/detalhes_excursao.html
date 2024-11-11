@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="./assets/img/turismo-removebg.png">
+    <title>PlanWay - Detalhes da Excursão</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="./assets/css/style.css">
+</head>
+
+<body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+        <a class="navbar-brand" href="#">PlanWay</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item"><a class="nav-link" href="home_agencia.html">Dashboard</a></li>
+                <li class="nav-item"><a class="nav-link" href="#reports">Relatórios</a></li>
+                <li class="nav-item"><a class="nav-link" href="index.html" onclick="logout()">Sair</a></li>
+            </ul>
+        </div>
+    </nav><br>
+
+    <div class="container mt-5">
+        <h1 class="text-center">Detalhes da Excursão</h1>
+
+        <div id="excursionDetails" class="mt-4">
+            <!-- Nome da excursão -->
+            <div class="form-group">
+                <label for="title">Nome da Excursão</label>
+                <input type="text" id="title" class="form-control" readonly>
+            </div>
+
+            <!-- Descrição da excursão -->
+            <div class="form-group">
+                <label for="description">Descrição</label>
+                <textarea id="description" class="form-control" rows="3" readonly></textarea>
+            </div>
+
+            <!-- Data de início -->
+            <div class="form-group">
+                <label for="startDate">Data de Início</label>
+                <input type="date" id="startDate" class="form-control" readonly>
+            </div>
+
+            <!-- Data de fim -->
+            <div class="form-group">
+                <label for="endDate">Data de Fim</label>
+                <input type="date" id="endDate" class="form-control" readonly>
+            </div>
+
+            <!-- Local -->
+            <div class="form-group">
+                <label for="location">Local</label>
+                <input type="text" id="location" class="form-control" readonly>
+            </div>
+
+            <!-- Valor da excursão -->
+            <div class="form-group">
+                <label for="price">Valor (R$)</label>
+                <input type="number" id="price" class="form-control" readonly>
+            </div>
+
+            <!-- Serviços adicionais -->
+            <div class="form-group">
+                <label for="additionalServices">Serviços Adicionais</label>
+                <input type="text" id="additionalServices" class="form-control" readonly>
+            </div>
+
+            <!-- Botão de entrar na excursão -->
+            <button class="btn btn-success btn-block" id="joinExcursionBtn">Entrar na Excursão</button>
+
+            <!-- Botão de voltar -->
+            <button class="btn btn-primary btn-block mt-2" onclick="window.history.back()">Voltar</button>
+        </div>
+    </div><br>
+
+    <!-- Footer -->
+    <footer class="footer text-white text-center">
+        <p>© 2024 PlanWay. Todos os direitos reservados.</p>
+    </footer>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script>
+        function viewExcursionDetails(id) {
+            fetch(`http://localhost:8081/api/excursoes/listExcursao/${id}`)
+                .then(response => response.json())
+                .then(excursao => {
+                    console.log(excursao); // Verifique a estrutura dos dados retornados
+                    document.getElementById("title").value = excursao.nome;
+                    document.getElementById("description").value = excursao.descricao;
+                    document.getElementById("startDate").value = excursao.dataInicio;
+                    document.getElementById("endDate").value = excursao.dataFim;
+                    document.getElementById("location").value = excursao.local;
+                    document.getElementById("price").value = excursao.valor;
+                    document.getElementById("additionalServices").value = excursao.servicosAdicionais;
+                })
+                .catch(error => console.error("Erro ao carregar detalhes da excursão:", error));
+        }
+
+        // Exemplo de chamada da função com um ID de excursão
+        // Você pode substituir este valor pelo ID da excursão que deseja visualizar
+        viewExcursionDetails(1);
+    </script>
+</body>
+
+</html>

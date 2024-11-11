@@ -1,12 +1,16 @@
 package com.planway.trabalhoInterdiciplinar.Entity;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 
 @Entity
 public class Excursao {
@@ -26,9 +30,12 @@ public class Excursao {
     @Column(name = "data_fim")
     private LocalDate dataFim;
 
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<UsuarioComum> participantes = new ArrayList<>();
+
     // Construtores
     public Excursao() {
-}
+    }
 
     public Excursao(String nome, String descricao, double valor, String local, LocalDate dataInicio, LocalDate dataFim) {
         this.nome = nome;

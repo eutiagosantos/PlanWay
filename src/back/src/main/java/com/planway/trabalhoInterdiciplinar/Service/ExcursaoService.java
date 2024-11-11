@@ -32,6 +32,10 @@ public class ExcursaoService {
         return excursaoRepository.findAll();
     }
 
+    public Excursao listExcursaoPeloId(Long id) {
+        return excursaoRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("Excursão não encontrada"));
+    }
+
     // Atualizar uma excursão existente
     public void updateExcursao(Long id, ExcursaoDto dto) {
         Excursao excursao = excursaoRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("Excursão não encontrada"));

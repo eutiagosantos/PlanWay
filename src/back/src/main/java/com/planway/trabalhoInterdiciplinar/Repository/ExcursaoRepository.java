@@ -7,4 +7,5 @@ import com.planway.trabalhoInterdiciplinar.Entity.Excursao;
 
 @Repository
 public interface ExcursaoRepository extends JpaRepository<Excursao, Long> {
+
 }
