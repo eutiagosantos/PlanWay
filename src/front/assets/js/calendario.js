@@ -1,4 +1,4 @@
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
     const monthBR = [
         'Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho',
         'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'
@@ -9,7 +9,12 @@ document.addEventListener('DOMContentLoaded', function() {
     let startDate = new Date();
     let endDate = new Date(startDate);
 
-    //Essa função mexe com tudo sobre o calendario(somente na parte de js)
+    // Função para fechar o modal
+    function closeModal(modal) {
+        modal.style.display = 'none';
+    }
+
+    // Função para preencher o calendário
     function GetDaysCalendar(mes, ano) {
         document.getElementById('mes').innerHTML = monthBR[mes];
         document.getElementById('ano').innerHTML = ano;
@@ -37,7 +42,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 dayTable.classList.add('proximo-mes');
             }
 
-            dayTable.onclick = function() {
+            dayTable.onclick = function () {
                 openModal(dt);
             };
 
@@ -50,7 +55,7 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
 
-    //Função que abre a jenela de criação de roteiro
+    // Função que abre o modal de criação de evento
     function openModal(date) {
         const modal = document.getElementById('modal');
         const span = document.getElementsByClassName('close')[0];
@@ -65,24 +70,24 @@ document.addEventListener('DOMContentLoaded', function() {
 
         modal.style.display = 'block';
 
-        span.onclick = function() {
-            modal.style.display = 'none';
+        span.onclick = function () {
+            closeModal(modal);
         };
 
-        window.onclick = function(event) {
+        window.onclick = function (event) {
             if (event.target == modal) {
-                modal.style.display = 'none';
+                closeModal(modal);
             }
         };
 
-        eventForm.onsubmit = function(e) {
+        eventForm.onsubmit = function (e) {
             e.preventDefault();
-        
+
             const eventTitle = eventTitleInput.value.trim();
-            const eventStartDate = new Date(eventStartDateInput.value + 'T00:00:00'); // Garanta que a data seja no início do dia
+            const eventStartDate = new Date(eventStartDateInput.value + 'T00:00:00');
             const eventEndDate = new Date(eventEndDateInput.value + 'T00:00:00');
             const eventLocation = eventLocationInput.value.trim();
-        
+
             // Validação
             if (!eventTitle) {
                 alert("Por favor, insira um título para o evento.");
@@ -96,20 +101,21 @@ document.addEventListener('DOMContentLoaded', function() {
                 alert("A data de início deve ser anterior à data de término.");
                 return;
             }
-        
+
             saveEvent(eventStartDate, eventEndDate, eventLocation, eventTitle);
-            modal.style.display = 'none';
+            closeModal(modal);
         };
     }
-    
-    //função de salvar os roteiros
+
+    // Função de salvar os eventos
     function saveEvent(startDate, endDate, location, title) {
         const newEvent = {
             startDate: startDate.toISOString().split('T')[0],
             endDate: endDate.toISOString().split('T')[0],
             location: location,
             title: title,
-            activities: []
+            activities: [],
+            id: Date.now() // Adiciona um id único
         };
 
         events.push(newEvent);
@@ -117,14 +123,14 @@ document.addEventListener('DOMContentLoaded', function() {
         GetDaysCalendar(startDate.getMonth(), startDate.getFullYear());
         displayEvents();
         sendNotification(newEvent);
-        
+        cadastrarRoteiro(newEvent);  // Função de backend para criar o roteiro
     }
 
     function sendNotification(event) {
         alert(`Notificação: Evento criado de ${event.startDate} a ${event.endDate} no local ${event.location}.`);
     }
 
-    //função que cria a lista ao lado do calendario
+    // Função que cria a lista de eventos ao lado do calendário
     function displayEvents() {
         eventList.innerHTML = '';
         events.forEach((event, index) => {
@@ -133,7 +139,7 @@ document.addEventListener('DOMContentLoaded', function() {
                             <button onclick="editEvent(${index})" class="btn btn-outline-primary">Editar</button>
                             <button onclick="deleteEvent(${index})" class="btn btn-outline-danger">Excluir</button>
                             <button onclick="openActivityModal(${index})" class="btn btn-outline-secondary">Adicionar Atividade</button>`;
-            
+
             // Adicionar lista de atividades
             if (event.activities.length > 0) {
                 const activityList = document.createElement('ul');
@@ -147,13 +153,13 @@ document.addEventListener('DOMContentLoaded', function() {
                 });
                 li.appendChild(activityList);
             }
-            
+
             eventList.appendChild(li);
         });
     }
 
-    // Funções de editar o Roteiro 
-    window.editEvent = function(index) {
+    // Função de editar evento
+    window.editEvent = function (index) {
         const event = events[index];
         const modal = document.getElementById('modal');
         const eventForm = document.getElementById('eventForm');
@@ -169,7 +175,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
         modal.style.display = 'block';
 
-        eventForm.onsubmit = function(e) {
+        eventForm.onsubmit = function (e) {
             e.preventDefault();
             events[index].title = eventTitleInput.value;
             events[index].startDate = eventStartDateInput.value;
@@ -177,140 +183,167 @@ document.addEventListener('DOMContentLoaded', function() {
             events[index].location = eventLocationInput.value;
 
             localStorage.setItem('events', JSON.stringify(events));
-            modal.style.display = 'none';
+            closeModal(modal);
             displayEvents();
             GetDaysCalendar(new Date(event.startDate).getMonth(), new Date(event.startDate).getFullYear());
         };
     }
 
-    //Função de exclusão de Roteiros
-    window.deleteEvent = function(index) {
+    // Função de exclusão de evento
+    window.deleteEvent = function (index) {
+        const eventId = events[index].id; // Obtém o id do evento
         events.splice(index, 1);
         localStorage.setItem('events', JSON.stringify(events));
         displayEvents();
         const now = new Date();
         GetDaysCalendar(now.getMonth(), now.getFullYear());
+        deleteRoteiro(eventId);
     }
 
+    // Funções de navegação entre meses
     let now = new Date();
     let mes = now.getMonth();
     let ano = now.getFullYear();
     GetDaysCalendar(mes, ano);
     displayEvents();
 
-    const botao_proximo = document.getElementById('btn-prev');
-    const botao_anterior = document.getElementById('btn-ant');
+    const botao_proximo = document.getElementById('btn-next');
+    const botao_anterior = document.getElementById('btn-prev');
+    
 
-    botao_proximo.onclick = function() {
-        mes++;
-        if (mes > 11) {
+    botao_proximo.onclick = function () {
+        if (mes === 11) {
             mes = 0;
             ano++;
+        } else {
+            mes++;
         }
         GetDaysCalendar(mes, ano);
     };
 
-    botao_anterior.onclick = function() {
-        mes--;
-        if (mes < 0) {
+    botao_anterior.onclick = function () {
+        if (mes === 0) {
             mes = 11;
             ano--;
+        } else {
+            mes--;
         }
         GetDaysCalendar(mes, ano);
     };
 
-    //essa função abre a janela de criação de Atividades
-    window.openActivityModal = function openActivityModal(eventIndex) {
+    // Funções de adicionar atividades
+    function openActivityModal(eventIndex) {
         const modal = document.getElementById('activityModal');
         const span = document.getElementsByClassName('close')[1];
         const activityForm = document.getElementById('activityForm');
+        const activityDescriptionInput = document.getElementById('activityDescription');
         const activityStartInput = document.getElementById('activityStart');
         const activityEndInput = document.getElementById('activityEnd');
-        const activityDescriptionInput = document.getElementById('activityDescription');
         const activityAddressInput = document.getElementById('activityAddress');
-    
-        modal.style.display = 'block';
-    
 
-        span.onclick = function() {
-            modal.style.display = 'none';
+        modal.style.display = 'block';
+
+        span.onclick = function () {
+            closeModal(modal);
         };
-    
-        window.onclick = function(event) {
+
+        window.onclick = function (event) {
             if (event.target == modal) {
-                modal.style.display = 'none';
+                closeModal(modal);
             }
         };
-    
-        activityForm.onsubmit = function(e) {
+
+        activityForm.onsubmit = function (e) {
             e.preventDefault();
-            const activityStart = activityStartInput.value;
-            const activityEnd = activityEndInput.value;
-            const activityDescription = activityDescriptionInput.value;
-            const activityAddress = activityAddressInput.value;
-    
-            addActivity(eventIndex, activityStart, activityEnd, activityAddress, activityDescription);
-            modal.style.display = 'none';
-        };
-    }
-    
-    const eventTitle = document.getElementById('eventTitle');
 
-    const newEvent = {
-        startDate: startDate.toISOString().split('T')[0],
-        endDate: endDate.toISOString().split('T')[0],
-        title: eventTitle,
-        activities: []
-    };
+            const activityDescription = activityDescriptionInput.value.trim();
+            const activityStart = activityStartInput.value.trim();
+            const activityEnd = activityEndInput.value.trim();
+            const activityAddress = activityAddressInput.value.trim();
 
-    function addActivity(eventIndex, start, end, address, description) {
-        console.log('Adicionando atividade:', { start, end, address, description });
-        const newActivity = {
-            start: start,
-            end: end,
-            address: address,
-            description: description
-        };
-        events[eventIndex].activities.push(newActivity);
-        localStorage.setItem('events', JSON.stringify(events));
-        displayEvents();
-    }
-    
-    // Funções de edição e exclusão de atividades
-    window.editActivity = function editActivity(eventIndex, activityIndex) {
-        const activity = events[eventIndex].activities[activityIndex];
-        const modal = document.getElementById('activityModal');
-        const activityForm = document.getElementById('activityForm');
-        const activityStartInput = document.getElementById('activityStart');
-        const activityEndInput = document.getElementById('activityEnd');
-        const activityDescriptionInput = document.getElementById('activityDescription');
-        const activityAddressInput = document.getElementById('activityAddress');
+            // Validação
+            if (!activityDescription || !activityStart || !activityEnd || !activityAddress) {
+                alert("Todos os campos da atividade são obrigatórios.");
+                return;
+            }
 
-        activityStartInput.value = activity.start;
-        activityEndInput.value = activity.end;
-        activityDescriptionInput.value = activity.description;
-        activityAddressInput.value = activity.address;
+            events[eventIndex].activities.push({
+                description: activityDescription,
+                start: activityStart,
+                end: activityEnd,
+                address: activityAddress
+            });
 
-        modal.style.display = 'block';
-
-        activityForm.onsubmit = function(e) {
-            e.preventDefault();
-            events[eventIndex].activities[activityIndex] = {
-                start: activityStartInput.value,
-                end: activityEndInput.value,
-                address: activityAddressInput.value,
-                description: activityDescriptionInput.value
-            };
             localStorage.setItem('events', JSON.stringify(events));
-            modal.style.display = 'none';
             displayEvents();
+            closeModal(modal);
         };
+    }
+    
+})
+
+// Função para cadastrar roteiro no backend
+function cadastrarRoteiro(event) {
+    const email = localStorage.getItem('userEmail');
+    const data = {
+        titulo: event.title,
+        dataFim: event.endDate,
+        email: email
     };
 
-    window.deleteActivity = function deleteActivity(eventIndex, activityIndex) {
-        events[eventIndex].activities.splice(activityIndex, 1);
-        localStorage.setItem('events', JSON.stringify(events));
-        displayEvents();
-    };
-    
-});
+    fetch('http://localhost:8081/api/roteiro/criarRoteiro', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(data)
+    })
+        .then(response => response.json())
+        .then(data => {
+            console.log('Roteiro criado com sucesso:', data);
+        })
+        .catch((error) => {
+            console.error('Erro ao criar roteiro:', error);
+        });
+}
+
+// Função para deletar roteiro no backend
+function deleteRoteiro(roteiroId) {
+    fetch(`http://localhost:8081/api/roteiro/deleteRoteiro/${roteiroId}`, {
+        method: 'DELETE',
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    })
+        .then(response => {
+            if (response.ok) {
+                console.log('Roteiro deletado com sucesso');
+            } else {
+                console.error('Erro ao deletar roteiro');
+            }
+        })
+        .catch((error) => {
+            console.error('Erro ao deletar roteiro:', error);
+        });
+}
+
+// Função para atualizar roteiro
+function atualizarRoteiro(roteiroId, updatedData) {
+    fetch(`http://localhost:8081/api/roteiro/updateRoteiro/${roteiroId}`, {
+        method: 'PUT',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(updatedData)
+    })
+        .then(response => {
+            if (response.ok) {
+                console.log('Roteiro atualizado com sucesso');
+            } else {
+                console.error('Erro ao atualizar roteiro');
+            }
+        })
+        .catch((error) => {
+            console.error('Erro ao atualizar roteiro:', error);
+        });
+}

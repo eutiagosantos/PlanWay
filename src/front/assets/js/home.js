@@ -20,6 +20,7 @@ window.onload = function() {
             <h5>${excursion.nome}</h5>
             <p><strong>Local:</strong> ${excursion.local}</p>
             <p><strong>Preço:</strong> R$ ${excursion.valor.toFixed(2)}</p>
+            <a href="#" class="btn btn-dark">Saiba Mais</a>
         </div>
     </div>
 `;
