@@ -56,8 +56,11 @@ function handleSubmit() {
             return;
         }
         cadastro();
+        sessionStorage.setItem('userId', userId);
     } else {
         login();
+
+        sessionStorage.setItem('userId', userId);
     }
 }
 
@@ -66,6 +69,7 @@ async function cadastro() {
     let email = document.getElementById('email').value;
     let password = document.getElementById('password').value;
     let documento = document.getElementById('cpfCnpj').value;
+
 
     try {
         const response = await fetch("http://localhost:8081/api/usuarios/cadastrar", {
@@ -141,5 +145,7 @@ async function login() {
         alert(`Erro ao conectar ao servidor: ${error.message}`);
     }
 }
+
+
 
 initEventListeners();

@@ -56,7 +56,7 @@ function deleteProfile() {
         localStorage.removeItem('userDocumento');
         sessionStorage.removeItem('isLoggedIn');
         sessionStorage.removeItem('userType');
-        window.location.href = 'index.html'; 
+        window.location.href = 'index.html';
     }
 }
 
