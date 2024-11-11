@@ -94,11 +94,20 @@
                     placeholder="Ex: Guia turístico, Transporte">
             </div>
 
-            <!-- Botão de submissão -->
-            <button type="submit" class="btn btn-primary btn-block">Cadastrar Excursão</button>
-        </form>
-    </div><br>
+            <!-- Seção de imagem -->
+            <input type="file" id="image" class="form-control" onchange="handleImageUpload(event)" accept="image/*" />
+            <div id="imagePreviewContainer" style="display: none;">
+                <img id="imagePreview" src="" alt="Pré-visualização da imagem" class="img-fluid" />
+            </div>
 
+            <!-- Botão de envio -->
+            <button type="submit" class="btn btn-primary">Cadastrar Excursão</button>
+        </form>
+    </div>
+
+    <footer>
+        <p>&copy; 2024 Sua Empresa. Todos os direitos reservados.</p>
+    </footer>
 
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
