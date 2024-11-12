@@ -51,7 +51,7 @@ document.addEventListener("DOMContentLoaded", function () {
                             <p class="card-text"><strong>Preço:</strong> R$ ${validPrice}</p>
                             <p class="card-text"><strong>Local:</strong> ${local || 'Local não informado'}</p>
                             <p class="card-text"><strong>Período:</strong> ${formattedDataInicio} a ${formattedDataFim}</p>
-                            <a href="ver_excursao.html?id=${id}" class="btn btn-outline-primary btn-block">Ver mais</a>
+                            <a href="detalhes_excursao.html?id=${id}" class="btn btn-outline-primary btn-block">Ver mais</a>
                         </div>
                     </div>
                 </div>
@@ -64,34 +64,4 @@ document.addEventListener("DOMContentLoaded", function () {
     // Carregar as excursões ao carregar a página
     loadExcursionsFromAPI();
 
-// Filtro de pesquisa
-document.getElementById('searchInput').addEventListener('input', function () {
-    const searchTerm = this.value.toLowerCase();
-
-    fetch('http://localhost:8081/api/excursoes/listExcursoes')
-        .then(response => {
-            if (!response.ok) {
-                throw new Error('Erro ao carregar excursões da API');
-            }
-            return response.json();
-        })
-        .then(data => {
-            console.log('Dados recebidos da API:', data);
-
-            const filteredExcursions = data.filter(({ nome, descricao }) => {
-                const titleValid = nome && nome.toLowerCase().includes(searchTerm);
-                const descriptionValid = descricao && descricao.toLowerCase().includes(searchTerm);
-                return titleValid || descriptionValid;
-            });
-
-            const limitedExcursions = filteredExcursions.slice(0, 10);
-            displayExcursions(limitedExcursions);
-        })
-        .catch(error => {
-            console.error('Erro ao buscar excursões:', error);
-            alert('Erro ao buscar excursões da API. Usando dados do LocalStorage.');
-            const storedExcursions = JSON.parse(localStorage.getItem("excursions")) || [];
-            displayExcursions(storedExcursions);
-        });
-    });
 });
