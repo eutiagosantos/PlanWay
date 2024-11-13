@@ -47,17 +47,6 @@ body, html {
     z-index: -1;
 }
 
-.background-img {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    z-index: -1;
-    opacity: 0.8;
-}
-
 .hero-content h1 {
     font-size: 4rem;
     margin-bottom: 20px;
@@ -117,10 +106,6 @@ body, html {
         font-size: 1rem;
     }
 
-    .features-section h2 {
-        font-size: 2rem;
-    }
-
     .about-section h2, .contact-section h2 {
         font-size: 2rem;
     }
@@ -128,9 +113,6 @@ body, html {
     .features-section .col-md-4 {
         text-align: center;
         margin-bottom: 20px;
-    }
-    .carousel-item img {
-        width: 100%;
     }
 }
 
@@ -151,31 +133,7 @@ body, html {
 
     .features-section .col-md-4 {
         margin-bottom: 15px;
-    }    
-}
-
-/* Estilo para a caixa de informações */
-.excursion-info-box {
-    background-color: #1574c4; 
-    color: #fff;
-    padding: 20px; 
-    margin-top: 10px;
-    text-align: center;
-    margin: auto;
-}
-
-.excursion-info-box h5 {
-    margin-bottom: 10px;
-    font-size: 1.2em;
-}
-
-.excursion-info-box p {
-    margin: 5px 0;
-    font-size: 1em;
-}
-
-.carousel-item {
-    text-align: center;
+    }
 }
 
 footer {
@@ -185,4 +143,18 @@ footer {
     color: #ffffff;
     position:relative;
     margin-top: auto; 
+}
+
+.btn-primary {
+    background-color: #00b8ff;
+    border-color: #00b8ff;
+    padding: 12px 30px;
+    font-size: 1.1rem;
+    border-radius: 25px;
+    transition: background-color 0.3s ease;
+}
+
+.btn-primary:hover {
+    background-color: #1574c4;
+    border-color: #1574c4;
 }

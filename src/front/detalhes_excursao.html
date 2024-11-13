@@ -7,11 +7,12 @@
     <link rel="icon" href="./assets/img/turismo-removebg.png">
     <title>PlanWay - Detalhes da Excursão</title>
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="./assets/css/style.css">
+    <link rel="stylesheet" href="./assets/css/detalhes_excusao.css">
 </head>
 
 <body>
-    <!-- Navbar -->
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
         <a class="navbar-brand" href="#">PlanWay</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
@@ -27,62 +28,56 @@
         </div>
     </nav><br>
 
+<!-- Conteúdo -->
     <div class="container mt-5">
-        <h1 class="text-center">Detalhes da Excursão</h1>
+        <h1>Detalhes da Excursão</h1>
 
-        <div id="excursionDetails" class="mt-4">
-            <!-- Nome da excursão -->
+        <div id="excursionDetails">
             <div class="form-group">
                 <label for="title">Nome da Excursão</label>
                 <input type="text" id="title" class="form-control" readonly>
             </div>
 
-            <!-- Descrição da excursão -->
             <div class="form-group">
                 <label for="description">Descrição</label>
                 <textarea id="description" class="form-control" rows="3" readonly></textarea>
             </div>
 
-            <!-- Data de início -->
             <div class="form-group">
                 <label for="startDate">Data de Início</label>
                 <input type="date" id="startDate" class="form-control" readonly>
             </div>
 
-            <!-- Data de fim -->
             <div class="form-group">
                 <label for="endDate">Data de Fim</label>
                 <input type="date" id="endDate" class="form-control" readonly>
             </div>
 
-            <!-- Local -->
             <div class="form-group">
                 <label for="location">Local</label>
                 <input type="text" id="location" class="form-control" readonly>
             </div>
 
-            <!-- Valor da excursão -->
             <div class="form-group">
                 <label for="price">Valor (R$)</label>
                 <input type="number" id="price" class="form-control" readonly>
             </div>
 
-            <!-- Serviços adicionais -->
             <div class="form-group">
                 <label for="additionalServices">Serviços Adicionais</label>
                 <input type="text" id="additionalServices" class="form-control" readonly>
             </div>
 
-            <!-- Botões de ação -->
-            <button class="btn btn-success btn-block" id="joinExcursionBtn">Entrar na Excursão</button>
-            <button class="btn btn-warning btn-block" id="updateExcursionBtn">Alterar Excursão</button>
-            <button class="btn btn-danger btn-block" id="deleteExcursionBtn">Deletar Excursão</button>
-            <button class="btn btn-primary btn-block mt-2" onclick="window.history.back()">Voltar</button>
+            <div class="mt-4">
+                <button class="btn btn-success" id="joinExcursionBtn">Entrar na Excursão</button>
+                <button class="btn btn-warning" id="updateExcursionBtn">Alterar Excursão</button>
+                <button class="btn btn-danger" id="deleteExcursionBtn">Deletar Excursão</button>
+                <button class="btn btn-primary mt-2" onclick="window.history.back()">Voltar</button>
+            </div>
         </div>
-    </div><br>
+    </div>
 
-    <!-- Footer -->
-    <footer class="footer text-white text-center">
+    <footer class="footer">
         <p>© 2024 PlanWay. Todos os direitos reservados.</p>
     </footer>
 

@@ -44,17 +44,16 @@ document.addEventListener("DOMContentLoaded", function () {
             const formattedDataInicio = formatDate(dataInicio);
             const formattedDataFim = formatDate(dataFim);
 
-            // Criação do cartão de excursão com imagem à esquerda
             const excursionCard = document.createElement('div');
             excursionCard.classList.add('col-md-12', 'col-lg-12', 'mb-1');
 
             excursionCard.innerHTML = `
                 <div class="card shadow-sm">
                     <div class="card-body d-flex">
-                        <div class="me-3" style="flex-shrink: 0;">
+                        <!--<div class="me-3" style="flex-shrink: 0;">
                             <img src="${imagem || 'default-image.jpg'}" alt="Imagem da excursão" class="img-fluid rounded" style="width: 250px; height: 250px; object-fit: cover;">
-                        </div>
-                        <!-- Texto da excursão -->
+                        </div>-->
+
                         <div>
                             <h5 class="card-title">${validTitle}</h5>
                             <p class="card-text text-truncate">${validDescription}</p>
