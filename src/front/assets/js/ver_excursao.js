@@ -10,10 +10,10 @@ document.addEventListener("DOMContentLoaded", () => {
             window.location.href = "pesquisa.html";
             return;
         }
-        const urlParams = new URLSearchParams(window.location.search);
-        excursionId = urlParams.get("id");
 
-        excursionId = parseInt(excursionId, 10);
+        const urlParams = new URLSearchParams(window.location.search);
+        excursionId = parseInt(urlParams.get("id"), 10);
+        console.log("Excursion ID: ", excursionId);
 
         if (!excursionId) {
             alert("ID da excursão não fornecido ou inválido.");
@@ -21,7 +21,9 @@ document.addEventListener("DOMContentLoaded", () => {
             return;
         }
 
-        const excursion = excursions.find(e => e.id === parseInt(excursionId, 10));
+        console.log("Excursões no localStorage: ", excursions);
+
+        const excursion = excursions.find(e => parseInt(e.id, 10) === excursionId);
 
         if (excursion) {
             document.getElementById("title").textContent = excursion.nome || "Nome não disponível";
@@ -30,10 +32,6 @@ document.addEventListener("DOMContentLoaded", () => {
             document.getElementById("endDate").textContent = formatDate(excursion.dataFim) || "Data de fim não disponível";
             document.getElementById("location").textContent = excursion.local || "Local não disponível";
             document.getElementById("price").textContent = excursion.valor ? `R$ ${excursion.valor.toFixed(2).replace('.', ',')}` : "Preço não disponível";
-
-            //const imageSrc = excursion.imagem || 'https://via.placeholder.com/800x300?text=Sem+Imagem';
-            //const imgElement = document.getElementById("excursionImage");
-            //imgElement.src = imageSrc;
         } else {
             alert("Excursão não encontrada.");
             window.location.href = "pesquisa.html";
@@ -45,17 +43,57 @@ document.addEventListener("DOMContentLoaded", () => {
     function formatDate(dateString) {
         if (!dateString) return '';
         const date = new Date(dateString);
+        if (isNaN(date)) return ''; 
         const day = String(date.getDate()).padStart(2, '0');
         const month = String(date.getMonth() + 1).padStart(2, '0');
         const year = date.getFullYear();
         return `${day}/${month}/${year}`;
     }
 
+    document.getElementById("participateButton").addEventListener("click", () => {
+        $('#confirmModal').modal('show');
+    });
+
+    // Lógica do botão sim no modal
+    document.getElementById("confirmParticipateButton").addEventListener("click", () => {
+        const userEmail = localStorage.getItem("userEmail") || "Usuário não identificado";
+        const user = { email: userEmail };
+        const excursionId = new URLSearchParams(window.location.search).get("id");
+
+        if (!excursionId) {
+            alert("ID da excursão não fornecido.");
+            return;
+        }
+
+        participateInExcursion(excursionId, user);
+        $('#confirmModal').modal('hide');
+    });
+
+    function participateInExcursion(excursionId, participant) {
+        const excursions = JSON.parse(localStorage.getItem("excursions"));
+        const excursion = excursions.find(e => parseInt(e.id, 10) === excursionId);
+
+        if (excursion) {
+            if (!excursion.participantes) {
+                excursion.participantes = []; 
+            }
+
+            const participantExists = excursion.participantes.some(p => p.email === participant.email);
+            if (!participantExists) {
+                excursion.participantes.push(participant);
+            }
+
+            localStorage.setItem("excursions", JSON.stringify(excursions));
+
+            alert("Você entrou na excursão com sucesso!");
+        } else {
+            alert("Excursão não encontrada.");
+        }
+    }
 
     function voltar() {
         window.location.href = "pesquisa.html";
     }
-
 
     function logout() {
         sessionStorage.removeItem("isLoggedIn");

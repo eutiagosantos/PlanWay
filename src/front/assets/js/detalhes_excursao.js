@@ -7,15 +7,12 @@ document.addEventListener("DOMContentLoaded", function () {
         const urlParams = new URLSearchParams(window.location.search);
         excursionId = urlParams.get("id");
 
-        console.log("ID da excursão (da URL):", excursionId);
-
         if (!excursionId) {
             alert("ID da excursão não fornecido.");
             window.location.href = "pesquisa.html";
             return;
         }
 
-        // Verifica se as excursões estão no localStorage
         if (!excursions || excursions.length === 0) {
             alert("Nenhuma excursão encontrada no localStorage.");
             window.location.href = "pesquisa.html";
@@ -24,7 +21,6 @@ document.addEventListener("DOMContentLoaded", function () {
 
         const excursion = excursions.find(e => e.id === parseInt(excursionId, 10));
 
-        // Se a excursão for encontrada
         if (excursion) {
             document.getElementById("title").value = excursion.nome;
             document.getElementById("description").value = excursion.descricao;
@@ -32,26 +28,36 @@ document.addEventListener("DOMContentLoaded", function () {
             document.getElementById("endDate").value = excursion.dataFim;
             document.getElementById("location").value = excursion.local;
             document.getElementById("price").value = excursion.valor;
-            document.getElementById("additionalServices").value = excursion.servicosAdicionais;
 
-            document.getElementById("deleteExcursionBtn").addEventListener("click", () => deleteExcursao(excursion.id));
-
-            const updateBtn = document.getElementById("updateExcursionBtn");
-            if (updateBtn) {
-                updateBtn.addEventListener("click", enableEditing);
-            } else {
-                console.error("Botão de alteração não encontrado.");
-            }
+            displayParticipants(excursion.participantes || []);
         } else {
             alert("Excursão não encontrada.");
             window.location.href = "pesquisa.html";
         }
     }
-
     loadExcursionDetails();
 
+    function displayParticipants(participants) {
+        const participantsList = document.getElementById("participants");
+        participantsList.innerHTML = '';
+    
+        if (participants && participants.length > 0) {
+            participants.forEach(participant => {
+                const listItem = document.createElement("li");
+                listItem.className = "list-group-item";
+                listItem.textContent = participant.nome;
+                participantsList.appendChild(listItem);
+            });
+        } else {
+            const noParticipantsMessage = document.createElement("li");
+            noParticipantsMessage.className = "list-group-item";
+            noParticipantsMessage.textContent = "Nenhum participante registrado ainda.";
+            participantsList.appendChild(noParticipantsMessage);
+        }
+    }
+
+    // Função para permitir a edição
     function enableEditing() {
-        // Liberar os campos para edição
         document.getElementById("title").readOnly = false;
         document.getElementById("description").readOnly = false;
         document.getElementById("startDate").disabled = false;
@@ -67,6 +73,7 @@ document.addEventListener("DOMContentLoaded", function () {
         updateBtn.addEventListener("click", saveChanges);
     }
 
+    // Função para salvar as alterações feitas
     function saveChanges() {
         const userDocumento = sessionStorage.getItem("documento");
 
@@ -76,13 +83,11 @@ document.addEventListener("DOMContentLoaded", function () {
             return;
         }
 
-        // Verificar se o documento é um CPF
         if (userDocumento.length === 11) {
             alert("Usuários com CPF não podem alterar uma excursão.");
             return;
         }
 
-        // Obter os novos valores dos campos de entrada
         const updatedExcursion = {
             id: excursionId,
             nome: document.getElementById("title").value,
@@ -114,6 +119,7 @@ document.addEventListener("DOMContentLoaded", function () {
             .catch(error => console.error("Erro ao alterar excursão:", error));
     }
 
+    // Função para excluir a excursão
     function deleteExcursao(excursionId) {
         const userDocumento = sessionStorage.getItem("documento");
 
@@ -122,8 +128,7 @@ document.addEventListener("DOMContentLoaded", function () {
             window.location.href = "login.html";
             return;
         }
-
-        // Verificar se o documento é um CPF
+        
         if (userDocumento.length === 11) {
             alert("Usuários com CPF não podem deletar uma excursão.");
             return;
