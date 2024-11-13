@@ -42,7 +42,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 <div class="card shadow-sm">
                     <div class="card-body d-flex">
                         <div class="me-3" style="flex-shrink: 0;">
-                            <img src="${imagem || 'default-image.jpg'}" alt="Imagem da excursão" class="img-fluid rounded" style="width: 250px; height: 250px; object-fit: cover;">
+                            <!--<img src="${imagem || 'default-image.jpg'}" alt="Imagem da excursão" class="img-fluid rounded" style="width: 250px; height: 250px; object-fit: cover;">-->
                         </div>
                         <!-- Texto da excursão -->
                         <div>

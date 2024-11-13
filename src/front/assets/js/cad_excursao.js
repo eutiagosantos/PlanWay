@@ -1,4 +1,4 @@
-// Função para pré-visualizar e converter a imagem para Base64
+/*// Função para pré-visualizar e converter a imagem para Base64
 function previewImage(event) {
     const file = event.target.files[0];
     const reader = new FileReader();
@@ -13,9 +13,9 @@ function previewImage(event) {
         reader.readAsDataURL(file);
     }
 }
-
+*/
 // Função para cadastrar excursão
-document.addEventListener("DOMContentLoaded", function() {
+document.addEventListener("DOMContentLoaded", function () {
     const excursionForm = document.getElementById("excursionForm");
 
     if (excursionForm) {
@@ -28,15 +28,21 @@ document.addEventListener("DOMContentLoaded", function() {
             const endDate = document.getElementById("endDate").value;
             const location = document.getElementById("location").value.trim();
             const price = document.getElementById("price").value.trim();
-            const image = document.getElementById("image").files[0];
+            //const image = document.getElementById("image").files[0];
 
             if (!title || !description || !location || !price) {
                 alert("Por favor, preencha todos os campos obrigatórios!");
                 return;
             }
 
+            const documento = sessionStorage.getItem('documento');
+            if (!documento) {
+                alert("Usuário não está logado!");
+                return;
+            }
+
             const excursions = JSON.parse(localStorage.getItem("excursions")) || [];
-            const newId = excursions.length > 0 ? excursions[excursions.length - 1].id + 1 : 1;
+            const newId = Date.now();
 
             const newExcursion = {
                 id: newId,
@@ -46,9 +52,9 @@ document.addEventListener("DOMContentLoaded", function() {
                 dataFim: endDate,
                 local: location,
                 valor: parseFloat(price),
-                imagem: image ? URL.createObjectURL(image) : null
+                //imagem: image ? URL.createObjectURL(image) : null,
+                usuarioId: documento
             };
-
 
             excursions.push(newExcursion);
             localStorage.setItem("excursions", JSON.stringify(excursions));
@@ -56,7 +62,7 @@ document.addEventListener("DOMContentLoaded", function() {
             cadastrarExcursao(newExcursion);
 
             excursionForm.reset();
-            document.getElementById('imagePreviewContainer').style.display = 'none';
+            //document.getElementById('imagePreviewContainer').style.display = 'none';
             alert("Excursão cadastrada com sucesso!");
         });
     } else {
@@ -64,33 +70,71 @@ document.addEventListener("DOMContentLoaded", function() {
     }
 });
 
-
 // Função para cadastrar excursão e enviar imagem para o servidor
 function cadastrarExcursao(newExcursion) {
-    fetch('http://localhost:8081/api/excursoes', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(newExcursion)
-    })
-        .then(response => {
-            if (response.ok) {
-                return response.json();
-            } else {
-                throw new Error('Falha ao cadastrar a excursão!');
-            }
+/*
+    if (newExcursion.imagem) {
+        const imageFile = newExcursion.imagem;
+        const reader = new FileReader();
+
+        reader.onload = function() {
+            //const base64Image = reader.result;
+            //newExcursion.imagem = base64Image;
+
+            fetch('http://localhost:8081/api/excursoes', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(newExcursion)
+            })
+                .then(response => {
+                    if (response.ok) {
+                        return response.json();
+                    } else {
+                        throw new Error('Falha ao cadastrar a excursão!');
+                    }
+                })
+                .then(newExcursion => {
+                    alert("Excursão cadastrada com sucesso!");
+                    document.getElementById("excursionForm").reset();
+                })
+                .catch(error => {
+                    console.error('Erro:', error);
+                    alert(error.message);
+                });
+        };
+
+        reader.readAsDataURL(imageFile);
+    } else {
+        */
+        fetch('http://localhost:8081/api/excursoes', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(newExcursion)
         })
-        .then(newExcursion => {
-            alert("Excursão cadastrada com sucesso!");
-            document.getElementById("excursionForm").reset();
-        })
-        .catch(error => {
-            console.error('Erro:', error);
-            alert(error.message);
-        });
+            .then(response => {
+                if (response.ok) {
+                    return response.json();
+                } else {
+                    throw new Error('Falha ao cadastrar a excursão!');
+                }
+            })
+            .then(newExcursion => {
+                alert("Excursão cadastrada com sucesso!");
+                document.getElementById("excursionForm").reset();
+            })
+            .catch(error => {
+                console.error('Erro:', error);
+                alert(error.message);
+            });
+    //}
 }
-// Função para ler a imagem e converter para Base64
+
+
+/*// Função para ler a imagem e converter para Base64
 function handleImageUpload(event) {
     const file = event.target.files[0];
     const reader = new FileReader();
@@ -110,6 +154,12 @@ function handleImageUpload(event) {
             return;
         }
 
+        const documento = sessionStorage.getItem('documento');
+        if (!documento) {
+            alert("Usuário não está logado!");
+            return;
+        }
+
         // Cria o objeto de excursão
         const newExcursion = {
             nome: title,
@@ -118,7 +168,8 @@ function handleImageUpload(event) {
             dataFim: endDate,
             local: location,
             valor: parseFloat(price),
-            imagem: base64Image
+            imagem: base64Image,
+            usuarioId: documento
         };
 
         const storedExcursions = JSON.parse(localStorage.getItem("excursions")) || [];
@@ -134,4 +185,4 @@ function handleImageUpload(event) {
 
     reader.readAsDataURL(file);
 }
-
+*/

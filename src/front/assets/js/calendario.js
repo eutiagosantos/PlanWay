@@ -9,7 +9,6 @@ document.addEventListener('DOMContentLoaded', function () {
     let startDate = new Date();
     let endDate = new Date(startDate);
 
-    // Função para fechar o modal
     function closeModal(modal) {
         modal.style.display = 'none';
     }

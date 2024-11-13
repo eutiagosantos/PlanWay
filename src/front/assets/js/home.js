@@ -13,18 +13,17 @@ window.onload = function() {
         const isActiveClass = index === 0 ? 'active' : '';
 
         const carouselItem = `
-    <div class="carousel-item ${isActiveClass}">
-        <img src="${imageUrl}" class="d-block" style="width: 50%; margin: 0 auto;" alt="Excursão ${index + 1}">
+        <div class="carousel-item ${isActiveClass}">
+            <!--<img src="${imageUrl}" class="d-block" style="width: 50%; margin: 0 auto;" alt="Excursão ${index + 1}">-->
 
-        <div class="excursion-info-box w-50" >
-            <h5>${excursion.nome}</h5>
-            <p><strong>Local:</strong> ${excursion.local}</p>
-            <p><strong>Preço:</strong> R$ ${excursion.valor.toFixed(2)}</p>
-            <a href="#" class="btn btn-dark">Saiba Mais</a>
+            <div class="excursion-info-box w-50" >
+                <h5>${excursion.nome}</h5>
+                <p><strong>Local:</strong> ${excursion.local}</p>
+                <p><strong>Preço:</strong> R$ ${excursion.valor.toFixed(2)}</p>
+                <a href="#" class="btn btn-dark">Saiba Mais</a>
+            </div>
         </div>
-    </div>
-`;
-
+        `;
 
         carouselItemsContainer.innerHTML += carouselItem;
     });

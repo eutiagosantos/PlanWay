@@ -1,12 +1,13 @@
-document.addEventListener("DOMContentLoaded", () => {
-    let excursionId; // Variável global para manter o ID da excursão
+document.addEventListener("DOMContentLoaded", function () {
+    let excursionId;
 
     // Função para carregar os detalhes da excursão
     function loadExcursionDetails() {
         const excursions = JSON.parse(localStorage.getItem("excursions"));
-
         const urlParams = new URLSearchParams(window.location.search);
-        excursionId = urlParams.get("id"); // Definindo o excursionId aqui
+        excursionId = urlParams.get("id");
+
+        console.log("ID da excursão (da URL):", excursionId);
 
         if (!excursionId) {
             alert("ID da excursão não fornecido.");
@@ -14,18 +15,17 @@ document.addEventListener("DOMContentLoaded", () => {
             return;
         }
 
-        // Verificar se as excursões estão no localStorage
+        // Verifica se as excursões estão no localStorage
         if (!excursions || excursions.length === 0) {
             alert("Nenhuma excursão encontrada no localStorage.");
             window.location.href = "pesquisa.html";
             return;
         }
 
-        // Procurar a excursão pelo ID
         const excursion = excursions.find(e => e.id === parseInt(excursionId, 10));
 
+        // Se a excursão for encontrada
         if (excursion) {
-            // Exibir os dados da excursão
             document.getElementById("title").value = excursion.nome;
             document.getElementById("description").value = excursion.descricao;
             document.getElementById("startDate").value = excursion.dataInicio;
@@ -34,10 +34,8 @@ document.addEventListener("DOMContentLoaded", () => {
             document.getElementById("price").value = excursion.valor;
             document.getElementById("additionalServices").value = excursion.servicosAdicionais;
 
-            // Adicionar evento ao botão de deletar excursão
             document.getElementById("deleteExcursionBtn").addEventListener("click", () => deleteExcursao(excursion.id));
 
-            // Verificar se o botão de alteração existe no DOM antes de adicionar o evento
             const updateBtn = document.getElementById("updateExcursionBtn");
             if (updateBtn) {
                 updateBtn.addEventListener("click", enableEditing);
@@ -45,7 +43,6 @@ document.addEventListener("DOMContentLoaded", () => {
                 console.error("Botão de alteração não encontrado.");
             }
         } else {
-            // Caso a excursão não seja encontrada
             alert("Excursão não encontrada.");
             window.location.href = "pesquisa.html";
         }
@@ -63,11 +60,9 @@ document.addEventListener("DOMContentLoaded", () => {
         document.getElementById("price").readOnly = false;
         document.getElementById("additionalServices").readOnly = false;
 
-        // Mudar o texto do botão para "Salvar Alterações"
         const updateBtn = document.getElementById("updateExcursionBtn");
         updateBtn.textContent = "Salvar Alterações";
 
-        // Alterar o evento de "Alterar Excursão" para "Salvar"
         updateBtn.removeEventListener("click", enableEditing);
         updateBtn.addEventListener("click", saveChanges);
     }
@@ -81,7 +76,7 @@ document.addEventListener("DOMContentLoaded", () => {
             return;
         }
 
-        // Verificar se o documento é um CPF (11 dígitos)
+        // Verificar se o documento é um CPF
         if (userDocumento.length === 11) {
             alert("Usuários com CPF não podem alterar uma excursão.");
             return;
@@ -89,7 +84,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
         // Obter os novos valores dos campos de entrada
         const updatedExcursion = {
-            id: excursionId, // Usando a variável excursionId global
+            id: excursionId,
             nome: document.getElementById("title").value,
             descricao: document.getElementById("description").value,
             dataInicio: document.getElementById("startDate").value,
@@ -128,7 +123,7 @@ document.addEventListener("DOMContentLoaded", () => {
             return;
         }
 
-        // Verificar se o documento é um CPF (11 dígitos)
+        // Verificar se o documento é um CPF
         if (userDocumento.length === 11) {
             alert("Usuários com CPF não podem deletar uma excursão.");
             return;

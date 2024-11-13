@@ -1,6 +1,11 @@
-// Espera o carregamento completo do DOM antes de executar
 document.addEventListener("DOMContentLoaded", function () {
     const loadExcursionsFromAPI = () => {
+        const documento = sessionStorage.getItem('documento');
+        if (!documento) {
+            console.error('Usuário não encontrado na sessão.');
+            return;
+        }
+
         const storedExcursions = JSON.parse(localStorage.getItem("excursions")) || [];
         const listContainer = document.getElementById('excursionsList');
 
@@ -9,14 +14,19 @@ document.addEventListener("DOMContentLoaded", function () {
             return;
         }
 
-        if (storedExcursions.length === 0) {
-            listContainer.innerHTML = '<p>Nenhuma excursão cadastrada.</p>';
+        // Filtra as excursões para exibir apenas as do usuário logado
+        const userExcursions = storedExcursions.filter(excursion => excursion.usuarioId === documento);
+
+        if (userExcursions.length === 0) {
+            listContainer.innerHTML = '<p>Nenhuma excursão cadastrada por você.</p>';
             return;
         }
 
         listContainer.innerHTML = '';
+        
+        userExcursions.forEach(({ nome, descricao, valor, local, dataInicio, dataFim, id, imagem }) => {
+            console.log("ID da excursão:", id);
 
-        storedExcursions.forEach(({ nome, descricao, valor, local, dataInicio, dataFim, id, imagem }) => {
             const validTitle = nome && nome.trim() !== '' ? nome : 'Sem título';
             const validDescription = descricao && descricao.trim() !== '' ? descricao : 'Sem descrição';
             const validPrice = valor && !isNaN(parseFloat(valor)) && parseFloat(valor) > 0
@@ -61,7 +71,5 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     };
 
-    // Carregar as excursões ao carregar a página
     loadExcursionsFromAPI();
-
 });

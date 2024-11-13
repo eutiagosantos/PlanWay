@@ -1,26 +1,26 @@
 document.addEventListener("DOMContentLoaded", () => {
-    let excursionId; // Variável global para manter o ID da excursão
+    let excursionId;
 
     // Função para carregar os detalhes da excursão
     function loadExcursionDetails() {
         const excursions = JSON.parse(localStorage.getItem("excursions"));
 
-        const urlParams = new URLSearchParams(window.location.search);
-        excursionId = urlParams.get("id"); // Definindo o excursionId aqui
-
-        if (!excursionId) {
-            alert("ID da excursão não fornecido.");
-            window.location.href = "pesquisa.html";
-            return;
-        }
-
-        // Verificar se as excursões estão no localStorage
         if (!excursions || excursions.length === 0) {
             alert("Nenhuma excursão encontrada no localStorage.");
             window.location.href = "pesquisa.html";
             return;
         }
-        // Procurar a excursão pelo ID
+        const urlParams = new URLSearchParams(window.location.search);
+        excursionId = urlParams.get("id");
+
+        excursionId = parseInt(excursionId, 10);
+
+        if (!excursionId) {
+            alert("ID da excursão não fornecido ou inválido.");
+            window.location.href = "pesquisa.html";
+            return;
+        }
+
         const excursion = excursions.find(e => e.id === parseInt(excursionId, 10));
 
         if (excursion) {
@@ -31,9 +31,9 @@ document.addEventListener("DOMContentLoaded", () => {
             document.getElementById("location").textContent = excursion.local || "Local não disponível";
             document.getElementById("price").textContent = excursion.valor ? `R$ ${excursion.valor.toFixed(2).replace('.', ',')}` : "Preço não disponível";
 
-            const imageSrc = excursion.imagem || 'assets/img/default-image.jpg';
-            const imgElement = document.getElementById("excursionImage");
-            imgElement.src = imageSrc;
+            //const imageSrc = excursion.imagem || 'https://via.placeholder.com/800x300?text=Sem+Imagem';
+            //const imgElement = document.getElementById("excursionImage");
+            //imgElement.src = imageSrc;
         } else {
             alert("Excursão não encontrada.");
             window.location.href = "pesquisa.html";
