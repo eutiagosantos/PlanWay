@@ -1,9 +1,17 @@
-document.addEventListener("DOMContentLoaded", () => {
+document.addEventListener("DOMContentLoaded", function () {
     let excursionId;
 
     // Função para carregar os detalhes da excursão
     function loadExcursionDetails() {
-        const excursions = JSON.parse(localStorage.getItem("excursions"));
+        const excursions = localStorage.getItem("excursions") ? JSON.parse(localStorage.getItem("excursions")) : [];
+        const urlParams = new URLSearchParams(window.location.search);
+        excursionId = urlParams.get("id");
+
+        if (isNaN(excursionId)) {
+            alert("ID da excursão não fornecido ou inválido.");
+            window.location.href = "pesquisa.html";
+            return;
+        }
 
         if (!excursions || excursions.length === 0) {
             alert("Nenhuma excursão encontrada no localStorage.");
@@ -11,19 +19,7 @@ document.addEventListener("DOMContentLoaded", () => {
             return;
         }
 
-        const urlParams = new URLSearchParams(window.location.search);
-        excursionId = parseInt(urlParams.get("id"), 10);
-        console.log("Excursion ID: ", excursionId);
-
-        if (!excursionId) {
-            alert("ID da excursão não fornecido ou inválido.");
-            window.location.href = "pesquisa.html";
-            return;
-        }
-
-        console.log("Excursões no localStorage: ", excursions);
-
-        const excursion = excursions.find(e => parseInt(e.id, 10) === excursionId);
+        const excursion = excursions.find(e => parseInt(e.id, 10) === parseInt(excursionId, 10));
 
         if (excursion) {
             document.getElementById("title").textContent = excursion.nome || "Nome não disponível";
@@ -54,28 +50,28 @@ document.addEventListener("DOMContentLoaded", () => {
         $('#confirmModal').modal('show');
     });
 
-    // Lógica do botão sim no modal
     document.getElementById("confirmParticipateButton").addEventListener("click", () => {
-        const userEmail = localStorage.getItem("userEmail") || "Usuário não identificado";
-        const user = { email: userEmail };
         const excursionId = new URLSearchParams(window.location.search).get("id");
 
-        if (!excursionId) {
-            alert("ID da excursão não fornecido.");
+        if (!excursionId || isNaN(excursionId)) {
+            alert("ID da excursão não fornecido ou inválido.");
             return;
         }
-
-        participateInExcursion(excursionId, user);
+    
+        const userEmail = localStorage.getItem("userEmail") || "Usuário não identificado";
+        const user = { email: userEmail };
+    
+        participateInExcursion(parseInt(excursionId, 10), user);
         $('#confirmModal').modal('hide');
     });
 
     function participateInExcursion(excursionId, participant) {
-        const excursions = JSON.parse(localStorage.getItem("excursions"));
+        const excursions = JSON.parse(localStorage.getItem("excursions") || '[]');
         const excursion = excursions.find(e => parseInt(e.id, 10) === excursionId);
 
         if (excursion) {
             if (!excursion.participantes) {
-                excursion.participantes = []; 
+                excursion.participantes = [];
             }
 
             const participantExists = excursion.participantes.some(p => p.email === participant.email);

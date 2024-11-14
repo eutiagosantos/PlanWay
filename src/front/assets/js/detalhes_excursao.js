@@ -29,23 +29,30 @@ document.addEventListener("DOMContentLoaded", function () {
             document.getElementById("location").value = excursion.local;
             document.getElementById("price").value = excursion.valor;
 
+            // Exibe os participantes
             displayParticipants(excursion.participantes || []);
         } else {
             alert("Excursão não encontrada.");
             window.location.href = "pesquisa.html";
         }
     }
+
     loadExcursionDetails();
 
+    // Função para exibir os participantes e quantos vão participar
     function displayParticipants(participants) {
         const participantsList = document.getElementById("participants");
-        participantsList.innerHTML = '';
+        participantsList.innerHTML = ''; 
     
-        if (participants && participants.length > 0) {
+        const participantsCount = participants.length;
+        const participantsCountDisplay = document.getElementById("participantsCount");
+        participantsCountDisplay.textContent = `Total de participantes: ${participantsCount}`;
+
+        if (participantsCount > 0) {
             participants.forEach(participant => {
                 const listItem = document.createElement("li");
                 listItem.className = "list-group-item";
-                listItem.textContent = participant.nome;
+                listItem.textContent = participant.email;
                 participantsList.appendChild(listItem);
             });
         } else {
@@ -64,7 +71,6 @@ document.addEventListener("DOMContentLoaded", function () {
         document.getElementById("endDate").disabled = false;
         document.getElementById("location").readOnly = false;
         document.getElementById("price").readOnly = false;
-        document.getElementById("additionalServices").readOnly = false;
 
         const updateBtn = document.getElementById("updateExcursionBtn");
         updateBtn.textContent = "Salvar Alterações";
@@ -96,7 +102,6 @@ document.addEventListener("DOMContentLoaded", function () {
             dataFim: document.getElementById("endDate").value,
             local: document.getElementById("location").value,
             valor: document.getElementById("price").value,
-            servicosAdicionais: document.getElementById("additionalServices").value
         };
 
         fetch(`http://localhost:8081/api/excursoes/${excursionId}`, {

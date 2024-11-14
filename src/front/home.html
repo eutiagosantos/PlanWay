@@ -13,19 +13,6 @@
 </head>
 
 <body>
-    <!--<script>
-        // Verifica se o usuário está logado e se é uma agência
-        if (!sessionStorage.getItem('isLoggedIn') || sessionStorage.getItem('userType') !== 'agencia') {
-            window.location.href = 'index.html'; // Redireciona para o login
-        }
-
-        function logout() {
-            sessionStorage.removeItem('isLoggedIn');
-            sessionStorage.removeItem('userType'); // Limpa o tipo de usuário
-            window.location.href = 'index.html'; // Redireciona para o login
-        }
-    </script>-->
-
     <!-- Navbar -->
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
         <a class="navbar-brand" href="index.html">PlanWay</a>
@@ -38,7 +25,7 @@
                 <li class="nav-item"><a class="nav-link" href="home.html">Dashboard</a></li>
                 <li class="nav-item"><a class="nav-link" href="#reports">Relatórios</a></li>
                 <li class="nav-item"><a class="nav-link" href="perfil.html">Perfil</a></li>
-                <li class="nav-item"><a class="nav-link" href="cad_log.html" onclick="logout()">Sair</a></li>
+                <li class="nav-item"><a class="nav-link" href="index.html" onclick="logout()">Sair</a></li>
             </ul>
         </div>
     </nav>
@@ -47,18 +34,20 @@
         <div class="row">
             <div class="col text-center">
                 <h1>Bem-vindo(a) ao PlanWay!</h1>
-                <p>Veja as excursões mais pesquisadas</p>
             </div>
         </div>
     </div>
 
     <!-- Carrossel de Excursões -->
     <div id="carouselExampleIndicators" class="carousel slide mt-5" data-ride="carousel">
+        <div class="col text-center">
+            <p>Veja as excursões mais pesquisadas</p>
+        </div>
         <ol class="carousel-indicators" id="carouselIndicators">
-            <!-- Os indicadores ficaram aq -->
+            <!-- Os indicadores podem ser inseridos dinamicamente aqui -->
         </ol>
         <div class="carousel-inner" id="carouselItems">
-            <!-- os itens que vão aparecer aqui -->
+            <!-- Os itens do carrossel serão inseridos dinamicamente aqui -->
         </div>
         <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
             <span class="carousel-control-prev-icon" aria-hidden="true"></span>
@@ -70,44 +59,66 @@
         </a>
     </div>
 
-    <!-- Dashboard Section -->
+
     <section id="dashboard" class="mt-5">
         <div class="container">
-            <div class="row justify-content-center align-items-center" >
+            <div class="row justify-content-center align-items-center">
                 <div class="col-md-3 mb-4">
                     <div class="card">
                         <div class="card-body">
-                            <h5 class="card-title">Calendarios</h5>
+                            <h5 class="card-title">Calendários</h5>
                             <p class="card-text">Verifique as datas das suas atividades.</p>
-                            <a href="calendario.html" class="btn btn-primary">Ver calendario</a>
+                            <a href="calendario.html" class="btn btn-primary">Calendário</a>
                         </div>
                     </div>
                 </div>
+    
+                <!-- Outras seções do Dashboard -->
                 <div class="col-md-3 mb-4">
                     <div class="card">
                         <div class="card-body">
                             <h5 class="card-title">Pesquisar</h5>
-                            <p class="card-text">Pesquise as excursões mais fácil!</p>
+                            <p class="card-text">Pesquise as excursões com facilidade.</p>
                             <a href="pesquisa.html" class="btn btn-primary">Pesquisar</a>
                         </div>
                     </div>
                 </div>
+    
+                <div class="col-md-3 mb-4" id="cadastrarSection">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title">Cadastrar Excursão</h5>
+                            <p class="card-text">Cadastre as suas excursões de forma simples.</p>
+                            <a href="cad_excursao.html" class="btn btn-primary">Cadastrar</a>
+                        </div>
+                    </div>
+                </div>
+    
+                <div class="col-md-3 mb-4" id="verExcursaoSection">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title">Ver suas Excursões</h5>
+                            <p class="card-text">Veja as excursões cadastradas facilmente.</p>
+                            <a href="pesquisa_ex.html" class="btn btn-primary">Ver</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-12 mb-4" id="participationSection">
+                    <!-- Este elemento será preenchido dinamicamente -->
+                </div>
             </div>
         </div>
     </section>
+    
 
-    <form id="excursionForm" class="mt-4">
-
-    </form>
-
-    <footer>
-        <p>&copy; 2024 Sua Empresa. Todos os direitos reservados.</p>
+    <footer class="footer">
+        <p>&copy; 2024 PlanWay. Todos os direitos reservados.</p>
     </footer>
-
+    
+    <script src="./assets/js/home.js"></script>
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-    <script src="./assets/js/home.js"></script>
     <script src="./assets/js/cad_excursao.js"></script>
 </body>
 

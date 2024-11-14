@@ -134,7 +134,7 @@ async function login() {
             localStorage.setItem('userEmail', email);
 
             alert('Login realizado com sucesso!');
-            window.location.href = userType === 'cliente' ? 'home.html' : 'home_agencia.html';
+            window.location.href = 'home.html';
         } else {
             const errorMessage = await response.text();
             alert(`Erro ao logar: ${errorMessage}`);
