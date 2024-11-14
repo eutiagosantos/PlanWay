@@ -3,7 +3,8 @@ document.addEventListener("DOMContentLoaded", function () {
 
     // Função para carregar os detalhes da excursão
     function loadExcursionDetails() {
-        const excursions = JSON.parse(localStorage.getItem("excursions"));
+        const excursions = JSON.parse(localStorage.getItem("excursions")) || [];
+        const eventPast = JSON.parse(localStorage.getItem("eventPast")) || [];
         const urlParams = new URLSearchParams(window.location.search);
         excursionId = urlParams.get("id");
 
@@ -13,27 +14,35 @@ document.addEventListener("DOMContentLoaded", function () {
             return;
         }
 
-        if (!excursions || excursions.length === 0) {
-            alert("Nenhuma excursão encontrada no localStorage.");
+        // Busca na lista de excursões ativas e passadas
+        let excursion = excursions.find(e => e.id === parseInt(excursionId, 10));
+        if (!excursion) {
+            excursion = eventPast.find(e => e.id === parseInt(excursionId, 10));
+        }
+
+        if (!excursion) {
+            alert("Excursão não encontrada.");
             window.location.href = "pesquisa.html";
             return;
         }
 
-        const excursion = excursions.find(e => e.id === parseInt(excursionId, 10));
+        // Exibe os detalhes da excursão
+        document.getElementById("title").value = excursion.nome;
+        document.getElementById("description").value = excursion.descricao;
+        document.getElementById("startDate").value = excursion.dataInicio;
+        document.getElementById("endDate").value = excursion.dataFim;
+        document.getElementById("location").value = excursion.local;
+        document.getElementById("price").value = excursion.valor;
 
-        if (excursion) {
-            document.getElementById("title").value = excursion.nome;
-            document.getElementById("description").value = excursion.descricao;
-            document.getElementById("startDate").value = excursion.dataInicio;
-            document.getElementById("endDate").value = excursion.dataFim;
-            document.getElementById("location").value = excursion.local;
-            document.getElementById("price").value = excursion.valor;
-
-            // Exibe os participantes
-            displayParticipants(excursion.participantes || []);
+        // Exibe os participantes
+        displayParticipants(excursion.participantes || []);
+        
+        // Verifica se a excursão já foi finalizada ou está ativa
+        if (eventPast.some(e => e.id === excursion.id)) {
+            document.getElementById("finishExcursionBtn").disabled = true; // Desabilita o botão de finalizar
+            document.getElementById("finishExcursionBtn").style.display = 'none'; // Oculta o botão
         } else {
-            alert("Excursão não encontrada.");
-            window.location.href = "pesquisa.html";
+            document.getElementById("finishExcursionBtn").disabled = false; // Habilita o botão
         }
     }
 
@@ -43,7 +52,7 @@ document.addEventListener("DOMContentLoaded", function () {
     function displayParticipants(participants) {
         const participantsList = document.getElementById("participants");
         participantsList.innerHTML = ''; // Limpa a lista antes de adicionar novos itens
-    
+
         // Exibe o número de participantes
         const participantsCount = participants.length;
         const participantsCountDisplay = document.getElementById("participantsCount");
@@ -64,21 +73,37 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     }
 
-    // Função para permitir a edição
-    function enableEditing() {
-        document.getElementById("title").readOnly = false;
-        document.getElementById("description").readOnly = false;
-        document.getElementById("startDate").disabled = false;
-        document.getElementById("endDate").disabled = false;
-        document.getElementById("location").readOnly = false;
-        document.getElementById("price").readOnly = false;
-        document.getElementById("additionalServices").readOnly = false;
+    // Função para finalizar a excursão
+    function finishExcursion() {
+        let excursions = JSON.parse(localStorage.getItem("excursions")) || [];
+        let eventPast = JSON.parse(localStorage.getItem("eventPast")) || [];
 
-        const updateBtn = document.getElementById("updateExcursionBtn");
-        updateBtn.textContent = "Salvar Alterações";
+        // Encontra a excursão que será finalizada
+        const excursion = excursions.find(e => e.id === parseInt(excursionId, 10));
 
-        updateBtn.removeEventListener("click", enableEditing);
-        updateBtn.addEventListener("click", saveChanges);
+        if (!excursion) {
+            alert("Excursão não encontrada.");
+            return;
+        }
+
+        // Remove a excursão de "excursions"
+        excursions = excursions.filter(e => e.id !== excursion.id);
+
+        // Adiciona a excursão a "eventPast"
+        eventPast.push(excursion);
+
+        // Atualiza o localStorage com as listas modificadas
+        localStorage.setItem("excursions", JSON.stringify(excursions));
+        localStorage.setItem("eventPast", JSON.stringify(eventPast));
+
+        alert("A excursão foi finalizada e movida para eventos passados.");
+        window.location.href = "pesquisa.html"; // Redireciona de volta à página de pesquisa
+    }
+
+    // Adiciona o evento de clique no botão "Finalizar Excursão"
+    const finishBtn = document.getElementById("finishExcursionBtn");
+    if (finishBtn) {
+        finishBtn.addEventListener("click", finishExcursion);
     }
 
     // Função para salvar as alterações feitas
