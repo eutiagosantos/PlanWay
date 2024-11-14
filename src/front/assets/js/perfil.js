@@ -1,7 +1,7 @@
 // Carrega os dados do perfil
 function loadProfile() {
     const email = localStorage.getItem('userEmail');
-    const documento = localStorage.getItem('userDocumento');
+    const documento = sessionStorage.getItem('documento');
 
     if (email) {
         document.getElementById('email').value = email;

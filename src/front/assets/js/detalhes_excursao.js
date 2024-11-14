@@ -39,11 +39,12 @@ document.addEventListener("DOMContentLoaded", function () {
 
     loadExcursionDetails();
 
-    // Função para exibir os participantes e quantos vão participar
+    // Função para exibir os participantes e o contador
     function displayParticipants(participants) {
         const participantsList = document.getElementById("participants");
-        participantsList.innerHTML = ''; 
+        participantsList.innerHTML = ''; // Limpa a lista antes de adicionar novos itens
     
+        // Exibe o número de participantes
         const participantsCount = participants.length;
         const participantsCountDisplay = document.getElementById("participantsCount");
         participantsCountDisplay.textContent = `Total de participantes: ${participantsCount}`;
@@ -52,7 +53,7 @@ document.addEventListener("DOMContentLoaded", function () {
             participants.forEach(participant => {
                 const listItem = document.createElement("li");
                 listItem.className = "list-group-item";
-                listItem.textContent = participant.email;
+                listItem.textContent = participant.email; // Exibindo o email ou outro dado do participante
                 participantsList.appendChild(listItem);
             });
         } else {
@@ -71,6 +72,7 @@ document.addEventListener("DOMContentLoaded", function () {
         document.getElementById("endDate").disabled = false;
         document.getElementById("location").readOnly = false;
         document.getElementById("price").readOnly = false;
+        document.getElementById("additionalServices").readOnly = false;
 
         const updateBtn = document.getElementById("updateExcursionBtn");
         updateBtn.textContent = "Salvar Alterações";
@@ -102,6 +104,7 @@ document.addEventListener("DOMContentLoaded", function () {
             dataFim: document.getElementById("endDate").value,
             local: document.getElementById("location").value,
             valor: document.getElementById("price").value,
+            servicosAdicionais: document.getElementById("additionalServices").value
         };
 
         fetch(`http://localhost:8081/api/excursoes/${excursionId}`, {
