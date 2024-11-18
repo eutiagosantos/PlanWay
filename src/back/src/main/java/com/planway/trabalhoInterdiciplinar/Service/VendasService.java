@@ -36,5 +36,4 @@ public class VendasService {
             throw new RuntimeException("Erro ao realizar a venda", e);
         }
     }
-
 }

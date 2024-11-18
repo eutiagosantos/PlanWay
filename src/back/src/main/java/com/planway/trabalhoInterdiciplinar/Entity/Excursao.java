@@ -7,9 +7,11 @@ import java.util.List;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.OneToMany;
 
 @Entity
@@ -33,6 +35,8 @@ public class Excursao {
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
     private List<UsuarioComum> participantes = new ArrayList<>();
 
+    // @ManyToMany(mappedBy = "excursao", fetch = FetchType.LAZY)
+    // private List<Vendas> vendas;
     // Construtores
     public Excursao() {
     }

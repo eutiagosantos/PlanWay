@@ -49,6 +49,17 @@ document.addEventListener("DOMContentLoaded", function () {
 
     // Abrir o modal de confirmação quando o usuário clica em "Participar"
     document.getElementById("participateButton").addEventListener("click", () => {
+        const excursionId = new URLSearchParams(window.location.search).get("id");
+
+        if (!excursionId || isNaN(excursionId)) {
+            alert("ID da excursão não fornecido ou inválido.");
+            return;
+        }
+
+        const userEmail = localStorage.getItem("userEmail") || "Usuário não identificado";
+        const user = { email: userEmail };
+
+        participateInExcursion(parseInt(excursionId, 10), user);
         $('#confirmModal').modal('show');
     });
 
@@ -101,10 +112,7 @@ document.addEventListener("DOMContentLoaded", function () {
                     // Pode redirecionar ou fazer outra ação aqui, caso necessário
                 }
             })
-            .catch(error => {
-                console.error('Erro ao se inscrever na excursão:', error);
-                alert("Erro ao se inscrever na excursão. Por favor, tente novamente.");
-            });
+
     }
 
 

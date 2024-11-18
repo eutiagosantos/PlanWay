@@ -18,7 +18,7 @@ document.addEventListener("DOMContentLoaded", function () {
     // Função para mostrar se o usuário está participando de alguma excursão
     function checkParticipation() {
         const participationSection = document.getElementById("participationSection");
-        const userParticipatingExcursion = excursions.find(excursion => 
+        const userParticipatingExcursion = excursions.find(excursion =>
             excursion.participantes && excursion.participantes.some(participant => participant.email === userEmail)
         );
 
@@ -58,7 +58,7 @@ document.addEventListener("DOMContentLoaded", function () {
     checkParticipation();
 });
 
-window.onload = function() {
+window.onload = function () {
     const storedExcursions = JSON.parse(localStorage.getItem("excursions")) || [];
     const carouselItemsContainer = document.getElementById('carouselItems');
 
@@ -66,7 +66,7 @@ window.onload = function() {
         carouselItemsContainer.innerHTML = '<p>Nenhuma excursão cadastrada.</p>';
         return;
     }
-    
+
     // Gerar itens do carrossel a partir das excursões armazenadas
     storedExcursions.forEach((excursion, index, id) => {
         const imageUrl = excursion.imagem || 'https://via.placeholder.com/800x300?text=Sem+Imagem';
