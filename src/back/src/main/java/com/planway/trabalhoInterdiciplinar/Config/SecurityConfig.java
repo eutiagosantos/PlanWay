@@ -1,4 +1,4 @@
-package com.planway.trabalhoInterdiciplinar.Config;
+package com.planway.trabalhoInterdiciplinar.config;
 
 import java.util.Arrays;
 
@@ -36,7 +36,8 @@ public class SecurityConfig {
     private static final String[] PUBLIC_MATCHERS_POST = {
         "/api/usuarios/cadastrar",
         "/api/usuarios/login",
-        "/api/usuarios/criarRoteiro"
+        "/api/usuarios/criarRoteiro",
+        "/api/vendas/cadastro"
     };
 
     @Bean

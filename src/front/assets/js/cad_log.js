@@ -59,7 +59,13 @@ function handleSubmit() {
         sessionStorage.setItem('userId', userId);
     } else {
         login();
+        if (cpfCnpj.length() == 11) {
+            sessionStorage.setItem('email', UserEmail);
+        } else if (cpfCnpj.length() == 14) {
+            sessionStorage.setItem('email', agencyEmail);
+        }
         sessionStorage.setItem('documento', cpfCnpj);
+
         sessionStorage.setItem('userId', userId);
     }
 }

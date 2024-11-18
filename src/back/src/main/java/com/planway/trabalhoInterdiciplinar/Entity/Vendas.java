@@ -20,17 +20,15 @@ public class Vendas {
 
     private String emailUsuario;
 
-    private String emailAgencia;
-
     public Vendas() {
 
     }
 
-    public Vendas(Long id, double valor, String emailUsuario, String emailAgencia) {
+    public Vendas(Long id, double valor, String emailUsuario) {
         this.id = id;
         this.valor = valor;
         this.emailUsuario = emailUsuario;
-        this.emailAgencia = emailAgencia;
+
     }
 
 }

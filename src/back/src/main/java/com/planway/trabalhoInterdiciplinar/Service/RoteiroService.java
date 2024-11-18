@@ -9,7 +9,6 @@ import org.springframework.stereotype.Service;
 
 import com.planway.trabalhoInterdiciplinar.Dto.RoteiroDto;
 import com.planway.trabalhoInterdiciplinar.Entity.Roteiro;
-import com.planway.trabalhoInterdiciplinar.Repository.AgenciaRepository;
 import com.planway.trabalhoInterdiciplinar.Repository.RoteiroRepository;
 
 import jakarta.persistence.EntityManager;
@@ -20,10 +19,7 @@ public class RoteiroService {
 
     @Autowired
     private RoteiroRepository roteiroRepository;
-    @Autowired
-    private AgenciaRepository agenciaRepository;
-    // @Autowired
-    // private UserRepository userRepository;
+
     @Autowired
     private EntityManager entityManager;
 
