@@ -5,6 +5,8 @@
 - Acompanhar a capacidade de vagas disponíveis em cada excursão em tempo real.
 - Notificar os participantes sobre a confirmação de sua participação.
 
+![image](https://github.com/user-attachments/assets/6a2cd7db-3d5a-4546-94c2-ff6b7550b9b7)
+
 ---
 
 #### **Selecionar Excursão**
