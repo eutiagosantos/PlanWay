@@ -12,8 +12,7 @@ Compatibilidade com Calendário: As excursões cadastradas podem ser diretamente
 
 Com essas melhorias, o cadastro de excursões será otimizado, proporcionando uma experiência fluida e eficiente para as agências.
 
-![image](https://github.com/user-attachments/assets/cafce33a-746d-451c-bb88-a86305579790)
-
+![image](https://github.com/user-attachments/assets/b0370088-5ea1-4411-a9df-6e39c46b17ea)
 
 
 #### Detalhamento das atividades
