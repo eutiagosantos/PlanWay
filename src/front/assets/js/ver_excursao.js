@@ -3,6 +3,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
     // Função para carregar os detalhes da excursão
     function loadExcursionDetails() {
+        const excursions = localStorage.getItem("excursions") ? JSON.parse(localStorage.getItem("excursions")) : [];
         const urlParams = new URLSearchParams(window.location.search);
         excursionId = urlParams.get("id");
 
@@ -12,7 +13,6 @@ document.addEventListener("DOMContentLoaded", function () {
             return;
         }
 
-        const excursions = JSON.parse(localStorage.getItem("excursions") || '[]');
         if (!excursions || excursions.length === 0) {
             alert("Nenhuma excursão encontrada no localStorage.");
             window.location.href = "pesquisa.html";
@@ -36,92 +36,61 @@ document.addEventListener("DOMContentLoaded", function () {
 
     loadExcursionDetails();
 
-    // Função para formatar a data no formato dd/mm/aaaa
     function formatDate(dateString) {
         if (!dateString) return '';
         const date = new Date(dateString);
-        if (isNaN(date)) return '';
+        if (isNaN(date)) return ''; 
         const day = String(date.getDate()).padStart(2, '0');
         const month = String(date.getMonth() + 1).padStart(2, '0');
         const year = date.getFullYear();
         return `${day}/${month}/${year}`;
     }
 
-    // Abrir o modal de confirmação quando o usuário clica em "Participar"
     document.getElementById("participateButton").addEventListener("click", () => {
+        $('#confirmModal').modal('show');
+    });
+
+    document.getElementById("confirmParticipateButton").addEventListener("click", () => {
         const excursionId = new URLSearchParams(window.location.search).get("id");
 
         if (!excursionId || isNaN(excursionId)) {
             alert("ID da excursão não fornecido ou inválido.");
             return;
         }
-
+    
         const userEmail = localStorage.getItem("userEmail") || "Usuário não identificado";
         const user = { email: userEmail };
-
+    
         participateInExcursion(parseInt(excursionId, 10), user);
-        $('#confirmModal').modal('show');
-    });
-
-    // Confirmar a participação e adicionar o usuário na excursão
-    document.getElementById("confirmParticipateButton").addEventListener("click", () => {
-        const userEmail = localStorage.getItem("userEmail") || "Usuário não identificado";
-        const priceText = document.getElementById("price").textContent;  // Obtenha o texto do preço
-        const valor = parseFloat(priceText.replace('R$', '').replace(',', '.').trim());
-
-
-        const participant = {
-            valor: valor,
-            emailUsuario: userEmail
-        };
-        console.log(participant);
-        participateInExcursion(participant);
         $('#confirmModal').modal('hide');
-        voltar();
     });
 
-    // Exemplo de requisição POST para o backend
-    function participateInExcursion(participant) {
-        // URL da API onde você vai enviar os dados
-        const url = 'http://localhost:8081/api/vendas/cadastro';
+    function participateInExcursion(excursionId, participant) {
+        const excursions = JSON.parse(localStorage.getItem("excursions") || '[]');
+        const excursion = excursions.find(e => parseInt(e.id, 10) === excursionId);
 
-        // Enviar os dados do participante para o backend
-        fetch(url, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(participant)
-        })
-            .then(response => {
-                // Verificar se a resposta foi bem-sucedida (status 2xx)
-                if (!response.ok) {
-                    return response.text().then(text => {
-                        throw new Error(`Erro: ${response.status} - ${text || response.statusText}`);
-                    });
-                }
-                // Tentar converter a resposta para JSON
-                return response.json();
-            })
-            .then(data => {
-                console.log('Resposta do servidor:', data);
+        if (excursion) {
+            if (!excursion.participantes) {
+                excursion.participantes = [];
+            }
 
-                // Verificar se o campo 'success' está presente na resposta (ajuste conforme a API)
-                if (data.success) {
-                    alert("Você entrou na excursão com sucesso!");
-                    // Pode redirecionar ou fazer outra ação aqui, caso necessário
-                }
-            })
+            const participantExists = excursion.participantes.some(p => p.email === participant.email);
+            if (!participantExists) {
+                excursion.participantes.push(participant);
+            }
 
+            localStorage.setItem("excursions", JSON.stringify(excursions));
+
+            alert("Você entrou na excursão com sucesso!");
+        } else {
+            alert("Excursão não encontrada.");
+        }
     }
 
-
-    // Função para voltar à página de pesquisa
     function voltar() {
-        window.location.href = "home.html";
+        window.location.href = "pesquisa.html";
     }
 
-    // Função para realizar logout
     function logout() {
         sessionStorage.removeItem("isLoggedIn");
         sessionStorage.removeItem("userType");
