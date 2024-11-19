@@ -91,7 +91,7 @@ Oportunidades de Melhoria: A plataforma pode simplificar a gestão de excursões
 
 [PROCESSO 3 - Acompanhamento-Relatorio](Acompanhamento-Relatorio.md "Detalhamento do Processo 3.")
 
-[PROCESSO 4 - Assinatura](Assinatura.md "Detalhamento do Processo 4.")
+[PROCESSO 4 - Vendas](Vendas.md "Detalhamento do Processo 4.")
 
 [PROCESSO 5 - Cadastrar-excursão](Cadastro-excursão.md "Detalhamento do processo 5")
 
