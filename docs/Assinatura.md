@@ -1,54 +1,51 @@
-### 3.3.4 Processo 4 – ASSINATURA
+### 3.3.4 Processo 4 – VENDAS
 
-Oportunidades de Melhoria:
+#### Oportunidades de Melhoria
+- Facilitar a inscrição dos usuários em excursões, garantindo um fluxo simples e intuitivo.
+- Acompanhar a capacidade de vagas disponíveis em cada excursão em tempo real.
+- Notificar os participantes sobre a confirmação de sua participação.
 
-Implementar automação no processo de verificação de pagamento.
-Melhorar a experiência do usuário durante o fluxo de assinatura.
-Garantir a segurança dos dados financeiros dos usuários.
+---
 
-![Assinatura](images/Assinatura.jpeg "Modelo BPMN do Processo 4.")
+#### **Selecionar Excursão**
+| **Campo**          | **Tipo**         | **Restrições**                                  | **Valor default** |
+|---------------------|------------------|-------------------------------------------------|--------------------|
+| Excursão Selecionada | Seleção Única   | Listar excursões com vagas disponíveis          | Nenhum             |
+| Número de Participantes | Caixa de Texto | Campo obrigatório, valor numérico positivo      | 1                  |
 
+| **Comandos**       | **Destino**                 | **Tipo**    |
+|--------------------|-----------------------------|-------------|
+| Continuar          | Preencher Dados do Participante | default     |
+| Cancelar           | Fim do Processo             | cancel      |
 
-#### Detalhamento das atividades
+---
 
+#### **Preencher Dados do Participante**
+| **Campo**          | **Tipo**         | **Restrições**                                  | **Valor default** |
+|---------------------|------------------|-------------------------------------------------|--------------------|
+| Nome Completo       | Caixa de Texto   | Campo obrigatório                               | Nenhum             |
+| CPF/CNPJ            | Caixa de Texto   | Campo obrigatório, formato numérico             | Nenhum             |
+| Email             | Caixa de Texto   | Campo obrigatório (e-mail)          | Nenhum             |
 
-**Selecionar Plano de Assinatura**
+| **Comandos**       | **Destino**                   | **Tipo**    |
+|--------------------|-------------------------------|-------------|
+| Confirmar Inscrição | Receber e Notificar Resultado da Participação | default     |
+| Cancelar           | Selecionar Excursão           | cancel      |
 
-| **Campo**       | **Tipo**         | **Restrições** | **Valor default** |
-| ---             | ---              | ---            | ---               |
-| Plano Selecionado | 	Seleção Única | "Mensal", "Trimestral", "Anual"   | "Mensal"                  |
+---
 
+#### **Notificar Resultado da Participação**
+| **Campo**              | **Tipo**        | **Restrições**                                   | **Valor default**       |
+|-------------------------|-----------------|-------------------------------------------------|-------------------------|
+| Status da Participação  | Seleção Única   | "Confirmado" ou "Recusado"                      | Recusado               |
+| Mensagem de Notificação | Área de Texto   | Mensagem sobre o status da inscrição            | Participação Recusada   |
 
-| **Comandos**         |  **Destino**                   | **Tipo** |
-| ---                  | ---                            | ---               |
-| Continuar  | Preencher Dados de Pagamento  | 	default |
-| Cancelar   | Fim do Processo | cancel|
+| **Comandos**           | **Destino**                 | **Tipo**    |
+|------------------------|-----------------------------|-------------|
+| Finalizar Processo     | Evento Final               | default     |
+| Tentar Novamente       | Preencher Dados do Participante | default     |
 
+---
 
-**Preencher Dados de Pagamento**
-
-| **Campo**       | **Tipo**         | **Restrições** | **Valor default** |
-| ---             | ---              | ---            | ---               |
-|Número do Cartão|	Caixa de Texto|	Campo obrigatório, formato numérico|	Nenhum|
-|Validade do Cartão|	Data	|Campo obrigatório|	Nenhum|
-|Código de Segurança|	Caixa de Texto|	Campo obrigatório, formato numérico	|Nenhum|
-
-
-| **Comandos**         |  **Destino**                   | **Tipo**          |
-| ---                  | ---                            | ---               |
-|Confirmar Pagamento	|Gateway Exclusivo (Sistema)	|default|
-|Cancelar	|Selecionar Plano|	cancel|
-
-
-**Notificar Resultado do Pagamento**
-
-| **Campo**       | **Tipo**         | **Restrições** | **Valor default** |
-| ---             | ---              | ---            | ---               |
-|Status do Pagamento|Seleção Única   |	"Aprovado" ou "Rejeitado" | Rejeitado |
-|Mensagem de Notificação|	Área de Texto |	Mensagem sobre o status do pagamento | Pagamento Rejeitado |
-
-
-| **Comandos**         |  **Destino**                   | **Tipo**          |
-| ---                  | ---                            | ---               |
-|Finalizar Processo    |	Evento Final                |	default         |
-|Tentar Novamente      |	Preencher Dados de Pagamento| default           |
+### Resumo
+Este processo detalha as etapas para participar de uma excursão, começando com a seleção de uma excursão, preenchimento dos dados do participante e a notificação do status da inscrição. Ele foca na simplicidade, garantindo um fluxo intuitivo para os usuários e ajudando na gestão de vagas em excursões.
