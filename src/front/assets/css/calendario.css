@@ -1,4 +1,3 @@
-/* Estilos gerais */
 * {
     box-sizing: border-box;
     margin: 0;
@@ -11,9 +10,8 @@ body {
     color: #333;
 }
 
-/* Estilo para o cabeçalho */
 header {
-    background: linear-gradient(120deg, #00b8ff, #1574c4);
+    background: linear-gradient(120deg, #00b8ff, #1574c4);  
     padding: 1rem;
 }
 
@@ -34,16 +32,15 @@ header {
     border-radius: 5px;
 }
 
-/* Layout do conteúdo principal */
 .conteudo {
     display: flex;
-    justify-content: space-between;
+    justify-content: space-between; 
+    max-width: auto; 
     margin: 80px auto;
     padding: 40px;
     background-color: white;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     border-radius: 8px;
-    max-width: 1200px;
 }
 
 .calendario {
@@ -52,19 +49,18 @@ header {
 }
 
 .event-list {
-    flex: 0 0 50%;
-    padding: 10px;
-    border: 1px solid #ddd;
-    border-radius: 10px;
-    background-color: #ffffff;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
 }
 
 .event-list h2 {
     text-align: center;
     margin-bottom: 15px;
     font-size: 24px;
-    color: #3685F5;
+    color: #3685F5; 
 }
 
 .event-list ul {
@@ -73,17 +69,16 @@ header {
 }
 
 .event-list li {
-    padding: 10px;
-    margin-bottom: 10px;
+    padding: 10px; 
+    margin-bottom: 10px; 
     border: 1px solid #3685F5;
-    border-radius: 4px;
-    background-color: #f0f8ff;
+    border-radius: 4px; 
+    background-color: #f0f8ff; 
     display: flex;
     justify-content: space-between;
     align-items: center;
     transition: transform 0.3s;
 }
-
 .event-list li:hover {
     transform: scale(1.02);
 }
@@ -95,18 +90,15 @@ header {
     border: none;
     padding: 5px 10px;
     border-radius: 4px;
-    cursor: pointer;
+    cursor: pointer; 
     transition: background-color 0.3s;
 }
 
-/* Estilos para o calendário */
-.calendario .mes-anterior,
-.calendario .proximo-mes {
+.calendario .mes-anterior, .calendario .proximo-mes {
     color: rgb(138, 138, 138);
 }
 
-.calendario .mes-anterior:hover,
-.calendario .proximo-mes:hover {
+.calendario .mes-anterior:hover, .calendario .proximo-mes:hover {
     background-color: rgb(105, 104, 104);
 }
 
@@ -134,8 +126,6 @@ header {
 .event.dia-atual::after {
     background: white;
 }
-
-/* Estilos para o título e botões do calendário */
 h2 {
     margin: 20px 0;
     font-size: 32px;
@@ -152,8 +142,7 @@ h2 {
     margin-bottom: 10px;
 }
 
-.btn-ant,
-.btn-pro {
+.btn-ant, .btn-pro {
     position: absolute;
     top: 50%;
     height: 32px;
@@ -178,13 +167,11 @@ h2 {
     right: 10px;
 }
 
-.btn-ant:hover,
-.btn-pro:hover {
+.btn-ant:hover, .btn-pro:hover {
     background-color: #3685F5;
     color: white;
 }
 
-/* Estilo da tabela de dias do calendário */
 table {
     margin-top: 20px;
     border-collapse: collapse;
@@ -210,9 +197,8 @@ td:hover {
     color: white;
 }
 
-/* Estilo do modal */
 .modal {
-    display: none;
+    display: none; 
     position: fixed;
     z-index: 1;
     left: 0;
@@ -220,7 +206,8 @@ td:hover {
     width: 100%;
     height: 100%;
     overflow: auto;
-    background-color: rgba(0, 0, 0, 0.4);
+    background-color: rgb(0,0,0);
+    background-color: rgba(0,0,0,0.4);
 }
 
 .modal-content {
@@ -231,6 +218,7 @@ td:hover {
     width: 30%;
 }
 
+
 .close {
     color: #aaa;
     float: right;
@@ -238,126 +226,28 @@ td:hover {
     font-weight: bold;
 }
 
-.close:hover,
-.close:focus {
+.close:hover, .close:focus {
     color: black;
     cursor: pointer;
 }
 
-/* Estilo específico para o modal de eventos */
-#modal {
-    display: none;
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.5);
-    z-index: 1000;
-    align-items: center;
-    justify-content: center;
-}
-
-#modal-content {
-    background-color: white;
-    border-radius: 10px;
-    padding: 20px;
-    width: 400px;
-    max-width: 100%;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-}
-
-#modal-titulo {
-    font-size: 18px;
-    margin-bottom: 20px;
-    color: #333;
-    text-align: center;
-}
-
-input[type="text"],
-input[type="date"] {
-    width: 100%;
-    padding: 10px;
-    margin: 10px 0;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    font-size: 14px;
-}
-
-input[type="text"]:focus,
-input[type="date"]:focus {
-    border-color: #007bff;
-    outline: none;
-}
-
-button {
-    padding: 10px 15px;
-    font-size: 14px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.3s;
-}
-
-button:hover {
-    opacity: 0.8;
-}
-
-#btn-salvar {
-    background-color: #28a745;
-    color: white;
-}
-
-#btn-fechar {
-    background-color: #dc3545;
-    color: white;
-    margin-left: 10px;
-}
-
-#btn-prev,
-#btn-next {
-    font-size: 16px;
-    padding: 8px 12px;
-    background-color: white;
-    color: #007bff;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-}
-
-#btn-prev:hover,
-#btn-next:hover {
-    background-color: #0056b3;
-}
-
-/* Adiciona responsividade ao modal */
-@media (max-width: 600px) {
-    #modal-content {
-        width: 90%;
-    }
-
-    input[type="text"],
-    input[type="date"] {
-        font-size: 12px;
-    }
-
-    #modal-titulo {
-        font-size: 16px;
-    }
-
-    button {
-        font-size: 12px;
-    }
-
+@media (max-width: 768px) {
     .conteudo {
-        flex-direction: column;
         width: 90%;
         padding: 10px;
     }
 
-    .calendario,
-    .event-list {
-        flex: 1 0 100%;
-        margin: 10px 0;
+    .btn-ant, .btn-pro {
+        height: 28px;
+        width: 28px;
+        font-size: 14px;
     }
+
+    td {
+        height: 50px;
+    }
+}
+#dias.disabled td {
+    pointer-events: none;
+    opacity: 0.5;
 }

@@ -44,10 +44,10 @@
             <p>Veja as excursões mais pesquisadas</p>
         </div>
         <ol class="carousel-indicators" id="carouselIndicators">
-            <!-- Os indicadores podem ser inseridos dinamicamente aqui -->
+            <!-- Os indicadores podem ser inseridos aqui -->
         </ol>
         <div class="carousel-inner" id="carouselItems">
-            <!-- Os itens do carrossel serão inseridos dinamicamente aqui -->
+            <!-- Os itens do carrossel serão inseridos aqui -->
         </div>
         <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
             <span class="carousel-control-prev-icon" aria-hidden="true"></span>
@@ -59,63 +59,77 @@
         </a>
     </div>
 
-
     <section id="dashboard" class="mt-5">
         <div class="container">
-            <div class="row justify-content-center align-items-center">
-                <div class="col-md-3 mb-4">
-                    <div class="card">
-                        <div class="card-body">
-                            <h5 class="card-title">Calendários</h5>
+            <h2 class="text-center mb-5">Painel de Controle</h2>
+            <div class="row justify-content-center align-items-center g-4">
+                <!-- Calendário -->
+                <div class="col-md-4 col-sm-6">
+                    <div class="card shadow-sm border-0">
+                        <div class="card-body text-center">
+                            <i class="fas fa-calendar-alt fa-3x mb-3 text-primary"></i>
+                            <h5 class="card-title">Calendário</h5>
                             <p class="card-text">Verifique as datas das suas atividades.</p>
-                            <a href="calendario.html" class="btn btn-primary">Calendário</a>
+                            <a href="calendario.html" class="btn btn btn-primary">Acessar</a>
                         </div>
                     </div>
                 </div>
-
-                <!-- Outras seções do Dashboard -->
-                <div class="col-md-3 mb-4">
-                    <div class="card">
-                        <div class="card-body">
+    
+                <!-- Pesquisar -->
+                <div class="col-md-4 col-sm-6">
+                    <div class="card shadow-sm border-0">
+                        <div class="card-body text-center">
+                            <i class="fas fa-search fa-3x mb-3 text-primary"></i>
                             <h5 class="card-title">Pesquisar</h5>
                             <p class="card-text">Pesquise as excursões com facilidade.</p>
-                            <a href="pesquisa.html" class="btn btn-primary">Pesquisar</a>
+                            <a href="pesquisa.html" class="btn btn btn-primary">Pesquisar</a>
                         </div>
                     </div>
                 </div>
-
-                <div class="col-md-3 mb-4" id="cadastrarSection">
-                    <div class="card">
-                        <div class="card-body">
+    
+                <!-- Cadastrar Excursão -->
+                <div class="col-md-4 col-sm-6" id="cadastrarSection">
+                    <div class="card shadow-sm border-0">
+                        <div class="card-body text-center">
+                            <i class="fas fa-plus-circle fa-3x mb-3 text-primary"></i>
                             <h5 class="card-title">Cadastrar Excursão</h5>
                             <p class="card-text">Cadastre as suas excursões de forma simples.</p>
-                            <a href="cad_excursao.html" class="btn btn-primary">Cadastrar</a>
+                            <a href="cad_excursao.html" class="btn btn btn-primary">Cadastrar</a>
                         </div>
                     </div>
                 </div>
-
-                <div class="col-md-3 mb-4" id="verExcursaoSection">
-                    <div class="card">
-                        <div class="card-body">
-                            <h5 class="card-title">Ver suas Excursões</h5>
+    
+                <!-- Ver Excursões -->
+                <div class="col-md-4 col-sm-6" id="verExcursaoSection">
+                    <div class="card shadow-sm border-0">
+                        <div class="card-body text-center">
+                            <i class="fas fa-list fa-3x mb-3 text-primary"></i>
+                            <h5 class="card-title">Ver Excursões</h5>
                             <p class="card-text">Veja as excursões cadastradas facilmente.</p>
-                            <a href="pesquisa_ex.html" class="btn btn-primary">Ver</a>
+                            <a href="pesquisa_ex.html" class="btn btn btn-primary">Ver</a>
                         </div>
                     </div>
                 </div>
-                <div class="col-md-3 mb-4">
-                    <div class="card">
-                        <div class="card-body">
-                            <h5 class="card-title">Excursoes</h5>
-                            <p class="card-text">Excursoes que voce comprou</p>
+    
+                <!-- Excursões Compradas -->
+                <div class="col-md-4 col-sm-6">
+                    <div class="card shadow-sm border-0">
+                        <div class="card-body text-center">
+                            <i class="fas fa-shopping-cart fa-3x mb-3 text-primary"></i>
+                            <h5 class="card-title">Excursões Compradas</h5>
+                            <p class="card-text">Visualize as excursões que você comprou.</p>
                             <a href="ver_venda.html" class="btn btn-primary">Ver</a>
                         </div>
                     </div>
                 </div>
+    
+                <!-- Participação -->
+                <div class="col-md-12" id="participationSection">
+                    <!-- Onde vai aparecer as informações da excursão -->
+                </div>
             </div>
         </div>
-    </section>
-
+    </section>    <br>
 
     <footer class="footer">
         <p>&copy; 2024 PlanWay. Todos os direitos reservados.</p>
