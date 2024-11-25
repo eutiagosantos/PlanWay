@@ -26,10 +26,10 @@ document.addEventListener("DOMContentLoaded", function () {
 
             // Verificar e exibir dados de venda, tratando valores null
             if (venda && venda.nomeExcursao) {
-                const local = venda.localExcursao ? venda.localExcursao : "Local não especificado";
+
                 const valor = venda.valor ? `R$ ${venda.valor.toFixed(2)}` : "Valor não disponível";
 
-                displayVendaDetails(venda, local, valor);
+                displayVendaDetails(venda, valor);
             } else {
                 alert("Venda não encontrada ou dados incompletos.");
             }
@@ -39,10 +39,9 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     }
 
-    function displayVendaDetails(venda, local, valor) {
+    function displayVendaDetails(venda, valor) {
         // Exibir detalhes da venda no HTML
         document.getElementById('vendaTitle').textContent = venda.nomeExcursao;
-        document.getElementById('excursionLocation').textContent = local;  // Exibe "Local não especificado" se for null
         document.getElementById('excursionPrice').textContent = valor;  // Exibe valor com formatação
     }
 

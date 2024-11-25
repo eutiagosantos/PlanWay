@@ -1,17 +1,19 @@
 // Função para obter o email do usuário logado
 function getUserEmail() {
-    // Aqui você pode adaptar para pegar o email do usuário logado de uma maneira mais segura, por exemplo,
-    // a partir de um token JWT ou de uma variável global que armazena as informações do usuário.
-    // Para este exemplo, vamos pegar o email a partir do armazenamento local.
-    return localStorage.getItem('userEmail');
+    return localStorage.getItem('userEmail');  // Pega o email do usuário logado
+}
+
+// Função para obter o documento do usuário logado
+function getUserDocumento() {
+    return localStorage.getItem('userDocumento');  // Pega o documento do usuário logado
 }
 
 // Função para carregar as excursões do usuário logado
 function loadUserExcursions() {
     const userEmail = getUserEmail();  // Pega o email do usuário logado
+    const userDocumento = getUserDocumento();  // Pega o documento do usuário logado
 
-    // Verifica se o email foi encontrado
-    if (!userEmail) {
+    if (!userEmail || !userDocumento) {
         alert("Usuário não encontrado. Faça login.");
         return;
     }
@@ -25,13 +27,12 @@ function loadUserExcursions() {
             return response.json();
         })
         .then(data => {
-            // Se não houver excursões, informa ao usuário
             if (data.length === 0) {
                 document.getElementById('excursionsList').innerHTML = '<p>Você ainda não criou nenhuma excursão.</p>';
                 return;
             }
             // Exibe as excursões encontradas
-            displayExcursions(data);
+            displayExcursions(data, userDocumento);
         })
         .catch(error => {
             console.error('Erro ao carregar as excursões do usuário:', error);
@@ -40,7 +41,7 @@ function loadUserExcursions() {
 }
 
 // Função para exibir as excursões na página
-function displayExcursions(excursions) {
+function displayExcursions(excursions, userDocumento) {
     const listContainer = document.getElementById('excursionsList');
     listContainer.innerHTML = '';  // Limpa a lista antes de renderizar as novas excursões
 
@@ -48,6 +49,20 @@ function displayExcursions(excursions) {
     excursions.forEach(({ nome, descricao, valor, local, dataInicio, dataFim, id }) => {
         const excursionCard = document.createElement('div');
         excursionCard.classList.add('col-md-4', 'col-lg-3', 'col-sm-6', 'mb-4');
+
+        let editAndDeleteButtons = '';  // Variável que irá armazenar os botões de editar e deletar
+
+        // Verifica se o documento do usuário tem 14 dígitos
+        if (userDocumento && userDocumento.length === 14) {
+            // Usuário com documento de 14 dígitos pode alterar ou excluir
+            editAndDeleteButtons = `
+                <a href="detalhes_excursao.html?id=${id}" class="btn btn-warning">Alterar</a>
+                <button class="btn btn-danger" onclick="deleteExcursion(${id})">Deletar</button>
+            `;
+        } else {
+            // Usuário sem documento de 14 dígitos não pode alterar ou excluir
+            editAndDeleteButtons = `<p><strong>Apenas usuários com documento de 14 dígitos podem alterar ou deletar excursões.</strong></p>`;
+        }
 
         excursionCard.innerHTML = `
             <div class="card" style="width: 350px;">
@@ -57,8 +72,7 @@ function displayExcursions(excursions) {
                     <p class="card-text">R$ ${valor}</p>
                     <p class="card-text">${local}</p>
                     <p class="card-text">${dataInicio} - ${dataFim}</p>
-                    <a href="detalhes_excursao.html?id=${id}" class="btn btn-warning">Alterar</a>
-                    <button class="btn btn-danger" onclick="deleteExcursion(${id})">Deletar</button>
+                    ${editAndDeleteButtons}  <!-- Adiciona os botões de edição e exclusão -->
                 </div>
             </div>
         `;

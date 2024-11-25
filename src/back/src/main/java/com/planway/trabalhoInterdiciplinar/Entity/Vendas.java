@@ -40,12 +40,11 @@ public class Vendas {
 
     }
 
-    public Vendas(Long id, double valor, String emailUsuario, String nomeExcursao, String localExcursao) {
+    public Vendas(Long id, double valor, String emailUsuario, String nomeExcursao) {
         this.id = id;
         this.valor = valor;
         this.emailUsuario = emailUsuario;
         this.nomeExcursao = nomeExcursao;
-        this.localExcursao = localExcursao;
 
     }
 

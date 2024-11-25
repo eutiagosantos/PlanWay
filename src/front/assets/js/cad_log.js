@@ -132,6 +132,7 @@ async function login() {
             sessionStorage.setItem('isLoggedIn', 'true');
             sessionStorage.setItem('userType', userType);
             localStorage.setItem('userEmail', email);
+            localStorage.setItem('userDocumento', documento);
 
             alert('Login realizado com sucesso!');
             window.location.href = 'home.html';

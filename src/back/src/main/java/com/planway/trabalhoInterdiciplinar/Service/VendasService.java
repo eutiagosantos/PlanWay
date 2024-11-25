@@ -27,8 +27,7 @@ public class VendasService {
                     null,
                     dto.valor(),
                     dto.emailUsuario(),
-                    dto.nomeExcursao(),
-                    dto.local()
+                    dto.nomeExcursao()
             );
 
             venda = vendasRepository.save(venda);
