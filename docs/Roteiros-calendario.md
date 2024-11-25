@@ -7,7 +7,7 @@ Integração: Oferecendo mais flexibilidade na gestão dos roteiros.
 
 Essas melhorias visam tornar a experiência do usuário mais fluida e agradável!
 
-![image](https://github.com/user-attachments/assets/e9cf43b6-e607-44f5-8f22-e57537c9c62c)
+![image](images/processo_calendario_atualizado.png)
 
 
 
