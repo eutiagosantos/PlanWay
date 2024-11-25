@@ -15,6 +15,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 throw new Error("Não foi possível carregar os detalhes da excursão.");
             }
             const excursion = await response.json();
+            console.log(excursion);
             displayExcursionDetails(excursion);
         } catch (error) {
             console.error(error);
