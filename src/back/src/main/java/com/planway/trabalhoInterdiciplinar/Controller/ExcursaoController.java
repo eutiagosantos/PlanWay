@@ -1,8 +1,10 @@
 package com.planway.trabalhoInterdiciplinar.Controller;
 
+import java.util.Collections;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -48,13 +50,24 @@ public class ExcursaoController {
         return ResponseEntity.ok(excursao);
     }
 
-    @PutMapping("/{id}")
+    @GetMapping("/listExcursoesByEmail/{email}")
+    public ResponseEntity<List<Excursao>> findExcursoesByEmail(@PathVariable String email) {
+        List<Excursao> excursaoList = excursaoService.findExcursoesByEmail(email);
+
+        if (excursaoList == null || excursaoList.isEmpty()) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(Collections.emptyList());
+        }
+
+        return ResponseEntity.ok(excursaoList);
+    }
+
+    @PutMapping("/update/{id}")
     public void updateExcursao(@PathVariable Long id, @RequestBody ExcursaoDto dto) {
         excursaoService.updateExcursao(id, dto);
         ResponseEntity.noContent().build();
     }
 
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/delete/{id}")
     public ResponseEntity<Void> deleteExcursao(@PathVariable Long id) {
         excursaoService.deleteExcursao(id);
         return ResponseEntity.noContent().build();

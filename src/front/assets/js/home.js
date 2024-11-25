@@ -1,9 +1,8 @@
 document.addEventListener("DOMContentLoaded", function () {
-    // Recuperando informações do usuário e as excursões
+    // Recuperando informações do usuário via API ou sessão
     const userType = sessionStorage.getItem('userType');
-    const userEmail = localStorage.getItem("userEmail");
+    const userEmail = sessionStorage.getItem("userEmail"); // Armazenando o e-mail na sessão
     const excursions = JSON.parse(localStorage.getItem("excursions")) || [];
-
     // Função para mostrar ou esconder seções conforme o tipo de usuário
     if (userType === 'cliente') {
         document.getElementById('cadastrarSection').style.display = 'none';
@@ -18,7 +17,7 @@ document.addEventListener("DOMContentLoaded", function () {
     // Função para mostrar se o usuário está participando de alguma excursão
     function checkParticipation() {
         const participationSection = document.getElementById("participationSection");
-        const userParticipatingExcursion = excursions.find(excursion => 
+        const userParticipatingExcursion = excursions.find(excursion =>
             excursion.participantes && excursion.participantes.some(participant => participant.email === userEmail)
         );
 
@@ -46,6 +45,7 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     }
 
+
     // Função para formatar as datas 
     function formatDate(dateString) {
         const date = new Date(dateString);
@@ -58,33 +58,52 @@ document.addEventListener("DOMContentLoaded", function () {
     checkParticipation();
 });
 
-window.onload = function() {
-    const storedExcursions = JSON.parse(localStorage.getItem("excursions")) || [];
+window.onload = async function () {
     const carouselItemsContainer = document.getElementById('carouselItems');
 
-    if (storedExcursions.length === 0) {
-        carouselItemsContainer.innerHTML = '<p>Nenhuma excursão cadastrada.</p>';
-        return;
+    try {
+        // Requisição para buscar todas as excursões disponíveis
+        const response = await fetch('http://localhost:8081/api/excursoes/listExcursoes', {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        });
+
+        if (!response.ok) {
+            throw new Error('Erro ao buscar excursões.');
+        }
+
+        const storedExcursions = await response.json();
+
+        if (storedExcursions.length === 0) {
+            carouselItemsContainer.innerHTML = '<p>Nenhuma excursão cadastrada.</p>';
+            return;
+        }
+
+        // Gerar itens do carrossel a partir das excursões retornadas
+        storedExcursions.forEach((excursion, index) => {
+            const imageUrl = excursion.imagem || 'https://via.placeholder.com/800x300?text=Sem+Imagem';
+            const isActiveClass = index === 0 ? 'active' : '';
+
+            const carouselItem = `
+                <div class="carousel-item ${isActiveClass}">
+                    <img src="${imageUrl}" class="d-block" style="width: 50%; margin: 0 auto;" alt="Excursão ${index + 1}">
+
+                    <div class="excursion-info-box w-50">
+                        <h5>${excursion.nome}</h5>
+                        <p><strong>Local:</strong> ${excursion.local}</p>
+                        <p><strong>Preço:</strong> R$ ${excursion.valor.toFixed(2)}</p>
+                        <a href="ver_excursao.html?id=${excursion.id}" class="btn btn-primary">Saiba Mais</a>
+                    </div>
+                </div>
+            `;
+
+            carouselItemsContainer.innerHTML += carouselItem;
+        });
+
+    } catch (error) {
+        console.error("Erro:", error);
+        carouselItemsContainer.innerHTML = '<p>Erro ao carregar excursões. Tente novamente mais tarde.</p>';
     }
-    
-    // Gerar itens do carrossel a partir das excursões armazenadas
-    storedExcursions.forEach((excursion, index, id) => {
-        const imageUrl = excursion.imagem || 'https://via.placeholder.com/800x300?text=Sem+Imagem';
-        const isActiveClass = index === 0 ? 'active' : '';
-
-        const carouselItem = `
-        <div class="carousel-item ${isActiveClass}">
-            <img src="${imageUrl}" class="d-block" style="width: 50%; margin: 0 auto;" alt="Excursão ${index + 1}">
-
-            <div class="excursion-info-box w-50" >
-                <h5>${excursion.nome}</h5>
-                <p><strong>Local:</strong> ${excursion.local}</p>
-                <p><strong>Preço:</strong> R$ ${excursion.valor.toFixed(2)}</p>
-                <a href="ver_excursao.html?id=${id}" class="btn btn-primary">Saiba Mais</a>
-            </div>
-        </div>
-        `;
-
-        carouselItemsContainer.innerHTML += carouselItem;
-    });
 };

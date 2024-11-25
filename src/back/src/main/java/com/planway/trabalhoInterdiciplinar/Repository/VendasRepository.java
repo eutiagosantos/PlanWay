@@ -11,4 +11,6 @@ import com.planway.trabalhoInterdiciplinar.Entity.Vendas;
 public interface VendasRepository extends JpaRepository<Vendas, Long> {
 
     Optional<Vendas> findByEmailUsuario(String emailUsuario);
+
+    Optional<Vendas> deleteByEmailUsuario(String emailUsuario);
 }

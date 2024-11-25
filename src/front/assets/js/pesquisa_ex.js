@@ -1,120 +1,92 @@
-document.addEventListener("DOMContentLoaded", function () {
-    const loadExcursionsFromAPI = () => {
-        const documento = sessionStorage.getItem('documento');
-        if (!documento) {
-            console.error('Usuário não encontrado na sessão.');
-            return;
-        }
+// Função para obter o email do usuário logado
+function getUserEmail() {
+    // Aqui você pode adaptar para pegar o email do usuário logado de uma maneira mais segura, por exemplo,
+    // a partir de um token JWT ou de uma variável global que armazena as informações do usuário.
+    // Para este exemplo, vamos pegar o email a partir do armazenamento local.
+    return localStorage.getItem('userEmail');
+}
 
-        // Carregar as excursões ativas e desativadas
-        const storedExcursions = JSON.parse(localStorage.getItem("excursions")) || [];
-        const storedPastExcursions = JSON.parse(localStorage.getItem("eventPast")) || [];
-        
-        const listContainer = document.getElementById('excursionsList');
+// Função para carregar as excursões do usuário logado
+function loadUserExcursions() {
+    const userEmail = getUserEmail();  // Pega o email do usuário logado
 
-        if (!listContainer) {
-            console.error("Elemento 'excursionsList' não encontrado.");
-            return;
-        }
+    // Verifica se o email foi encontrado
+    if (!userEmail) {
+        alert("Usuário não encontrado. Faça login.");
+        return;
+    }
 
-        // Filtra as excursões para exibir apenas as do usuário logado (ativas)
-        const userExcursions = storedExcursions.filter(excursion => excursion.usuarioId === documento);
-        const userPastExcursions = storedPastExcursions.filter(excursion => excursion.usuarioId === documento);
+    // Faz a requisição para buscar as excursões do usuário baseado no email
+    fetch(`http://localhost:8081/api/excursoes/listExcursoesByEmail/${userEmail}`)
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Erro ao carregar excursões');
+            }
+            return response.json();
+        })
+        .then(data => {
+            // Se não houver excursões, informa ao usuário
+            if (data.length === 0) {
+                document.getElementById('excursionsList').innerHTML = '<p>Você ainda não criou nenhuma excursão.</p>';
+                return;
+            }
+            // Exibe as excursões encontradas
+            displayExcursions(data);
+        })
+        .catch(error => {
+            console.error('Erro ao carregar as excursões do usuário:', error);
+            alert('Erro ao carregar suas excursões.');
+        });
+}
 
-        // Se não houver excursões ativas ou passadas
-        if (userExcursions.length === 0 && userPastExcursions.length === 0) {
-            listContainer.innerHTML = '<p>Nenhuma excursão cadastrada por você.</p>';
-            return;
-        }
+// Função para exibir as excursões na página
+function displayExcursions(excursions) {
+    const listContainer = document.getElementById('excursionsList');
+    listContainer.innerHTML = '';  // Limpa a lista antes de renderizar as novas excursões
 
-        listContainer.innerHTML = ''; // Limpa o conteúdo da lista
+    // Para cada excursão, cria um cartão de excursão na página
+    excursions.forEach(({ nome, descricao, valor, local, dataInicio, dataFim, id }) => {
+        const excursionCard = document.createElement('div');
+        excursionCard.classList.add('col-md-4', 'col-lg-3', 'col-sm-6', 'mb-4');
 
-        // Exibe as excursões ativas
-        if (userExcursions.length > 0) {
-            userExcursions.forEach(({ nome, descricao, valor, local, dataInicio, dataFim, id, imagem }) => {
-                const validTitle = nome && nome.trim() !== '' ? nome : 'Sem título';
-                const validDescription = descricao && descricao.trim() !== '' ? descricao : 'Sem descrição';
-                const validPrice = valor && !isNaN(parseFloat(valor)) && parseFloat(valor) > 0
-                    ? parseFloat(valor).toFixed(2).replace('.', ',')
-                    : 'Preço não disponível';
+        excursionCard.innerHTML = `
+            <div class="card" style="width: 350px;">
+                <div class="card-body">
+                    <h5 class="card-title">${nome}</h5>
+                    <p class="card-text">${descricao}</p>
+                    <p class="card-text">R$ ${valor}</p>
+                    <p class="card-text">${local}</p>
+                    <p class="card-text">${dataInicio} - ${dataFim}</p>
+                    <a href="detalhes_excursao.html?id=${id}" class="btn btn-warning">Alterar</a>
+                    <button class="btn btn-danger" onclick="deleteExcursion(${id})">Deletar</button>
+                </div>
+            </div>
+        `;
+        listContainer.appendChild(excursionCard);
+    });
+}
 
-                const formatDate = (dateString) => {
-                    const date = new Date(dateString);
-                    const day = String(date.getDate()).padStart(2, '0');
-                    const month = String(date.getMonth() + 1).padStart(2, '0');
-                    const year = date.getFullYear();
-                    return `${day}/${month}/${year}`;
-                };
-
-                const formattedDataInicio = formatDate(dataInicio);
-                const formattedDataFim = formatDate(dataFim);
-
-                const excursionCard = document.createElement('div');
-                excursionCard.classList.add('col-md-12', 'col-lg-12', 'mb-1');
-
-                excursionCard.innerHTML = `
-                    <div class="card shadow-sm">
-                        <div class="card-body d-flex">
-                            <div>
-                                <h5 class="card-title">${validTitle}</h5>
-                                <p class="card-text text-truncate">${validDescription}</p>
-                                <p class="card-text"><strong>Preço:</strong> R$ ${validPrice}</p>
-                                <p class="card-text"><strong>Local:</strong> ${local || 'Local não informado'}</p>
-                                <p class="card-text"><strong>Período:</strong> ${formattedDataInicio} a ${formattedDataFim}</p>
-                                <p class="card-text"><strong>Status:</strong> Ativa</p>
-                                <a href="detalhes_excursao.html?id=${id}" class="btn btn-outline-primary btn-block">Ver mais</a>
-                            </div>
-                        </div>
-                    </div>
-                `;
-
-                listContainer.appendChild(excursionCard);
+// Função para deletar uma excursão
+function deleteExcursion(id) {
+    if (confirm("Tem certeza que deseja deletar esta excursão?")) {
+        fetch(`http://localhost:8081/api/excursoes/delete/${id}`, {
+            method: 'DELETE',
+        })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Erro ao excluir a excursão');
+                }
+                alert('Excursão deletada com sucesso!');
+                loadUserExcursions(); // Recarrega a lista de excursões após a exclusão
+            })
+            .catch(error => {
+                console.error('Erro ao excluir a excursão:', error);
+                alert('Erro ao deletar a excursão.');
             });
-        }
+    }
+}
 
-        // Exibe as excursões passadas
-        if (userPastExcursions.length > 0) {
-            userPastExcursions.forEach(({ nome, descricao, valor, local, dataInicio, dataFim, id, imagem }) => {
-                const validTitle = nome && nome.trim() !== '' ? nome : 'Sem título';
-                const validDescription = descricao && descricao.trim() !== '' ? descricao : 'Sem descrição';
-                const validPrice = valor && !isNaN(parseFloat(valor)) && parseFloat(valor) > 0
-                    ? parseFloat(valor).toFixed(2).replace('.', ',')
-                    : 'Preço não disponível';
-
-                const formatDate = (dateString) => {
-                    const date = new Date(dateString);
-                    const day = String(date.getDate()).padStart(2, '0');
-                    const month = String(date.getMonth() + 1).padStart(2, '0');
-                    const year = date.getFullYear();
-                    return `${day}/${month}/${year}`;
-                };
-
-                const formattedDataInicio = formatDate(dataInicio);
-                const formattedDataFim = formatDate(dataFim);
-
-                const excursionCard = document.createElement('div');
-                excursionCard.classList.add('col-md-12', 'col-lg-12', 'mb-1');
-
-                excursionCard.innerHTML = `
-                    <div class="card shadow-sm">
-                        <div class="card-body d-flex">
-                            <div>
-                                <h5 class="card-title">${validTitle}</h5>
-                                <p class="card-text text-truncate">${validDescription}</p>
-                                <p class="card-text"><strong>Preço:</strong> R$ ${validPrice}</p>
-                                <p class="card-text"><strong>Local:</strong> ${local || 'Local não informado'}</p>
-                                <p class="card-text"><strong>Período:</strong> ${formattedDataInicio} a ${formattedDataFim}</p>
-                                <p class="card-text"><strong>Status:</strong> Expirado</p>
-                                <a href="detalhes_excursao.html?id=${id}" class="btn btn-outline-primary btn-block">Ver mais</a>
-                            </div>
-                        </div>
-                    </div>
-                `;
-
-                listContainer.appendChild(excursionCard);
-            });
-        }
-    };
-
-    loadExcursionsFromAPI();
+// Espera o carregamento completo do DOM antes de executar
+document.addEventListener('DOMContentLoaded', function () {
+    loadUserExcursions();  // Carrega as excursões do usuário ao carregar a página
 });

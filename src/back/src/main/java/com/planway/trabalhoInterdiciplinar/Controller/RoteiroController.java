@@ -3,6 +3,7 @@ package com.planway.trabalhoInterdiciplinar.Controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -16,6 +17,8 @@ import org.springframework.web.bind.annotation.RestController;
 import com.planway.trabalhoInterdiciplinar.Dto.RoteiroDto;
 import com.planway.trabalhoInterdiciplinar.Entity.Roteiro;
 import com.planway.trabalhoInterdiciplinar.Service.RoteiroService;
+
+import jakarta.persistence.EntityNotFoundException;
 
 @RestController
 @RequestMapping("/api/roteiro")
@@ -50,8 +53,13 @@ public class RoteiroController {
 
     @DeleteMapping("/deleteRoteiro/{id}")
     public ResponseEntity<Void> deleteRoteiro(@PathVariable Long id) {
-
-        roteiroService.deleteRoteiro(id);
-        return ResponseEntity.noContent().build();
+        try {
+            roteiroService.deleteRoteiro(id);
+            return ResponseEntity.noContent().build();
+        } catch (EntityNotFoundException e) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+        }
     }
 }

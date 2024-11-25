@@ -18,7 +18,7 @@ public class Roteiro {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    // private String local;
+    private String local;
     private String titulo;
 
     // private String descricao;
@@ -29,17 +29,18 @@ public class Roteiro {
     // @ManyToOne
     // @JoinColumn(name = "agencia_cnpj")
     // private Agencia agencia;
-    // private String dataInicio;
+    private String dataInicio;
+
     public Roteiro() {
     }
 
-    public Roteiro(Long id, String titulo, String dataFim, String agenciaEmail) {
+    public Roteiro(Long id, String titulo, String dataFim, String agenciaEmail, String local, String dataInicio) {
         this.id = id;
-        // this.local = local;
+        this.local = local;
         this.titulo = titulo;
         // this.descricao = descricao;
         this.dataFim = dataFim;
-        // this.dataInicio = dataInicio;
+        this.dataInicio = dataInicio;
         this.agenciaEmail = agenciaEmail;
     }
 

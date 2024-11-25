@@ -1,4 +1,4 @@
-package com.planway.trabalhoInterdiciplinar.Config;
+package com.planway.trabalhoInterdiciplinar.config;
 
 import java.util.Arrays;
 
@@ -37,7 +37,17 @@ public class SecurityConfig {
         "/api/usuarios/cadastrar",
         "/api/usuarios/login",
         "/api/usuarios/criarRoteiro",
-        "/api/vendas/cadastro"
+        "/api/usuarios/updateUser",
+        "/api/roteiro/updateRoteiro/{id}",
+        "/api/vendas/cadastro",
+        "/api/vendas/listVenda/{email}",
+        "/api/excursoes",
+        "/api/excursoes/listExcursoes",
+        "/api/excursoes/listExcursao/{id}",
+        "/api/excursoes/update/{id}",
+        "/api/excursoes/delete/{id}",
+        "/api/excursoes/listExcursoesByEmail/{email}",
+        "/api/excursoes/update/{id}"
     };
 
     @Bean

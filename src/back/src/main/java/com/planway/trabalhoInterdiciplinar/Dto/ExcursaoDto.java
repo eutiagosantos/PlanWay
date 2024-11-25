@@ -8,6 +8,7 @@ public record ExcursaoDto(
         double valor,
         String local,
         LocalDate dataInicio,
-        LocalDate dataFim) {
+        LocalDate dataFim,
+        String email) {
 
 }

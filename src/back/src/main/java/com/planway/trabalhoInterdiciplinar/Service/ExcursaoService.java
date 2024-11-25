@@ -22,7 +22,8 @@ public class ExcursaoService {
                 dto.valor(),
                 dto.local(),
                 dto.dataInicio(),
-                dto.dataFim()
+                dto.dataFim(),
+                dto.email()
         );
         return excursaoRepository.save(excursao);
     }
@@ -30,6 +31,10 @@ public class ExcursaoService {
     // Listar todas as excursões
     public List<Excursao> listExcursoes() {
         return excursaoRepository.findAll();
+    }
+
+    public List<Excursao> findExcursoesByEmail(String email) {
+        return excursaoRepository.findByEmail(email);
     }
 
     public Excursao listExcursaoPeloId(Long id) {

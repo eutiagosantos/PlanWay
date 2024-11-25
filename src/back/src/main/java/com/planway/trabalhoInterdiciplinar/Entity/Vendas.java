@@ -25,22 +25,27 @@ public class Vendas {
 
     private String emailUsuario;
 
-    @ManyToMany
-    @JoinTable(
-            name = "venda_excursao", // Nome da tabela de junção
-            joinColumns = @JoinColumn(name = "venda_id"), // Chave estrangeira para a tabela Vendas
-            inverseJoinColumns = @JoinColumn(name = "excursao_id") // Chave estrangeira para a tabela Excursao
-    )
-    private List<Excursao> excursao;
+    private String nomeExcursao;
 
+    private String localExcursao;
+
+    // @ManyToMany
+    // @JoinTable(
+    //         name = "venda_excursao", // Nome da tabela de junção
+    //         joinColumns = @JoinColumn(name = "venda_id"), // Chave estrangeira para a tabela Vendas
+    //         inverseJoinColumns = @JoinColumn(name = "excursao_id") // Chave estrangeira para a tabela Excursao
+    // )
+    // private List<Excursao> excursao;
     public Vendas() {
 
     }
 
-    public Vendas(Long id, double valor, String emailUsuario) {
+    public Vendas(Long id, double valor, String emailUsuario, String nomeExcursao, String localExcursao) {
         this.id = id;
         this.valor = valor;
         this.emailUsuario = emailUsuario;
+        this.nomeExcursao = nomeExcursao;
+        this.localExcursao = localExcursao;
 
     }
 

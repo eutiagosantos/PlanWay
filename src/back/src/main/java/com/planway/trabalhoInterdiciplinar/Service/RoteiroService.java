@@ -12,6 +12,7 @@ import com.planway.trabalhoInterdiciplinar.Entity.Roteiro;
 import com.planway.trabalhoInterdiciplinar.Repository.RoteiroRepository;
 
 import jakarta.persistence.EntityManager;
+import jakarta.persistence.EntityNotFoundException;
 import jakarta.transaction.Transactional;
 
 @Service
@@ -29,7 +30,9 @@ public class RoteiroService {
                 null,
                 roteiroDto.titulo(),
                 roteiroDto.dataFim(),
-                roteiroDto.email()
+                roteiroDto.email(),
+                roteiroDto.local(),
+                roteiroDto.dataInicio()
         );
 
         roteiro = entityManager.merge(roteiro);  // Ou use save se preferir
@@ -51,11 +54,19 @@ public class RoteiroService {
             var roteiro = roteiroExists.get();
 
             if (roteiroDto.titulo() != null) {
-                roteiro.setTitulo(roteiroDto.titulo());
+                roteiro.setTitulo(roteiroDto.titulo());;
             }
 
             if (roteiroDto.dataFim() != null) {
                 roteiro.setDataFim(roteiroDto.dataFim());
+            }
+
+            if (roteiroDto.local() != null) {
+                roteiro.setLocal(roteiroDto.local());
+            }
+
+            if (roteiroDto.dataInicio() != null) {
+                roteiro.setDataInicio(roteiroDto.dataInicio());
             }
 
             roteiroRepository.save(roteiro);
@@ -64,6 +75,10 @@ public class RoteiroService {
     }
 
     public void deleteRoteiro(Long roteiroId) {
+        Optional<Roteiro> roteiro = roteiroRepository.findById(roteiroId);
+        if (!roteiro.isPresent()) {
+            throw new EntityNotFoundException("Roteiro não encontrado");
+        }
         roteiroRepository.deleteById(roteiroId);
     }
 

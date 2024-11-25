@@ -26,7 +26,9 @@ public class VendasService {
             var venda = new Vendas(
                     null,
                     dto.valor(),
-                    dto.emailUsuario()
+                    dto.emailUsuario(),
+                    dto.nomeExcursao(),
+                    dto.local()
             );
 
             venda = vendasRepository.save(venda);
@@ -34,6 +36,19 @@ public class VendasService {
         } catch (Exception e) {
             e.printStackTrace();
             throw new RuntimeException("Erro ao realizar a venda", e);
+        }
+    }
+
+    public Optional<Vendas> listarVendaUsuario(String emailUsuario) {
+        return vendasRepository.findByEmailUsuario(emailUsuario);
+    }
+
+    public void deleteVenda(String email) {
+        Optional<Vendas> venda = vendasRepository.findByEmailUsuario(email);
+        if (venda.isPresent()) {
+            vendasRepository.delete(venda.get());
+        } else {
+            throw new RuntimeException("Venda não encontrada para o usuário com email: " + email);
         }
     }
 }

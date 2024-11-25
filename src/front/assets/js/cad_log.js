@@ -69,7 +69,7 @@ async function cadastro() {
     let email = document.getElementById('email').value;
     let password = document.getElementById('password').value;
     let documento = document.getElementById('cpfCnpj').value;
-
+    const emailUser = localStorage.setItem('userEmail', email);
 
     try {
         const response = await fetch("http://localhost:8081/api/usuarios/cadastrar", {

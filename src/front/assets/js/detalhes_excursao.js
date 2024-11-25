@@ -3,57 +3,57 @@ document.addEventListener("DOMContentLoaded", function () {
 
     // Função para carregar os detalhes da excursão
     function loadExcursionDetails() {
-        const excursions = JSON.parse(localStorage.getItem("excursions")) || [];
-        const eventPast = JSON.parse(localStorage.getItem("eventPast")) || [];
         const urlParams = new URLSearchParams(window.location.search);
         excursionId = urlParams.get("id");
 
         if (!excursionId) {
             alert("ID da excursão não fornecido.");
-            window.location.href = "pesquisa.html";
+            window.location.href = "pesquisa.html"; // Redireciona para pesquisa se não encontrar o ID
             return;
         }
 
-        // Busca na lista de excursões ativas e passadas
-        let excursion = excursions.find(e => e.id === parseInt(excursionId, 10));
-        if (!excursion) {
-            excursion = eventPast.find(e => e.id === parseInt(excursionId, 10));
-        }
+        // Converte o ID para número para garantir a consistência
+        excursionId = parseInt(excursionId, 10);
 
-        if (!excursion) {
-            alert("Excursão não encontrada.");
-            window.location.href = "pesquisa.html";
+        // Verifica se o ID é um número válido
+        if (isNaN(excursionId)) {
+            alert("ID da excursão inválido.");
+            window.location.href = "pesquisa.html"; // Redireciona para pesquisa se o ID for inválido
             return;
         }
 
-        // Exibe os detalhes da excursão
-        document.getElementById("title").value = excursion.nome;
-        document.getElementById("description").value = excursion.descricao;
-        document.getElementById("startDate").value = excursion.dataInicio;
-        document.getElementById("endDate").value = excursion.dataFim;
-        document.getElementById("location").value = excursion.local;
-        document.getElementById("price").value = excursion.valor;
+        // Faz a requisição para obter os detalhes da excursão pelo ID
+        fetch(`http://localhost:8081/api/excursoes/listExcursao/${excursionId}`)
+            .then(response => response.json())
+            .then(excursion => {
+                if (!excursion) {
+                    alert("Excursão não encontrada.");
+                    window.location.href = "pesquisa.html"; // Redireciona para pesquisa se não encontrar a excursão
+                    return;
+                }
 
-        // Exibe os participantes
-        displayParticipants(excursion.participantes || []);
-        
-        // Verifica se a excursão já foi finalizada ou está ativa
-        if (eventPast.some(e => e.id === excursion.id)) {
-            document.getElementById("finishExcursionBtn").disabled = true; // Desabilita o botão de finalizar
-            document.getElementById("finishExcursionBtn").style.display = 'none'; // Oculta o botão
-        } else {
-            document.getElementById("finishExcursionBtn").disabled = false; // Habilita o botão
-        }
+                // Exibe os detalhes da excursão
+                document.getElementById("title").value = excursion.nome;
+                document.getElementById("description").value = excursion.descricao;
+                document.getElementById("startDate").value = excursion.dataInicio;
+                document.getElementById("endDate").value = excursion.dataFim;
+                document.getElementById("location").value = excursion.local;
+                document.getElementById("price").value = excursion.valor;
+
+                // Exibe os participantes
+                displayParticipants(excursion.participantes || []);
+            })
+            .catch(error => {
+                console.error("Erro ao carregar os detalhes da excursão:", error);
+                alert("Erro ao carregar os dados da excursão.");
+            });
     }
 
-    loadExcursionDetails();
-
-    // Função para exibir os participantes e o contador
+    // Função para exibir os participantes da excursão
     function displayParticipants(participants) {
         const participantsList = document.getElementById("participants");
-        participantsList.innerHTML = ''; // Limpa a lista antes de adicionar novos itens
+        participantsList.innerHTML = ''; // Limpa a lista antes de adicionar novos participantes
 
-        // Exibe o número de participantes
         const participantsCount = participants.length;
         const participantsCountDisplay = document.getElementById("participantsCount");
         participantsCountDisplay.textContent = `Total de participantes: ${participantsCount}`;
@@ -62,7 +62,7 @@ document.addEventListener("DOMContentLoaded", function () {
             participants.forEach(participant => {
                 const listItem = document.createElement("li");
                 listItem.className = "list-group-item";
-                listItem.textContent = participant.email; // Exibindo o email ou outro dado do participante
+                listItem.textContent = participant.email;
                 participantsList.appendChild(listItem);
             });
         } else {
@@ -73,113 +73,74 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     }
 
-    // Função para finalizar a excursão
-    function finishExcursion() {
-        let excursions = JSON.parse(localStorage.getItem("excursions")) || [];
-        let eventPast = JSON.parse(localStorage.getItem("eventPast")) || [];
+    // Função para alterar os detalhes da excursão
+    document.getElementById("updateExcursionBtn").addEventListener("click", function () {
+        // Habilita os campos para alteração
+        document.getElementById("title").readOnly = false;
+        document.getElementById("description").readOnly = false;
+        document.getElementById("startDate").readOnly = false;
+        document.getElementById("endDate").readOnly = false;
+        document.getElementById("location").readOnly = false;
+        document.getElementById("price").readOnly = false;
 
-        // Encontra a excursão que será finalizada
-        const excursion = excursions.find(e => e.id === parseInt(excursionId, 10));
+        // Muda o texto do botão para "Salvar Alterações"
+        this.textContent = "Salvar Alterações";
 
-        if (!excursion) {
-            alert("Excursão não encontrada.");
-            return;
-        }
+        // Quando o botão for clicado novamente, enviar as alterações para a API
+        this.addEventListener("click", function () {
+            const updatedExcursion = {
+                nome: document.getElementById("title").value,
+                descricao: document.getElementById("description").value,
+                dataInicio: document.getElementById("startDate").value,
+                dataFim: document.getElementById("endDate").value,
+                local: document.getElementById("location").value,
+                valor: parseFloat(document.getElementById("price").value)
+            };
 
-        // Remove a excursão de "excursions"
-        excursions = excursions.filter(e => e.id !== excursion.id);
-
-        // Adiciona a excursão a "eventPast"
-        eventPast.push(excursion);
-
-        // Atualiza o localStorage com as listas modificadas
-        localStorage.setItem("excursions", JSON.stringify(excursions));
-        localStorage.setItem("eventPast", JSON.stringify(eventPast));
-
-        alert("A excursão foi finalizada e movida para eventos passados.");
-        window.location.href = "pesquisa.html"; // Redireciona de volta à página de pesquisa
-    }
-
-    // Adiciona o evento de clique no botão "Finalizar Excursão"
-    const finishBtn = document.getElementById("finishExcursionBtn");
-    if (finishBtn) {
-        finishBtn.addEventListener("click", finishExcursion);
-    }
-
-    // Função para salvar as alterações feitas
-    function saveChanges() {
-        const userDocumento = sessionStorage.getItem("documento");
-
-        if (!userDocumento) {
-            alert("Usuário não está logado.");
-            window.location.href = "login.html";
-            return;
-        }
-
-        if (userDocumento.length === 11) {
-            alert("Usuários com CPF não podem alterar uma excursão.");
-            return;
-        }
-
-        const updatedExcursion = {
-            id: excursionId,
-            nome: document.getElementById("title").value,
-            descricao: document.getElementById("description").value,
-            dataInicio: document.getElementById("startDate").value,
-            dataFim: document.getElementById("endDate").value,
-            local: document.getElementById("location").value,
-            valor: document.getElementById("price").value,
-            servicosAdicionais: document.getElementById("additionalServices").value
-        };
-
-        fetch(`http://localhost:8081/api/excursoes/${excursionId}`, {
-            method: 'PUT',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(updatedExcursion)
-        })
-            .then(response => {
-                if (response.ok) {
-                    alert("Excursão alterada com sucesso.");
-                    window.location.href = "pesquisa.html";
-                } else if (response.status === 403) {
-                    alert("Você não tem permissão para alterar esta excursão.");
-                } else {
-                    alert("Erro ao alterar excursão.");
-                }
+            // Enviar a requisição PUT para atualizar os detalhes da excursão
+            fetch(`http://localhost:8081/api/excursoes/update/${excursionId}`, {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(updatedExcursion)
             })
-            .catch(error => console.error("Erro ao alterar excursão:", error));
-    }
+                .then(response => {
+                    if (response.ok) {
+                        alert("Excursão atualizada com sucesso!");
+                        window.location.reload(); // Recarrega a página para exibir as alterações
+                    } else {
+                        alert("Erro ao atualizar a excursão.");
+                    }
+                })
+                .catch(error => {
+                    console.error("Erro ao enviar a atualização:", error);
+                    alert("Erro ao atualizar a excursão.");
+                });
+        });
+    });
 
-    // Função para excluir a excursão
-    function deleteExcursao(excursionId) {
-        const userDocumento = sessionStorage.getItem("documento");
-
-        if (!userDocumento) {
-            alert("Usuário não está logado.");
-            window.location.href = "login.html";
-            return;
-        }
-        
-        if (userDocumento.length === 11) {
-            alert("Usuários com CPF não podem deletar uma excursão.");
-            return;
-        }
-
-        fetch(`http://localhost:8081/api/excursoes/${excursionId}`, {
-            method: 'DELETE'
-        })
-            .then(response => {
-                if (response.ok) {
-                    alert("Excursão deletada com sucesso.");
-                    window.location.href = "pesquisa.html";
-                } else if (response.status === 403) {
-                    alert("Você não tem permissão para deletar esta excursão.");
-                } else {
-                    alert("Erro ao deletar excursão.");
-                }
+    // Função para deletar a excursão
+    document.getElementById("deleteExcursaoBtn").addEventListener("click", function () {
+        const confirmDelete = confirm("Tem certeza que deseja deletar esta excursão?");
+        if (confirmDelete) {
+            fetch(`http://localhost:8081/api/excursoes/delete/${excursionId}`, {
+                method: 'DELETE'
             })
-            .catch(error => console.error("Erro ao deletar excursão:", error));
-    }
+                .then(response => {
+                    if (response.ok) {
+                        alert("Excursão deletada com sucesso!");
+                        window.location.href = "pesquisa.html"; // Redireciona para a página de pesquisa
+                    } else {
+                        alert("Erro ao deletar a excursão.");
+                    }
+                })
+                .catch(error => {
+                    console.error("Erro ao deletar a excursão:", error);
+                    alert("Erro ao deletar a excursão.");
+                });
+        }
+    });
+
+    loadExcursionDetails();
 });
