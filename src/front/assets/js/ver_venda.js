@@ -1,5 +1,4 @@
 document.addEventListener("DOMContentLoaded", function () {
-    // Obtém o e-mail do usuário logado do localStorage ou de outra fonte
     const userEmail = localStorage.getItem("userEmail");
 
     if (!userEmail) {
@@ -7,14 +6,13 @@ document.addEventListener("DOMContentLoaded", function () {
         return;
     }
 
-    // Função para buscar os detalhes da venda do usuário
     async function getVendaDetails(email) {
         try {
             const response = await fetch(`http://localhost:8081/api/vendas/listVenda/${email}`, {
                 method: 'GET',
                 headers: {
-                    'Content-Type': 'application/json'
-                }
+                    'Content-Type': 'application/json',
+                },
             });
 
             if (!response.ok) {
@@ -22,13 +20,10 @@ document.addEventListener("DOMContentLoaded", function () {
             }
 
             const venda = await response.json();
-            console.log("Detalhes da venda:", venda);  // Verifique no console
+            console.log("Detalhes da venda:", venda);
 
-            // Verificar e exibir dados de venda, tratando valores null
             if (venda && venda.nomeExcursao) {
-
                 const valor = venda.valor ? `R$ ${venda.valor.toFixed(2)}` : "Valor não disponível";
-
                 displayVendaDetails(venda, valor);
             } else {
                 alert("Venda não encontrada ou dados incompletos.");
@@ -39,47 +34,55 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     }
 
+    // Exibir os detalhes da venda no HTML
     function displayVendaDetails(venda, valor) {
-        // Exibir detalhes da venda no HTML
-        document.getElementById('vendaTitle').textContent = venda.nomeExcursao;
-        document.getElementById('excursionPrice').textContent = valor;  // Exibe valor com formatação
+        document.getElementById("vendaTitle").textContent = venda.nomeExcursao;
+        document.getElementById("excursionPrice").textContent = valor;
     }
 
+    // Função para remover o participante específico do localStorage
+    function removeParticipantFromLocalStorage(email) {
+        const storedExcursions = JSON.parse(localStorage.getItem("excursoes")) || [];
 
-    // Chama a função para buscar os detalhes da venda com base no e-mail
+        storedExcursions.forEach((excursion) => {
+            if (excursion.participantes && Array.isArray(excursion.participantes)) {
+                const initialCount = excursion.participantes.length;
+                excursion.participantes = excursion.participantes.filter((participant) => participant !== email);
+                if (excursion.participantes.length !== initialCount) {
+                    console.log(
+                        `Participante ${email} removido da excursão com ID ${excursion.id}.`
+                    );
+                }
+            }
+        });
+
+        // Atualiza o localStorage com as alterações
+        localStorage.setItem("excursoes", JSON.stringify(storedExcursions));
+        console.log(`Participante ${email} removido das excursões no localStorage.`);
+    }
+
+    document.getElementById("logoutButton").addEventListener("click", function () {
+        removeParticipantFromLocalStorage(userEmail);
+
+        fetch(`http://localhost:8081/api/vendas/deleteVenda/${userEmail}`, {
+            method: "DELETE",
+            headers: {
+                "Content-Type": "application/json",
+            },
+        })
+            .then((response) => {
+                if (response.ok) {
+                    alert("Venda deletada com sucesso!");
+                    window.location.href = "home.html";
+                } else {
+                    alert("Erro ao deletar a venda. Tente novamente.");
+                }
+            })
+            .catch((error) => {
+                console.error("Erro ao tentar deletar a venda:", error);
+                alert("Erro ao tentar deletar a venda.");
+            });
+    });
+
     getVendaDetails(userEmail);
 });
-
-// Função que será chamada quando o usuário clicar em "Sair"
-document.getElementById('logoutButton').addEventListener('click', function () {
-    const email = localStorage.getItem("userEmail"); // Obtém o email do usuário do localStorage
-
-    if (!email) {
-        alert("Não foi possível obter o e-mail do usuário.");
-        return;
-    }
-
-    // Realizar a requisição DELETE para deletar a venda
-    fetch(`http://localhost:8081/api/vendas/deleteVenda/${email}`, {
-        method: 'DELETE',
-        headers: {
-            'Content-Type': 'application/json',
-        }
-    })
-        .then(response => {
-            if (response.ok) {
-
-                alert("Venda deletada com sucesso!");
-
-                window.location.href = 'home.html';
-            } else {
-
-                alert("Erro ao deletar a venda. Tente novamente.");
-            }
-        })
-        .catch(error => {
-            console.error("Erro ao tentar deletar a venda:", error);
-            alert("Erro ao tentar deletar a venda.");
-        });
-});
-
