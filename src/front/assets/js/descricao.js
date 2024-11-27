@@ -5,6 +5,7 @@ document.addEventListener("DOMContentLoaded", function () {
     // Função para carregar os detalhes da excursão
     function loadExcursionDetails() {
         const excursions = JSON.parse(localStorage.getItem("excursoes")) || [];
+        const excursionsPast = JSON.parse(localStorage.getItem("excursoesPast")) || [];
         const urlParams = new URLSearchParams(window.location.search);
         excursionId = urlParams.get("id");
 
@@ -70,6 +71,7 @@ document.addEventListener("DOMContentLoaded", function () {
         document.getElementById("averageRating").textContent = averageRatingText;
     }
 
+    // Formatar datas no formato dd/mm/yyyy
     function formatDate(dateString) {
         const date = new Date(dateString);
         const day = String(date.getDate()).padStart(2, '0');
@@ -78,12 +80,18 @@ document.addEventListener("DOMContentLoaded", function () {
         return `${day}/${month}/${year}`;
     }
 
+    // Enviar comentário
     document.getElementById("submitComment").addEventListener("click", function () {
         const commentText = document.getElementById("commentText").value;
-        const rating = document.getElementById("rating").value;
+        const rating = document.querySelector('input[name="rating"]:checked')?.value;
 
         if (!commentText.trim()) {
             alert("Comentário não pode ser vazio.");
+            return;
+        }
+
+        if (!rating) {
+            alert("Selecione uma avaliação com estrelas.");
             return;
         }
 
@@ -93,8 +101,8 @@ document.addEventListener("DOMContentLoaded", function () {
             avaliacao: parseInt(rating, 10),
         };
 
-        const excursions = JSON.parse(localStorage.getItem("excursions")) || [];
-        const excursionsPast = JSON.parse(localStorage.getItem("excursionsPast")) || [];
+        const excursions = JSON.parse(localStorage.getItem("excursoes")) || [];
+        const excursionsPast = JSON.parse(localStorage.getItem("excursoesPast")) || [];
         const excursion = excursions.find(e => e.id === excursionId) || excursionsPast.find(e => e.id === excursionId);
 
         if (excursion) {
@@ -109,9 +117,9 @@ document.addEventListener("DOMContentLoaded", function () {
             excursion.avaliacoes.push(newComment.avaliacao);
 
             if (excursions.find(e => e.id === excursionId)) {
-                localStorage.setItem("excursions", JSON.stringify(excursions));
+                localStorage.setItem("excursoes", JSON.stringify(excursions));
             } else {
-                localStorage.setItem("excursionsPast", JSON.stringify(excursionsPast));
+                localStorage.setItem("excursoesPast", JSON.stringify(excursionsPast));
             }
 
             displayComments(excursion);
@@ -119,6 +127,8 @@ document.addEventListener("DOMContentLoaded", function () {
 
             document.getElementById("commentText").value = '';
             alert("Comentário enviado com sucesso!");
+        } else {
+            alert("Erro ao encontrar a excursão.");
         }
     });
 

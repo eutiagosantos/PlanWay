@@ -24,7 +24,6 @@ document.addEventListener("DOMContentLoaded", function () {
         const excursion = storedExcursions.find(e => e.id === excursionId);
 
         if (excursion) {
-            // Exibe os detalhes da excursão
             document.getElementById("title").value = excursion.nome || "Sem título";
             document.getElementById("description").value = excursion.descricao || "Sem descrição";
             document.getElementById("startDate").value = excursion.dataInicio || "";
@@ -32,8 +31,8 @@ document.addEventListener("DOMContentLoaded", function () {
             document.getElementById("location").value = excursion.local || "Local não informado";
             document.getElementById("price").value = excursion.valor || 0;
 
-            // Exibe os participantes
             displayParticipants(excursion.participantes || []);
+            displayCommentsAndRatings(excursion.comentarios || []);
         } else {
             alert("Excursão não encontrada no localStorage.");
             window.location.href = "pesquisa.html";
@@ -43,7 +42,7 @@ document.addEventListener("DOMContentLoaded", function () {
     // Função para exibir os participantes da excursão
     function displayParticipants(participants) {
         const participantsList = document.getElementById("participants");
-        participantsList.innerHTML = ''; 
+        participantsList.innerHTML = '';
 
         const participantsCount = participants.length;
         const participantsCountDisplay = document.getElementById("participantsCount");
@@ -64,6 +63,44 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     }
 
+    // Função para exibir comentários e avaliações
+    function displayCommentsAndRatings(comments) {
+        const commentsContainer = document.getElementById("commentsContainer");
+        commentsContainer.innerHTML = '';
+
+        if (comments.length === 0) {
+            const noCommentsMessage = document.createElement("div");
+            noCommentsMessage.className = "alert alert-secondary";
+            noCommentsMessage.textContent = "Nenhum comentário ainda.";
+            commentsContainer.appendChild(noCommentsMessage);
+            return;
+        }
+
+        comments.forEach(comment => {
+            const commentBox = document.createElement("div");
+            commentBox.className = "card mb-3";
+
+            // Define a cor com base na avaliação
+            const ratingColor = comment.avaliacao < 3
+                ? "#F07771" // Vermelho
+                : comment.avaliacao === 3
+                ? "#e2e3e5" // Cinza
+                : "#71EF72"; // Verde
+
+            commentBox.style.backgroundColor = ratingColor;
+
+            commentBox.innerHTML = `
+                <div class="card-body">
+                    <h5 class="card-title">${"★".repeat(comment.avaliacao)}${"☆".repeat(5 - comment.avaliacao)}</h5>
+                    <p class="card-text"><strong>${comment.email}</strong></p>
+                    <p class="card-text">${comment.texto}</p>
+                </div>
+            `;
+
+            commentsContainer.appendChild(commentBox);
+        });
+    }
+
     // Função para finalizar a excursão
     document.getElementById("finishExcursionBtn").addEventListener("click", function () {
         const storedExcursions = JSON.parse(localStorage.getItem("excursoes")) || [];
@@ -78,24 +115,8 @@ document.addEventListener("DOMContentLoaded", function () {
             localStorage.setItem("excursoes", JSON.stringify(storedExcursions));
             localStorage.setItem("excursoesPast", JSON.stringify(pastExcursions));
 
-            fetch(`http://localhost:8081/api/excursoes/finalizar/${excursionId}`, {
-                method: 'PUT',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-            })
-                .then(response => {
-                    if (response.ok) {
-                        alert("Excursão finalizada com sucesso!");
-                        window.location.href = "pesquisa.html";
-                    } else {
-                        throw new Error("Erro ao finalizar a excursão na API.");
-                    }
-                })
-                .catch(error => {
-                    console.error("Erro ao finalizar excursão na API:", error);
-                    alert("A excursão foi movida localmente, mas houve um erro ao finalizar na API.");
-                });
+            alert("Excursão finalizada com sucesso!");
+            window.location.href = "pesquisa.html";
         } else {
             alert("Excursão não encontrada na lista atual.");
         }
