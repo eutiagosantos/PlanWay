@@ -20,8 +20,14 @@ document.addEventListener("DOMContentLoaded", function () {
             return;
         }
 
+
         const storedExcursions = JSON.parse(localStorage.getItem("excursoes")) || [];
-        const excursion = storedExcursions.find(e => e.id === excursionId);
+        let excursion = storedExcursions.find(e => e.id === excursionId);
+
+        if (!excursion) {
+            const pastExcursions = JSON.parse(localStorage.getItem("excursoesPast")) || [];
+            excursion = pastExcursions.find(e => e.id === excursionId);
+        }
 
         if (excursion) {
             document.getElementById("title").value = excursion.nome || "Sem título";
@@ -34,7 +40,7 @@ document.addEventListener("DOMContentLoaded", function () {
             displayParticipants(excursion.participantes || []);
             displayCommentsAndRatings(excursion.comentarios || []);
         } else {
-            alert("Excursão não encontrada no localStorage.");
+            alert("Excursão não encontrada.");
             window.location.href = "pesquisa.html";
         }
     }
@@ -80,7 +86,6 @@ document.addEventListener("DOMContentLoaded", function () {
             const commentBox = document.createElement("div");
             commentBox.className = "card mb-3";
 
-            // Define a cor com base na avaliação
             const ratingColor = comment.avaliacao < 3
                 ? "#F07771" // Vermelho
                 : comment.avaliacao === 3
@@ -101,8 +106,8 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     }
 
-    // Função para finalizar a excursão
-    document.getElementById("finishExcursionBtn").addEventListener("click", function () {
+    // Função para finalizar a excursão (local e backend)
+    document.getElementById("finishExcursionBtn").addEventListener("click", async function () {
         const storedExcursions = JSON.parse(localStorage.getItem("excursoes")) || [];
         const pastExcursions = JSON.parse(localStorage.getItem("excursoesPast")) || [];
 
@@ -115,8 +120,21 @@ document.addEventListener("DOMContentLoaded", function () {
             localStorage.setItem("excursoes", JSON.stringify(storedExcursions));
             localStorage.setItem("excursoesPast", JSON.stringify(pastExcursions));
 
-            alert("Excursão finalizada com sucesso!");
-            window.location.href = "pesquisa.html";
+            try {
+                const response = await fetch(`http://localhost:8081/api/excursoes/delete/${excursionId}`, {
+                    method: 'DELETE',
+                });
+
+                if (response.ok) {
+                    alert("Excursão finalizada e removida com sucesso!");
+                    window.location.href = "pesquisa.html";
+                } else {
+                    throw new Error("Erro ao remover a excursão do backend.");
+                }
+            } catch (error) {
+                console.error("Erro ao remover a excursão do backend:", error);
+                alert("Excursão finalizada localmente, mas ocorreu um erro ao removê-la do backend.");
+            }
         } else {
             alert("Excursão não encontrada na lista atual.");
         }

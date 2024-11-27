@@ -1,11 +1,7 @@
 document.addEventListener("DOMContentLoaded", function () {
     const excursionForm = document.getElementById('excursionForm');
     const excursaoKey = "excursoes"; 
-
     const userEmail = localStorage.getItem('userEmail');
-
-    // Função para gerar um ID único para as excursões no localStorage
-
 
     // Função para recuperar os dados do formulário
     function getFormData() {
@@ -18,7 +14,6 @@ document.addEventListener("DOMContentLoaded", function () {
         const additionalServices = document.getElementById('additionalServices').value;
 
         return {
-
             nome: title,
             descricao: description,
             dataInicio: startDate,
@@ -30,12 +25,18 @@ document.addEventListener("DOMContentLoaded", function () {
         };
     }
 
-    // Função para salvar os dados no localStorage
-    function saveToLocalStorage(excursionData) {
+    // Função para salvar os dados no localStorage com ID correto
+    function saveToLocalStorageWithId(excursionData, id) {
         const existingExcursoes = JSON.parse(localStorage.getItem(excursaoKey)) || [];
-        existingExcursoes.push(excursionData);
+        const existingExcursionIndex = existingExcursoes.findIndex(e => e.id === id);
+        if (existingExcursionIndex !== -1) {
+            existingExcursoes[existingExcursionIndex] = { ...excursionData, id };
+        } else {
+            existingExcursoes.push({ ...excursionData, id });
+        }
+
         localStorage.setItem(excursaoKey, JSON.stringify(existingExcursoes));
-        console.log("Excursão salva no localStorage:", excursionData);
+        console.log("Excursão salva no localStorage:", { ...excursionData, id });
     }
 
     // Função para enviar os dados para a API e salvar no localStorage
@@ -50,7 +51,6 @@ document.addEventListener("DOMContentLoaded", function () {
         }
 
         const formData = getFormData();
-        saveToLocalStorage(formData);
 
         fetch('http://localhost:8081/api/excursoes', {
             method: 'POST',
@@ -63,10 +63,13 @@ document.addEventListener("DOMContentLoaded", function () {
                 if (!response.ok) {
                     throw new Error('Erro ao criar excursão');
                 }
-                return response.json();
+                return response.json(); 
             })
             .then((data) => {
                 alert('Excursão criada com sucesso!');
+
+                saveToLocalStorageWithId(formData, data.id);
+
                 excursionForm.reset();
             })
             .catch((error) => {

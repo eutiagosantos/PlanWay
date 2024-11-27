@@ -4,6 +4,13 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
     function loadUserExcursions() {
+        const userEmail = getUserEmail();
+
+        if (!userEmail) {
+            alert("Usuário não encontrado. Faça login.");
+            return;
+        }
+
         fetch('http://localhost:8081/api/excursoes/listExcursoes')
             .then(response => {
                 if (!response.ok) {
@@ -11,8 +18,13 @@ document.addEventListener("DOMContentLoaded", function () {
                 }
                 return response.json();
             })
-            .then(data => {
-                displayExcursions(data);
+            .then(apiExcursions => {
+                const userActiveExcursions = apiExcursions.filter(excursion => excursion.email === userEmail);
+
+                const pastExcursions = JSON.parse(localStorage.getItem('excursoesPast')) || [];
+                const userPastExcursions = pastExcursions.filter(excursion => excursion.email === userEmail);
+
+                displayExcursions(userActiveExcursions, userPastExcursions);
             })
             .catch(error => {
                 console.error('Erro ao buscar excursões:', error);
@@ -21,34 +33,60 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
     // Função para exibir as excursões do usuário na página
-    function displayExcursions(excursions) {
+    function displayExcursions(activeExcursions, pastExcursions) {
         const listContainer = document.getElementById('excursionsList');
-        listContainer.innerHTML = ''; 
+        listContainer.innerHTML = '';
 
-        if (excursions.length === 0) {
+        if (activeExcursions.length === 0 && pastExcursions.length === 0) {
             listContainer.innerHTML = '<p>Você ainda não criou nenhuma excursão.</p>';
             return;
         }
 
-        excursions.forEach(({ nome, descricao, valor, local, dataInicio, dataFim, id }) => {
-            const excursionCard = document.createElement('div');
-            excursionCard.classList.add('col-md-4', 'col-lg-12');
+        // Renderiza excursões ativas
+        if (activeExcursions.length > 0) {
+            activeExcursions.forEach(({ nome, descricao, valor, local, dataInicio, dataFim, id }) => {
+                const excursionCard = document.createElement('div');
+                excursionCard.classList.add('col-md-4', 'col-lg-12');
 
-            excursionCard.innerHTML = `
-                <div class="card">
-                    <div class="card-body">
-                        <h5 class="card-title">${nome}</h5>
-                        <p class="card-text">${descricao}</p>
-                        <p class="card-text"><strong>Preço:</strong> R$ ${valor.toFixed(2).replace('.', ',')}</p>
-                        <p class="card-text"><strong>Local:</strong> ${local}</p>
-                        <p class="card-text"><strong>Período:</strong> ${formatDate(dataInicio)} - ${formatDate(dataFim)}</p>
-                        <p class="card-text"><strong>Status:</strong> Ativa</p>
-                        <a href="detalhes_excursao.html?id=${id}" class="btn btn-outline-primary">Ver Detalhes</a>
+                excursionCard.innerHTML = `
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title">${nome}</h5>
+                            <p class="card-text">${descricao}</p>
+                            <p class="card-text"><strong>Preço:</strong> R$ ${valor.toFixed(2).replace('.', ',')}</p>
+                            <p class="card-text"><strong>Local:</strong> ${local}</p>
+                            <p class="card-text"><strong>Período:</strong> ${formatDate(dataInicio)} - ${formatDate(dataFim)}</p>
+                            <p class="card-text"><strong>Status:</strong> Ativa</p>
+                            <a href="detalhes_excursao.html?id=${id}&status=active" class="btn btn-outline-primary">Ver Detalhes</a>
+                        </div>
                     </div>
-                </div>
-            `;
-            listContainer.appendChild(excursionCard);
-        });
+                `;
+                listContainer.appendChild(excursionCard);
+            });
+        }
+
+        // Renderiza excursões finalizadas
+        if (pastExcursions.length > 0) {
+            pastExcursions.forEach(({ nome, descricao, valor, local, dataInicio, dataFim, id }) => {
+                const excursionCard = document.createElement('div');
+                excursionCard.classList.add('col-md-4', 'col-lg-12');
+
+                excursionCard.innerHTML = `
+                    <div class="card bg-light">
+                        <div class="card-body">
+                            <h5 class="card-title">${nome}</h5>
+                            <p class="card-text">${descricao}</p>
+                            <p class="card-text"><strong>Preço:</strong> R$ ${valor.toFixed(2).replace('.', ',')}</p>
+                            <p class="card-text"><strong>Local:</strong> ${local}</p>
+                            <p class="card-text"><strong>Período:</strong> ${formatDate(dataInicio)} - ${formatDate(dataFim)}</p>
+                            <p class="card-text"><strong>Status:</strong> Finalizada</p>
+                            <a href="detalhes_excursao.html?id=${id}&status=past" class="btn btn-outline-primary">Ver Detalhes</a>
+                        </div>
+                    </div>
+                `;
+                listContainer.appendChild(excursionCard);
+            });
+        }
     }
 
     function formatDate(dateString) {
@@ -58,5 +96,6 @@ document.addEventListener("DOMContentLoaded", function () {
         const year = date.getFullYear();
         return `${day}/${month}/${year}`;
     }
+
     loadUserExcursions();
 });
