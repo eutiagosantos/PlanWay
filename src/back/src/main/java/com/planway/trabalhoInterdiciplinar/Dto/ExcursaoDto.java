@@ -9,6 +9,7 @@ public record ExcursaoDto(
         String local,
         LocalDate dataInicio,
         LocalDate dataFim,
-        String email) {
+        String email,
+        int quantidadePessoas) {
 
 }

@@ -14,7 +14,6 @@ public class ExcursaoService {
     @Autowired
     private ExcursaoRepository excursaoRepository;
 
-    // Criar uma nova excursão
     public Excursao criarExcursao(ExcursaoDto dto) {
         Excursao excursao = new Excursao(
                 dto.nome(),
@@ -23,12 +22,12 @@ public class ExcursaoService {
                 dto.local(),
                 dto.dataInicio(),
                 dto.dataFim(),
-                dto.email()
+                dto.email(),
+                dto.quantidadePessoas()
         );
         return excursaoRepository.save(excursao);
     }
 
-    // Listar todas as excursões
     public List<Excursao> listExcursoes() {
         return excursaoRepository.findAll();
     }
@@ -41,7 +40,6 @@ public class ExcursaoService {
         return excursaoRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("Excursão não encontrada"));
     }
 
-    // Atualizar uma excursão existente
     public void updateExcursao(Long id, ExcursaoDto dto) {
         Excursao excursao = excursaoRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("Excursão não encontrada"));
 
@@ -51,11 +49,11 @@ public class ExcursaoService {
         excursao.setLocal(dto.local());
         excursao.setDataInicio(dto.dataInicio());
         excursao.setDataFim(dto.dataFim());
+        excursao.setQuantidadePessoas(dto.quantidadePessoas());
 
         excursaoRepository.save(excursao);
     }
 
-    // Deletar uma excursão pelo ID
     public void deleteExcursao(Long id) {
         if (!excursaoRepository.existsById(id)) {
             throw new IllegalArgumentException("Excursão não encontrada");
