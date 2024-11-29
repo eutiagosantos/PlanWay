@@ -1,6 +1,6 @@
 document.addEventListener("DOMContentLoaded", function () {
     const excursionId = new URLSearchParams(window.location.search).get('id');
-    const userEmail = localStorage.getItem("userEmail"); // Aqui você pode buscar o email do usuário que está logado
+    const userEmail = localStorage.getItem("userEmail");
 
     if (!excursionId || !userEmail) {
         alert("Erro: Dados da excursão ou usuário não encontrados.");
@@ -10,13 +10,14 @@ document.addEventListener("DOMContentLoaded", function () {
     // Função para buscar os detalhes da excursão
     async function getExcursionDetails(id) {
         try {
-            const response = await fetch(`http://localhost:8081/api/excursoes/listExcursao/${id}`); // Ajuste a URL conforme necessário
+            const response = await fetch(`http://localhost:8081/api/excursoes/listExcursao/${id}`);
             if (!response.ok) {
                 throw new Error("Não foi possível carregar os detalhes da excursão.");
             }
             const excursion = await response.json();
             console.log(excursion);
             displayExcursionDetails(excursion);
+            saveExcursionToLocalStorage(excursion); 
         } catch (error) {
             console.error(error);
             alert("Erro ao carregar os detalhes da excursão.");
@@ -31,12 +32,44 @@ document.addEventListener("DOMContentLoaded", function () {
         document.getElementById('endDate').textContent = formatDate(excursion.dataFim);
         document.getElementById('location').textContent = excursion.local;
         document.getElementById('price').textContent = `R$ ${excursion.valor.toFixed(2)}`;
-
-        // Salvar os dados da excursão para enviar quando o usuário clicar no botão
         window.excursionData = excursion;
     }
 
-    // Função para formatar a data
+    // Função para salvar a excursão no localStorage
+    function saveExcursionToLocalStorage(excursion) {
+        const excursoes = JSON.parse(localStorage.getItem("excursoes")) || [];
+        const existingExcursion = excursoes.find(e => e.id === excursion.id);
+
+        if (!existingExcursion) {
+            excursion.participantes = [];
+            excursoes.push(excursion);
+            localStorage.setItem("excursoes", JSON.stringify(excursoes));
+            console.log("Excursão salva no localStorage:", excursion);
+        }
+    }
+
+    // Função para adicionar um participante localmente
+    function addParticipantToExcursion(excursionId, userEmail) {
+        const excursoes = JSON.parse(localStorage.getItem("excursoes")) || [];
+        const excursion = excursoes.find(e => e.id == excursionId);
+
+        if (excursion) {
+            excursion.participantes = excursion.participantes || [];
+            const participantExists = excursion.participantes.some(p => p === userEmail);
+
+            if (!participantExists) {
+                excursion.participantes.push(userEmail); 
+                localStorage.setItem("excursoes", JSON.stringify(excursoes));
+                console.log(`Participante ${userEmail} adicionado à excursão ${excursionId}`);
+                alert("Você foi adicionado à excursão com sucesso!");
+            } else {
+                alert("Você já está participando desta excursão.");
+            }
+        } else {
+            console.error("Excursão não encontrada no localStorage para adicionar participante:", excursionId);
+        }
+    }
+
     function formatDate(dateString) {
         const date = new Date(dateString);
         const day = String(date.getDate()).padStart(2, '0');
@@ -52,16 +85,15 @@ document.addEventListener("DOMContentLoaded", function () {
                 valor: excursionData.valor,
                 emailUsuario: userEmail,
                 nomeExcursao: excursionData.nome,
-                localExcursao: excursionData.local
-                // Aqui você pode adicionar mais informações da excursão se necessário
+                localExcursao: excursionData.local,
             };
 
             const response = await fetch('http://localhost:8081/api/vendas/cadastro', {
                 method: 'POST',
                 headers: {
-                    'Content-Type': 'application/json'
+                    'Content-Type': 'application/json',
                 },
-                body: JSON.stringify(venda)
+                body: JSON.stringify(venda),
             });
 
             if (!response.ok) {
@@ -69,29 +101,23 @@ document.addEventListener("DOMContentLoaded", function () {
             }
 
             const result = await response.json();
+            addParticipantToExcursion(excursionId, userEmail); 
             alert("Venda realizada com sucesso!");
-            console.log(result); // Exibe o resultado da venda no console
+            console.log(result);
         } catch (error) {
             console.error(error);
             alert("Erro ao realizar a venda.");
         }
     }
 
-    // Ação ao clicar no botão de participar
     document.getElementById('participateButton').addEventListener('click', function () {
-        // Exibir o modal de confirmação
         $('#confirmModal').modal('show');
     });
 
-    // Quando o usuário confirma no modal
     document.getElementById('confirmParticipateButton').addEventListener('click', function () {
-        // Fechar o modal
-        $('#confirmModal').modal('hide');
-
-        // Realizar a venda
+        $('#confirmModal').modal('hide'); 
         realizarVenda(window.excursionData, userEmail);
     });
 
-    // Carregar os detalhes da excursão
     getExcursionDetails(excursionId);
 });

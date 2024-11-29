@@ -1,39 +1,3 @@
-/* Reset básico */
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
-/* Corpo da página */
-body {
-    font-family: 'Arial', sans-serif;
-    background-color: #f8f9fa;
-    color: #343a40;
-    padding-top: 80px;
-    /* Para garantir que o conteúdo não fique escondido atrás da navbar fixa */
-}
-
-/* Navbar */
-.navbar {
-    background-color: #007bff;
-}
-
-.navbar a {
-    color: white !important;
-    font-weight: bold;
-}
-
-.navbar .navbar-toggler-icon {
-    background-color: white;
-}
-
-/* Título da página */
-h1 {
-    font-size: 2rem;
-    font-weight: bold;
-    color: #007bff;
-}
 
 /* Estilo para as caixas de informações da excursão */
 .excursion-info-box {
@@ -104,37 +68,10 @@ h1 {
     background-color: #0069d9;
 }
 
-/* Estilos do footer */
-footer {
-    text-align: center;
-    margin-top: 30px;
-    padding: 10px 0;
-    background-color: #f1f1f1;
-    font-size: 0.9rem;
-    color: #343a40;
-}
-
-footer p {
-    margin: 0;
-}
-
 /* Responsividade */
 @media (max-width: 768px) {
-    body {
-        padding-top: 70px;
-        /* Ajuste do espaço para telas menores */
-    }
-
     .excursion-info-box {
         padding: 15px;
-    }
-
-    .navbar {
-        padding: 10px 15px;
-    }
-
-    .navbar .navbar-brand {
-        font-size: 1.2rem;
     }
 
     .excursion-info-box h5 {

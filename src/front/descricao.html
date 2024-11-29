@@ -8,6 +8,7 @@
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="./assets/css/style.css">
+    <link rel="stylesheet" href="./assets/css/descricao.css">
     <link rel="stylesheet" href="./assets/css/detalhes_excusao.css">
 </head>
 <body>
@@ -54,14 +55,24 @@
         <h3>Avaliação</h3>
         <div class="rating">
             <label for="rating">Avalie a excursão:</label>
-            <select id="rating" class="form-select" aria-label="Avaliação da excursão">
-                <option value="1">1 Estrela</option>
-                <option value="2">2 Estrelas</option>
-                <option value="3">3 Estrelas</option>
-                <option value="4">4 Estrelas</option>
-                <option value="5">5 Estrelas</option>
-            </select>
+            <div class="star-rating">
+                <input type="radio" id="star5" name="rating" value="5">
+                <label for="star5" title="5 estrelas">★</label>
+        
+                <input type="radio" id="star4" name="rating" value="4">
+                <label for="star4" title="4 estrelas">★</label>
+        
+                <input type="radio" id="star3" name="rating" value="3">
+                <label for="star3" title="3 estrelas">★</label>
+        
+                <input type="radio" id="star2" name="rating" value="2">
+                <label for="star2" title="2 estrelas">★</label>
+        
+                <input type="radio" id="star1" name="rating" value="1">
+                <label for="star1" title="1 estrela">★</label>
+            </div>
         </div>
+        
 
         <hr>
 

@@ -1,9 +1,8 @@
 document.addEventListener("DOMContentLoaded", function () {
-    // Recuperando informações do usuário via API ou sessão
     const userType = sessionStorage.getItem('userType');
-    const userEmail = sessionStorage.getItem("userEmail"); // Armazenando o e-mail na sessão
-    const excursions = JSON.parse(localStorage.getItem("excursions")) || [];
-    // Função para mostrar ou esconder seções conforme o tipo de usuário
+    const userEmail = localStorage.getItem("userEmail");
+    const excursions = JSON.parse(localStorage.getItem("excursoes")) || [];
+
     if (userType === 'cliente') {
         document.getElementById('cadastrarSection').style.display = 'none';
         document.getElementById('verExcursaoSection').style.display = 'none';
@@ -14,17 +13,18 @@ document.addEventListener("DOMContentLoaded", function () {
         window.location.href = 'index.html';
     }
 
-    // Função para mostrar se o usuário está participando de alguma excursão
+    // Função para verificar e exibir a participação do usuário em excursões
     function checkParticipation() {
         const participationSection = document.getElementById("participationSection");
+
         const userParticipatingExcursion = excursions.find(excursion =>
-            excursion.participantes && excursion.participantes.some(participant => participant.email === userEmail)
+            excursion.participantes && excursion.participantes.includes(userEmail)
         );
 
         if (userParticipatingExcursion) {
-            const participationMessage = ` 
+            const participationMessage = `
                 <div class="alert alert-info" role="alert">
-                    <h4 class="alert-heading">Você está participando da excursão!</h4>
+                    <h4 class="alert-heading">Você está participando de uma excursão!</h4>
                     <p><strong>Excursão:</strong> ${userParticipatingExcursion.nome}</p>
                     <p><strong>Data de início:</strong> ${formatDate(userParticipatingExcursion.dataInicio)}</p>
                     <p><strong>Data de término:</strong> ${formatDate(userParticipatingExcursion.dataFim)}</p>
@@ -45,9 +45,9 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     }
 
-
-    // Função para formatar as datas 
+    // Função para formatar as datas
     function formatDate(dateString) {
+        if (!dateString) return "Data não disponível";
         const date = new Date(dateString);
         const day = String(date.getDate()).padStart(2, '0');
         const month = String(date.getMonth() + 1).padStart(2, '0');
@@ -62,12 +62,11 @@ window.onload = async function () {
     const carouselItemsContainer = document.getElementById('carouselItems');
 
     try {
-        // Requisição para buscar todas as excursões disponíveis
         const response = await fetch('http://localhost:8081/api/excursoes/listExcursoes', {
             method: 'GET',
             headers: {
-                'Content-Type': 'application/json'
-            }
+                'Content-Type': 'application/json',
+            },
         });
 
         if (!response.ok) {
@@ -81,7 +80,6 @@ window.onload = async function () {
             return;
         }
 
-        // Gerar itens do carrossel a partir das excursões retornadas
         storedExcursions.forEach((excursion, index) => {
             const imageUrl = excursion.imagem || 'https://via.placeholder.com/800x300?text=Sem+Imagem';
             const isActiveClass = index === 0 ? 'active' : '';
@@ -89,7 +87,6 @@ window.onload = async function () {
             const carouselItem = `
                 <div class="carousel-item ${isActiveClass}">
                     <img src="${imageUrl}" class="d-block" style="width: 50%; margin: 0 auto;" alt="Excursão ${index + 1}">
-
                     <div class="excursion-info-box w-50">
                         <h5>${excursion.nome}</h5>
                         <p><strong>Local:</strong> ${excursion.local}</p>
