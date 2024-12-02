@@ -12,6 +12,7 @@ document.addEventListener("DOMContentLoaded", function () {
         const location = document.getElementById('location').value;
         const price = document.getElementById('price').value;
         const additionalServices = document.getElementById('additionalServices').value;
+        const qtdPessoas = document.getElementById('qtdPessoas').value;
 
         return {
             nome: title,
@@ -22,6 +23,7 @@ document.addEventListener("DOMContentLoaded", function () {
             valor: parseFloat(price),
             servicosAdicionais: additionalServices || '',
             email: userEmail,
+            quantidadePessoas: qtdPessoas
         };
     }
 
