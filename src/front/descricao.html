@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -11,20 +12,8 @@
     <link rel="stylesheet" href="./assets/css/descricao.css">
     <link rel="stylesheet" href="./assets/css/detalhes_excusao.css">
 </head>
+
 <body>
-    <!--<script>
-        // Verifica se o usuário está logado e se é uma agência
-        if (!sessionStorage.getItem('isLoggedIn') || sessionStorage.getItem('userType') !== 'agencia') {
-            window.location.href = 'index.html'; // Redireciona para o login
-        }
-
-        function logout() {
-            sessionStorage.removeItem('isLoggedIn');
-            sessionStorage.removeItem('userType'); // Limpa o tipo de usuário
-            window.location.href = 'index.html'; // Redireciona para o login
-        }
-    </script>-->
-
     <!-- Navbar -->
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
         <a class="navbar-brand" href="index.html">PlanWay</a>
@@ -35,7 +24,6 @@
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav ml-auto">
                 <li class="nav-item"><a class="nav-link" href="home.html">Dashboard</a></li>
-                <li class="nav-item"><a class="nav-link" href="#reports">Relatórios</a></li>
                 <li class="nav-item"><a class="nav-link" href="perfil.html">Perfil</a></li>
                 <li class="nav-item"><a class="nav-link" href="index.html" onclick="logout()">Sair</a></li>
             </ul>

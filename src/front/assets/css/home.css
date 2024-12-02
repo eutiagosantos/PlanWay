@@ -7,6 +7,11 @@
         .carousel-indicators li {
             background-color: #17a2b8;
         }
+        h4{
+            justify-content: center;
+            align-items: center;
+            text-align: center; 
+        }
 
         .carousel-item img {
             max-height: 450px;

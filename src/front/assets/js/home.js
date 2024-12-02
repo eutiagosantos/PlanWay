@@ -37,7 +37,7 @@ document.addEventListener("DOMContentLoaded", function () {
         } else {
             const noParticipationMessage = `
                 <div class="alert alert-warning" role="alert">
-                    <h4 class="alert-heading">Você ainda não está participando de nenhuma excursão.</h4>
+                    <h3 class="alert-heading">Você ainda não está participando de nenhuma excursão.</h3>
                     <p>Pesquise por excursões e participe de uma para começar sua jornada!</p>
                 </div>
             `;
@@ -76,7 +76,7 @@ window.onload = async function () {
         const storedExcursions = await response.json();
 
         if (storedExcursions.length === 0) {
-            carouselItemsContainer.innerHTML = '<p>Nenhuma excursão cadastrada.</p>';
+            carouselItemsContainer.innerHTML = '<h4>Nenhuma excursão cadastrada.<h4>';
             return;
         }
 
