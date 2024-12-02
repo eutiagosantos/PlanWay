@@ -1,14 +1,9 @@
 package com.planway.trabalhoInterdiciplinar.Entity;
 
-import java.util.List;
-
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.JoinTable;
-import jakarta.persistence.ManyToMany;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -28,24 +23,19 @@ public class Vendas {
     private String nomeExcursao;
 
     private String localExcursao;
+    
+    private Long excursaoId;
 
-    // @ManyToMany
-    // @JoinTable(
-    //         name = "venda_excursao", // Nome da tabela de junção
-    //         joinColumns = @JoinColumn(name = "venda_id"), // Chave estrangeira para a tabela Vendas
-    //         inverseJoinColumns = @JoinColumn(name = "excursao_id") // Chave estrangeira para a tabela Excursao
-    // )
-    // private List<Excursao> excursao;
     public Vendas() {
 
     }
 
-    public Vendas(Long id, double valor, String emailUsuario, String nomeExcursao) {
+    public Vendas(Long id, double valor, String emailUsuario, String nomeExcursao, Long excursaoId) {
         this.id = id;
         this.valor = valor;
         this.emailUsuario = emailUsuario;
         this.nomeExcursao = nomeExcursao;
-
+        this.excursaoId = excursaoId;
     }
 
 }

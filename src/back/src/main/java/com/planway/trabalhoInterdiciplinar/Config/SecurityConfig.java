@@ -1,4 +1,4 @@
-package com.planway.trabalhoInterdiciplinar.Config;
+package com.planway.trabalhoInterdiciplinar.config;
 
 import java.util.Arrays;
 
