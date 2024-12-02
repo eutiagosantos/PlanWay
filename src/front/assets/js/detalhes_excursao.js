@@ -5,30 +5,29 @@ document.addEventListener("DOMContentLoaded", function () {
     function loadExcursionDetails() {
         const urlParams = new URLSearchParams(window.location.search);
         excursionId = urlParams.get("id");
-
+    
         if (!excursionId) {
             alert("ID da excursão não fornecido.");
             window.location.href = "pesquisa.html";
             return;
         }
-
+    
         excursionId = parseInt(excursionId, 10);
-
+    
         if (isNaN(excursionId)) {
             alert("ID da excursão inválido.");
             window.location.href = "pesquisa.html";
             return;
         }
-
-
+    
         const storedExcursions = JSON.parse(localStorage.getItem("excursoes")) || [];
         let excursion = storedExcursions.find(e => e.id === excursionId);
-
+    
         if (!excursion) {
             const pastExcursions = JSON.parse(localStorage.getItem("excursoesPast")) || [];
             excursion = pastExcursions.find(e => e.id === excursionId);
         }
-
+    
         if (excursion) {
             document.getElementById("title").value = excursion.nome || "Sem título";
             document.getElementById("description").value = excursion.descricao || "Sem descrição";
@@ -36,14 +35,18 @@ document.addEventListener("DOMContentLoaded", function () {
             document.getElementById("endDate").value = excursion.dataFim || "";
             document.getElementById("location").value = excursion.local || "Local não informado";
             document.getElementById("price").value = excursion.valor || 0;
-
+    
             displayParticipants(excursion.participantes || []);
             displayCommentsAndRatings(excursion.comentarios || []);
+    
+            // Calcula os percentuais com a excursão atual
+            calculateReservedExcursionsPercentage(excursion);
         } else {
             alert("Excursão não encontrada.");
             window.location.href = "pesquisa.html";
         }
     }
+    
 
     // Função para exibir os participantes da excursão
     function displayParticipants(participants) {
@@ -105,6 +108,18 @@ document.addEventListener("DOMContentLoaded", function () {
             commentsContainer.appendChild(commentBox);
         });
     }
+    // Função para calcular o percentual de excursões reservadas
+    function calculateReservedExcursionsPercentage(excursion) {
+        const currentParticipantsCount = excursion.participantes.length;
+        const currentCapacity = parseInt(excursion.quantidadePessoas, 10);
+        
+        const currentPercentage = (currentParticipantsCount / currentCapacity) * 100;
+
+        document.getElementById("currentExcursionPercentage").textContent =
+            `Percentual desta excursão reservada: ${currentPercentage.toFixed(2)}% (${currentParticipantsCount}/${currentCapacity})`;
+    }
+
+     
 
     // Função para finalizar a excursão (local e backend)
     document.getElementById("finishExcursionBtn").addEventListener("click", async function () {

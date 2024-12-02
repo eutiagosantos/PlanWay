@@ -35,13 +35,13 @@
         <form id="excursionForm">
             <div class="form-group">
                 <label for="title">Nome da Excursão</label>
-                <input type="text" id="title" class="form-control" required>
+                <input type="text" id="title" class="form-control" required placeholder="Ex: Praia Grande">
                 <div class="invalid-feedback">Por favor, insira o nome da excursão.</div>
             </div>
 
             <div class="form-group">
                 <label for="description">Descrição</label>
-                <textarea id="description" class="form-control" rows="3" required></textarea>
+                <textarea id="description" class="form-control" rows="3" required placeholder="Ex: Ir para a praia"></textarea>
                 <div class="invalid-feedback">Por favor, insira uma descrição da excursão.</div>
             </div>
 
@@ -59,13 +59,13 @@
 
             <div class="form-group">
                 <label for="location">Local</label>
-                <input type="text" id="location" class="form-control" required>
+                <input type="text" id="location" class="form-control" required placeholder="Ex: Rio de Janeiro">
                 <div class="invalid-feedback">Por favor, insira o local da excursão.</div>
             </div>
 
             <div class="form-group">
                 <label for="price">Valor (R$)</label>
-                <input type="number" id="price" class="form-control" min="0" step="0.01" required>
+                <input type="number" id="price" class="form-control" min="0" step="0.01" required placeholder="Ex: R$600,00">
                 <div class="invalid-feedback">Por favor, insira um valor válido.</div>
             </div>
 
@@ -73,6 +73,12 @@
                 <label for="additionalServices">Serviços Adicionais (Opcional)</label>
                 <input type="text" id="additionalServices" class="form-control"
                     placeholder="Ex: Guia turístico, Transporte">
+            </div>
+
+            <div class="form-group">
+                <label for="additionalServices">Quantidade Maxima de pessoas</label>
+                <input type="text" id="qtdPessoas" class="form-control"
+                    placeholder="Ex: 10">
             </div>
 
             <button type="submit" class="btn btn-primary">Cadastrar Excursão</button>
