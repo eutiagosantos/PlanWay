@@ -38,8 +38,7 @@ document.addEventListener("DOMContentLoaded", function () {
     
             displayParticipants(excursion.participantes || []);
             displayCommentsAndRatings(excursion.comentarios || []);
-    
-            // Calcula os percentuais com a excursão atual
+            calculateComplaintPercentage(excursion.comentarios || []);
             calculateReservedExcursionsPercentage(excursion);
         } else {
             alert("Excursão não encontrada.");
@@ -119,7 +118,21 @@ document.addEventListener("DOMContentLoaded", function () {
             `Percentual desta excursão reservada: ${currentPercentage.toFixed(2)}% (${currentParticipantsCount}/${currentCapacity})`;
     }
 
-     
+
+    // Função para calcular e exibir o percentual de reclamações
+    function calculateComplaintPercentage(comments) {
+        const negativeComments = comments.filter(comment => comment.avaliacao < 3).length;
+        const totalComments = comments.length;
+
+        const complaintPercentage = totalComments > 0
+            ? (negativeComments / totalComments) * 100
+            : 0;
+
+        document.getElementById("complaintCount").textContent = `Total de comentários negativos: ${negativeComments}`;
+        document.getElementById("complaintPercentage").textContent =
+            `Percentual de reclamações: ${complaintPercentage.toFixed(2)}% (${negativeComments}/${totalComments})`;
+    }
+
 
     // Função para finalizar a excursão (local e backend)
     document.getElementById("finishExcursionBtn").addEventListener("click", async function () {

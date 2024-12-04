@@ -1,4 +1,4 @@
-package com.planway.trabalhoInterdiciplinar.config;
+package com.planway.trabalhoInterdiciplinar.Config;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
