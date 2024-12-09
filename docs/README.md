@@ -117,17 +117,19 @@ _A sessão a seguir apresenta a descrição do produto de software desenvolvido.
 
 ## 7. Conclusão
 
-O presente trabalho focou no desenvolvimento de interfaces de usuário para a plataforma PlanWay, especificamente no cadastro de excursões e na criação de funcionalidades que visam facilitar a experiência do usuário na gestão de viagens e eventos. Ao longo do processo, foi possível aplicar conceitos importantes de design de interface, como a criação de formulários dinâmicos, interatividade e navegação simplificada. O projeto teve como objetivo melhorar a usabilidade e oferecer uma experiência intuitiva, ajudando os usuários a gerenciar excursões de forma eficiente.
+Neste trabalho, o principal objetivo foi o desenvolvimento de interfaces para a plataforma PlanWay, focando no cadastro de excursões e na criação de funcionalidades que tornem o gerenciamento de viagens e eventos mais prático e intuitivo. Ao longo do projeto, pude aplicar conceitos de design de interface que priorizam a usabilidade, criando uma experiência mais agradável e acessível para o usuário. A ideia era tornar o processo de cadastro e organização de excursões o mais simples possível, ao mesmo tempo em que mantivéssemos a funcionalidade necessária.
 
-Durante o desenvolvimento, algumas dificuldades surgiram, principalmente no que diz respeito à implementação de validações de formulário e à adaptação da interface para diferentes dispositivos. A construção de um formulário completo, que integra diversos campos obrigatórios e opcionais, exigiu um cuidado especial para garantir a boa experiência do usuário, evitando falhas de preenchimento e tornando o sistema acessível a todos.
+Como qualquer projeto, surgiram desafios. Um dos maiores foi a implementação das validações nos formulários, para garantir que os usuários preenchessem todos os campos corretamente e sem dificuldades. Também houve um cuidado especial para tornar a interface amigável e responsiva, para que fosse fácil de usar tanto em computadores quanto em dispositivos móveis.
 
-Um aspecto positivo foi a implementação de modais para facilitar o cadastro e a atualização dos eventos, o que possibilitou uma interação mais fluida e sem a necessidade de recarregar a página, melhorando o desempenho e a usabilidade do sistema.
+Por outro lado, um aspecto que considero muito positivo foi a criação dos modais para cadastro e atualização dos eventos. Essa abordagem permitiu que o usuário interagisse com a plataforma de forma mais dinâmica, sem a necessidade de recarregar a página, o que deu uma sensação de agilidade e fluidez na navegação.
 
-Em relação às sugestões de novas linhas de estudo, alguns pontos podem ser explorados para melhorar ainda mais o sistema. Um aspecto relevante seria a inclusão de funcionalidades de autenticação e autorização de usuários, permitindo que apenas administradores possam cadastrar ou modificar excursões, garantindo maior segurança. Outra melhoria poderia ser a integração com APIs de pagamento, facilitando o processo de cobrança e reserva de vagas para as excursões.
+Pensando em melhorias, acredito que uma próxima etapa poderia ser a adição de um sistema de autenticação e autorização para garantir que apenas administradores possam criar ou editar excursões. Isso traria mais segurança ao sistema e controlaria melhor as permissões. Também vejo como uma excelente oportunidade a integração com plataformas de pagamento, o que tornaria o processo de reserva e pagamento das excursões mais prático.
 
-Além disso, seria interessante estudar o uso de inteligência artificial para personalizar as excursões oferecidas aos usuários com base em suas preferências anteriores e nas interações realizadas dentro da plataforma. Isso poderia melhorar a experiência e engajamento dos usuários com a plataforma.
+Outro ponto que poderia ser explorado é o uso de inteligência artificial para sugerir excursões personalizadas, com base no comportamento e nas preferências dos usuários. Isso poderia aumentar o engajamento e tornar a plataforma mais atraente para quem a utiliza.
 
-Por fim, a implementação de funcionalidades de feedback dos usuários, por meio de avaliações ou comentários sobre as excursões, também seria um passo importante para garantir a qualidade dos serviços oferecidos e criar uma comunidade engajada.
+E, por fim, algo que vejo como muito valioso seria a implementação de um sistema de feedback, onde os usuários pudessem avaliar e comentar sobre as excursões. Isso não só ajudaria a melhorar a qualidade dos serviços oferecidos, como também criaria um senso de comunidade, com usuários compartilhando suas experiências.
+
+Em resumo, este trabalho me permitiu entender melhor as necessidades dos usuários e como uma interface bem projetada pode impactar diretamente na experiência deles. Mas também ficou claro que há muito mais a explorar e aperfeiçoar, o que abre várias possibilidades para futuros desenvolvimentos na plataforma.
 
 # REFERÊNCIAS
 
