@@ -1,6 +1,6 @@
 document.addEventListener("DOMContentLoaded", function () {
     const excursionForm = document.getElementById('excursionForm');
-    const excursaoKey = "excursoes"; 
+    const excursaoKey = "excursoes";
     const userEmail = localStorage.getItem('userEmail');
 
     // Função para recuperar os dados do formulário
@@ -12,9 +12,9 @@ document.addEventListener("DOMContentLoaded", function () {
         const location = document.getElementById('location').value;
         const price = document.getElementById('price').value;
         const additionalServices = document.getElementById('additionalServices').value;
-        const qtdPessoas = document.getElementById('qtdPessoas').value;
+        const quantidadePessoas = document.getElementById('qtdPessoas').value;
 
-        return {
+        const formData = {
             nome: title,
             descricao: description,
             dataInicio: startDate,
@@ -23,8 +23,12 @@ document.addEventListener("DOMContentLoaded", function () {
             valor: parseFloat(price),
             servicosAdicionais: additionalServices || '',
             email: userEmail,
-            quantidadePessoas: qtdPessoas
+            quantidadePessoas: quantidadePessoas
         };
+
+        console.log("Form Data:", formData); // Adicionando log
+
+        return formData;
     }
 
     // Função para salvar os dados no localStorage com ID correto
@@ -49,7 +53,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
         if (!documento || documento.length !== 14) {
             alert('Você deve ser uma agência (CNPJ) para criar excursões.');
-            return; 
+            return;
         }
 
         const formData = getFormData();
@@ -61,20 +65,18 @@ document.addEventListener("DOMContentLoaded", function () {
             },
             body: JSON.stringify(formData),
         })
-            .then((response) => {
+            .then(response => {
                 if (!response.ok) {
                     throw new Error('Erro ao criar excursão');
                 }
-                return response.json(); 
+                return response.json();
             })
-            .then((data) => {
+            .then(data => {
                 alert('Excursão criada com sucesso!');
-
                 saveToLocalStorageWithId(formData, data.id);
-
                 excursionForm.reset();
             })
-            .catch((error) => {
+            .catch(error => {
                 console.error('Erro ao enviar dados para a API:', error);
                 alert('Erro ao cadastrar excursão. Tente novamente.');
             });
