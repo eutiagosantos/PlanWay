@@ -117,17 +117,13 @@ _A sessão a seguir apresenta a descrição do produto de software desenvolvido.
 
 ## 7. Conclusão
 
-Neste trabalho, o principal objetivo foi o desenvolvimento de interfaces para a plataforma PlanWay, focando no cadastro de excursões e na criação de funcionalidades que tornem o gerenciamento de viagens e eventos mais prático e intuitivo. Ao longo do projeto, pude aplicar conceitos de design de interface que priorizam a usabilidade, criando uma experiência mais agradável e acessível para o usuário. A ideia era tornar o processo de cadastro e organização de excursões o mais simples possível, ao mesmo tempo em que mantivéssemos a funcionalidade necessária.
+Neste trabalho, o principal objetivo foi o desenvolvimento de interfaces para a plataforma PlanWay, focando no cadastro de excursões e na criação de funcionalidades que tornem o gerenciamento de viagens mais prático e intuitivo. Ao longo do projeto, pude aplicar conceitos de design de interface que priorizam a usabilidade, criando uma experiência mais agradável e acessível para o usuário. A ideia era tornar o processo de cadastro e organização de excursões o mais simples possível, ao mesmo tempo em que mantivéssemos a funcionalidade necessária.
 
 Como qualquer projeto, surgiram desafios. Um dos maiores foi a implementação das validações nos formulários, para garantir que os usuários preenchessem todos os campos corretamente e sem dificuldades. Também houve um cuidado especial para tornar a interface amigável e responsiva, para que fosse fácil de usar tanto em computadores quanto em dispositivos móveis.
 
 Por outro lado, um aspecto que considero muito positivo foi a criação dos modais para cadastro e atualização dos eventos. Essa abordagem permitiu que o usuário interagisse com a plataforma de forma mais dinâmica, sem a necessidade de recarregar a página, o que deu uma sensação de agilidade e fluidez na navegação.
 
 Pensando em melhorias, acredito que uma próxima etapa poderia ser a adição de um sistema de autenticação e autorização para garantir que apenas administradores possam criar ou editar excursões. Isso traria mais segurança ao sistema e controlaria melhor as permissões. Também vejo como uma excelente oportunidade a integração com plataformas de pagamento, o que tornaria o processo de reserva e pagamento das excursões mais prático.
-
-Outro ponto que poderia ser explorado é o uso de inteligência artificial para sugerir excursões personalizadas, com base no comportamento e nas preferências dos usuários. Isso poderia aumentar o engajamento e tornar a plataforma mais atraente para quem a utiliza.
-
-E, por fim, algo que vejo como muito valioso seria a implementação de um sistema de feedback, onde os usuários pudessem avaliar e comentar sobre as excursões. Isso não só ajudaria a melhorar a qualidade dos serviços oferecidos, como também criaria um senso de comunidade, com usuários compartilhando suas experiências.
 
 Em resumo, este trabalho me permitiu entender melhor as necessidades dos usuários e como uma interface bem projetada pode impactar diretamente na experiência deles. Mas também ficou claro que há muito mais a explorar e aperfeiçoar, o que abre várias possibilidades para futuros desenvolvimentos na plataforma.
 
