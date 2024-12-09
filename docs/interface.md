@@ -52,7 +52,7 @@ Local do evento. Após preencher, o usuário pode salvar o evento, que será reg
 ![image](images/telaProcesso2.jpeg)
 
 
-## 6.3. Telas do processo 3
+## 6.4. Telas do processo 3
 
 A agência vai para a página "Veja suas Excursoes" e visualiza as excursoes que ele criou
 
@@ -63,7 +63,7 @@ A segunda atividade é clicar em ver detalhes, o usuario sera direcionado para u
 ![image](images/Atividade2Processo3.jpeg)
 
 
-## 6.3. Telas do processo 4
+## 6.5. Telas do processo 4
 
 O usuario irá clicar em pesquisa na pagina principal, e irá ser direcionado para essa página
 
@@ -74,7 +74,7 @@ A segunda atividade é clicar em ver detalhes, o usuario sera direcionado para u
 ![image](images/Atividade2Processo4.jpeg)
 
 
-## 6.3. Telas do processo 5
+## 6.6. Telas do processo 5
 
 Nessa tela, o usuário realiza o cadastro de uma excursão. Ele deve preencher um formulário com as seguintes informações:
 
