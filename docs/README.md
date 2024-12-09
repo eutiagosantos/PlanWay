@@ -117,7 +117,17 @@ _A sessão a seguir apresenta a descrição do produto de software desenvolvido.
 
 ## 7. Conclusão
 
-_Apresente aqui a conclusão do seu trabalho. Deve ser apresentada aqui uma discussão dos resultados obtidos no trabalho, local em que se verifica as observações pessoais de cada aluno. Essa seção poderá também apresentar sugestões de novas linhas de estudo._
+O presente trabalho focou no desenvolvimento de interfaces de usuário para a plataforma PlanWay, especificamente no cadastro de excursões e na criação de funcionalidades que visam facilitar a experiência do usuário na gestão de viagens e eventos. Ao longo do processo, foi possível aplicar conceitos importantes de design de interface, como a criação de formulários dinâmicos, interatividade e navegação simplificada. O projeto teve como objetivo melhorar a usabilidade e oferecer uma experiência intuitiva, ajudando os usuários a gerenciar excursões de forma eficiente.
+
+Durante o desenvolvimento, algumas dificuldades surgiram, principalmente no que diz respeito à implementação de validações de formulário e à adaptação da interface para diferentes dispositivos. A construção de um formulário completo, que integra diversos campos obrigatórios e opcionais, exigiu um cuidado especial para garantir a boa experiência do usuário, evitando falhas de preenchimento e tornando o sistema acessível a todos.
+
+Um aspecto positivo foi a implementação de modais para facilitar o cadastro e a atualização dos eventos, o que possibilitou uma interação mais fluida e sem a necessidade de recarregar a página, melhorando o desempenho e a usabilidade do sistema.
+
+Em relação às sugestões de novas linhas de estudo, alguns pontos podem ser explorados para melhorar ainda mais o sistema. Um aspecto relevante seria a inclusão de funcionalidades de autenticação e autorização de usuários, permitindo que apenas administradores possam cadastrar ou modificar excursões, garantindo maior segurança. Outra melhoria poderia ser a integração com APIs de pagamento, facilitando o processo de cobrança e reserva de vagas para as excursões.
+
+Além disso, seria interessante estudar o uso de inteligência artificial para personalizar as excursões oferecidas aos usuários com base em suas preferências anteriores e nas interações realizadas dentro da plataforma. Isso poderia melhorar a experiência e engajamento dos usuários com a plataforma.
+
+Por fim, a implementação de funcionalidades de feedback dos usuários, por meio de avaliações ou comentários sobre as excursões, também seria um passo importante para garantir a qualidade dos serviços oferecidos e criar uma comunidade engajada.
 
 # REFERÊNCIAS
 
