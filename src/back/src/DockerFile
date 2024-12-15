@@ -1,16 +1,26 @@
-FROM ubuntu:latest AS build
+# Etapa de Build com Maven
+FROM maven:3.8.6-openjdk-17-slim AS build
 
-RUN apt-get update
-RUN apt-get install openjdk-17-jdk -y
-COPY . .
+# Atualiza os pacotes e instala dependências necessárias
+RUN apt-get update && apt-get install -y openjdk-17-jdk
 
-RUN apt-get install maven -y
+# Copia o código-fonte do projeto para o contêiner
+COPY . /app
+
+# Define o diretório de trabalho no contêiner
+WORKDIR /app
+
+# Executa o build do Maven para gerar o artefato JAR
 RUN mvn clean install
 
+# Etapa final com a imagem do OpenJDK para rodar a aplicação
 FROM openjdk:17-jdk-slim
 
+# Expondo a porta que a aplicação irá rodar
 EXPOSE 8081
 
-COPY --from=build /target/trabalhoInterdiciplinar-0.0.1-SNAPSHOT.jar app.jar
+# Copia o arquivo JAR gerado no contêiner de build para o contêiner final
+COPY --from=build /app/target/trabalhoInterdiciplinar-0.0.1-SNAPSHOT.jar app.jar
 
+# Define o comando para rodar a aplicação
 ENTRYPOINT ["java", "-jar", "app.jar"]
